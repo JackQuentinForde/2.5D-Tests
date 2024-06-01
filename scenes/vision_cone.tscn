@@ -1,16 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bsa7exclyl13r"]
 
 [ext_resource type="PackedScene" uid="uid://cbbxalpvu1gl" path="res://assets/models/Vision Cone.glb" id="1_8cds0"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tukls"]
-render_priority = 1
-transparency = 1
-diffuse_mode = 3
-albedo_color = Color(0.352941, 0.772549, 0.309804, 1)
+[ext_resource type="Material" uid="uid://d2eyjk221kv6n" path="res://materials/fov.tres" id="2_tg72l"]
 
 [node name="Vision Cone" instance=ExtResource("1_8cds0")]
 
 [node name="Cone" parent="." index="0"]
-layers = 2
 cast_shadow = 0
-surface_material_override/0 = SubResource("StandardMaterial3D_tukls")
+surface_material_override/0 = ExtResource("2_tg72l")

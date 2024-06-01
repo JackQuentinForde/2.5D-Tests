@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bgerljopmo5v"]
+
+[resource]
+resource_name = "VisionCone_Material"
+render_priority = 1
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.352941, 0.772549, 0.309804, 0.25098)

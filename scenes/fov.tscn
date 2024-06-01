@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdn5gtomm6rvy"]
+
+[ext_resource type="PackedScene" uid="uid://y4g70ledhmd1" path="res://assets/models/FOV.glb" id="1_6dwgq"]
+[ext_resource type="Material" uid="uid://bgerljopmo5v" path="res://materials/vision_cone.tres" id="2_6rp3h"]
+
+[node name="FOV Cone" instance=ExtResource("1_6dwgq")]
+
+[node name="FOV" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -2.39583)
+layers = 2
+surface_material_override/0 = ExtResource("2_6rp3h")

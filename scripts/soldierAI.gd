@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 const PATROL_SPEED = 2.5
 const CHASE_SPEED = 5
-const ROT_SPEED = 6
+const ROT_SPEED = 18
 const WAYPOINT_MIN_DIST = 0.075
 
 @export var cameraPivot : Node3D
@@ -13,6 +13,7 @@ enum {PATROL_STATE, CHASE_STATE, WAIT_STATE, DYING_STATE}
 
 var state
 var heading
+var targetRotation = 0
 var waypoints = []
 var activeWayPoint
 
@@ -25,7 +26,7 @@ func _ready():
 func _physics_process(delta):
 	ApplyGravity(delta)
 	BrainLogic()
-	AnimLogic()
+	AnimLogic(delta)
 	move_and_slide()
 
 func ApplyGravity(delta):
@@ -67,8 +68,8 @@ func Wait():
 		GetNextWaypoint()
 		state = PATROL_STATE
 
-func AnimLogic():
-	var angle = GetCameraAngle()
+func AnimLogic(delta):
+	var angle = GetCameraAngle(delta)
 	if state == PATROL_STATE:
 		if angle < 45 or angle > 315:
 			$AnimatedSprite3D.play("WalkBack")
@@ -88,26 +89,31 @@ func AnimLogic():
 		else:
 			$AnimatedSprite3D.play("IdleLeft")
 
-func GetCameraAngle():
-	SetHeading()
+func GetCameraAngle(delta):
+	SetHeading(delta)
 	var cameraBasis = -cameraPivot.global_transform.basis.z.normalized()
 	var angle = rad_to_deg(atan2(cameraBasis.x * heading.z - cameraBasis.z * heading.x, cameraBasis.x * heading.x + cameraBasis.z * heading.z))
 	if angle < 0:
 		angle += 360
 	return angle
 
-func SetHeading():
+func SetHeading(delta):
 	if abs(velocity.x) > abs(velocity.z):
 		if velocity.x > 0:
 			heading = Vector3.RIGHT
-			$"Vision Cone".rotation_degrees.y = -90
+			targetRotation = -90
 		elif velocity.x < 0:
 			heading = Vector3.LEFT
-			$"Vision Cone".rotation_degrees.y = 90
+			targetRotation = 90
 	else:
 		if velocity.z > 0:
 			heading = Vector3.BACK
-			$"Vision Cone".rotation_degrees.y = 180
+			targetRotation = 180
 		elif velocity.z < 0:
 			heading = Vector3.FORWARD
-			$"Vision Cone".rotation_degrees.y = 0
+			targetRotation = 0
+	var currentRotation = $FOVCone.rotation_degrees.y
+	$FOVCone.rotation_degrees.y = Lerp(currentRotation, targetRotation, ROT_SPEED * delta)
+
+func Lerp(a, b, t):
+	return a + (b - a) * t
