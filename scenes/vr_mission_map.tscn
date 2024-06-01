@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3o2n6w11evkm"]
+
+[ext_resource type="PackedScene" uid="uid://hwku4yvjod1y" path="res://assets/models/VR Mission Map.glb" id="1_toio2"]
+[ext_resource type="Material" uid="uid://dtrssgwr5n52h" path="res://materials/vr_mission_map.tres" id="2_glnkd"]
+
+[node name="VR Mission Map" instance=ExtResource("1_toio2")]
+
+[node name="Map" parent="." index="0"]
+layers = 2
+surface_material_override/0 = ExtResource("2_glnkd")
+
+[node name="Map_001" parent="." index="1"]
+layers = 2
+surface_material_override/0 = ExtResource("2_glnkd")
+
+[node name="Map_002" parent="." index="2"]
+layers = 2
+surface_material_override/0 = ExtResource("2_glnkd")
+
+[node name="Map_003" parent="." index="3"]
+layers = 2
+surface_material_override/0 = ExtResource("2_glnkd")
+
+[node name="Map_004" parent="." index="4"]
+layers = 2
+surface_material_override/0 = ExtResource("2_glnkd")
+
+[node name="Map_005" parent="." index="5"]
+layers = 2
+surface_material_override/0 = ExtResource("2_glnkd")

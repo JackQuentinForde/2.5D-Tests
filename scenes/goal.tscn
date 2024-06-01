@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcygh0i4lphes"]
+
+[ext_resource type="PackedScene" uid="uid://b5i1u6rj2gdxu" path="res://assets/models/Goal.glb" id="1_bdoo0"]
+[ext_resource type="Texture2D" uid="uid://j43xymgjs1gl" path="res://assets/textures/goalIcon.png" id="2_xlmeg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0pnt"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+
+[sub_resource type="Animation" id="Animation_1l3ma"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GoalIcon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_at8j8"]
+resource_name = "spin"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GoalIcon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1.00032, 1.20032, 1.4, 1.6, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.5, 1.5, 1.5), Vector3(1, 1, 1), Vector3(1.5, 1.5, 1.5), Vector3(1, 1, 1), Vector3(1.5, 1.5, 1.5), Vector3(1, 1, 1), Vector3(1.5, 1.5, 1.5), Vector3(1, 1, 1), Vector3(1.5, 1.5, 1.5), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d1jdy"]
+_data = {
+"RESET": SubResource("Animation_1l3ma"),
+"spin": SubResource("Animation_at8j8")
+}
+
+[node name="Goal" instance=ExtResource("1_bdoo0")]
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, -0.2, 0)
+layers = 3
+surface_material_override/0 = SubResource("StandardMaterial3D_k0pnt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_d1jdy")
+}
+autoplay = "spin"
+
+[node name="GoalIcon" type="Sprite3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.25, 0)
+layers = 2
+texture_filter = 0
+render_priority = 1
+texture = ExtResource("2_xlmeg")

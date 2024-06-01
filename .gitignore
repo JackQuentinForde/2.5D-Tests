@@ -1,0 +1,41 @@
+# Godot 4+ specific ignores
+.godot/
+
+/assets/models/Cube.glb
+/assets/models/Cube.glb.import
+/assets/models/Flower.glb
+/assets/models/Flower.glb.import
+/assets/models/Goal.glb
+/assets/models/Goal.glb.import
+/assets/models/Levels/VR Mission.glb
+/assets/models/Levels/VR Mission.glb.import
+/assets/models/Pallet_Town_GameReady.glb
+/assets/models/Pallet_Town_GameReady.glb.import
+/assets/models/Red_Shadow.glb
+/assets/models/Red_Shadow.glb.import
+/assets/models/Vision Cone.glb
+/assets/models/Vision Cone.glb.import
+/assets/models/VR Mission Map.glb
+/assets/models/VR Mission Map.glb.import
+/assets/models/VR Mission.glb
+/assets/models/VR Mission.glb.import
+/assets/music/Pallet Town Theme.mp3
+/assets/music/Pallet Town Theme.mp3.import
+/assets/textures/enemyIcon.png
+/assets/textures/enemyIcon.png.import
+/assets/textures/goalIcon.png
+/assets/textures/goalIcon.png.import
+/assets/textures/Guard.png
+/assets/textures/Guard.png.import
+/assets/textures/MapTexture.png
+/assets/textures/MapTexture.png.import
+/assets/textures/Pallet_Town.png
+/assets/textures/Pallet_Town.png.import
+/assets/textures/playerIcon.png
+/assets/textures/playerIcon.png.import
+/assets/textures/Red.png
+/assets/textures/Red.png.import
+/assets/textures/Snake.png
+/assets/textures/Snake.png.import
+/assets/textures/VRMissionTexture.png
+/assets/textures/VRMissionTexture.png.import

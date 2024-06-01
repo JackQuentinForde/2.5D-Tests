@@ -1,0 +1,136 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0satcf1abmm7"]
+
+[ext_resource type="PackedScene" uid="uid://qeqjrwtcc6c2" path="res://scenes/vr_mission.tscn" id="1_gqvsg"]
+[ext_resource type="PackedScene" uid="uid://b3o2n6w11evkm" path="res://scenes/vr_mission_map.tscn" id="2_1mvnw"]
+[ext_resource type="PackedScene" uid="uid://bjo7rjav1fsv0" path="res://scenes/camera_pivot.tscn" id="2_24mw5"]
+[ext_resource type="PackedScene" uid="uid://bi7ytmfmnojhb" path="res://scenes/snake.tscn" id="2_idy6e"]
+[ext_resource type="PackedScene" uid="uid://sl4bqqt4oqm8" path="res://scenes/soldier.tscn" id="3_dn0c4"]
+[ext_resource type="PackedScene" uid="uid://dcygh0i4lphes" path="res://scenes/goal.tscn" id="5_ah6ij"]
+[ext_resource type="Script" path="res://scripts/miniMapCamera.gd" id="7_cdba2"]
+
+[node name="test_scene_2" type="Node3D"]
+
+[node name="VR Mission" parent="." instance=ExtResource("1_gqvsg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -4)
+
+[node name="Snake" parent="." instance=ExtResource("2_idy6e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6067, 1.1875, 9)
+
+[node name="CameraPivot" parent="Snake" instance=ExtResource("2_24mw5")]
+
+[node name="Soldier" parent="." node_paths=PackedStringArray("cameraPivot") instance=ExtResource("3_dn0c4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.18257, 1.875)
+cameraPivot = NodePath("../Snake/CameraPivot")
+
+[node name="Waypoints" type="Node3D" parent="Soldier"]
+top_level = true
+
+[node name="Waypoint" type="Node3D" parent="Soldier/Waypoints" groups=["PausePoints"]]
+
+[node name="Waypoint2" type="Node3D" parent="Soldier/Waypoints" groups=["PausePoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.2319)
+
+[node name="Waypoint3" type="Node3D" parent="Soldier/Waypoints" groups=["PausePoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5923, 0, -6.2319)
+
+[node name="Waypoint4" type="Node3D" parent="Soldier/Waypoints" groups=["PausePoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98149, 0, -6.232)
+
+[node name="Waypoint5" type="Node3D" parent="Soldier/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5923, 0, -6.2319)
+
+[node name="Waypoint6" type="Node3D" parent="Soldier/Waypoints" groups=["PausePoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.592, 0, 0)
+
+[node name="WaitTimer" type="Timer" parent="Soldier"]
+one_shot = true
+
+[node name="Soldier2" parent="." node_paths=PackedStringArray("cameraPivot") instance=ExtResource("3_dn0c4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1.18606, -11)
+cameraPivot = NodePath("../Snake/CameraPivot")
+
+[node name="Waypoints" type="Node3D" parent="Soldier2"]
+top_level = true
+
+[node name="Waypoint" type="Node3D" parent="Soldier2/Waypoints" groups=["PausePoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13)
+
+[node name="Waypoint2" type="Node3D" parent="Soldier2/Waypoints" groups=["PausePoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10657, 0, 13)
+
+[node name="Waypoint3" type="Node3D" parent="Soldier2/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13)
+
+[node name="Waypoint4" type="Node3D" parent="Soldier2/Waypoints" groups=["PausePoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.674)
+
+[node name="Waypoint5" type="Node3D" parent="Soldier2/Waypoints" groups=["PausePoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.10657, 0, 6.67434)
+
+[node name="Waypoint6" type="Node3D" parent="Soldier2/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.674)
+
+[node name="Waypoint7" type="Node3D" parent="Soldier2/Waypoints" groups=["PausePoints"]]
+
+[node name="WaitTimer" type="Timer" parent="Soldier2"]
+one_shot = true
+
+[node name="Soldier3" parent="." node_paths=PackedStringArray("cameraPivot") instance=ExtResource("3_dn0c4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1.18606, -23)
+cameraPivot = NodePath("../Snake/CameraPivot")
+
+[node name="Waypoints" type="Node3D" parent="Soldier3"]
+top_level = true
+
+[node name="Waypoint" type="Node3D" parent="Soldier3/Waypoints" groups=["PausePoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.2482)
+
+[node name="Waypoint2" type="Node3D" parent="Soldier3/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.330692)
+
+[node name="Waypoint3" type="Node3D" parent="Soldier3/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -0.330692)
+
+[node name="Waypoint4" type="Node3D" parent="Soldier3/Waypoints" groups=["PausePoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -0.842796)
+
+[node name="Waypoint5" type="Node3D" parent="Soldier3/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -0.330692)
+
+[node name="Waypoint6" type="Node3D" parent="Soldier3/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.330692)
+
+[node name="WaitTimer" type="Timer" parent="Soldier3"]
+one_shot = true
+
+[node name="Goal" parent="." instance=ExtResource("5_ah6ij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9886, 2.0279, -27.361)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -256.0
+offset_bottom = 256.0
+grow_horizontal = 0
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+handle_input_locally = false
+canvas_cull_mask = 4294966274
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+
+[node name="VR Mission Map" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D" instance=ExtResource("2_1mvnw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 35, -4)
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 2.98023e-08, 1, 0, -1, 2.98023e-08, 12, 43, 4)
+cull_mask = 1047554
+projection = 1
+size = 15.0
+script = ExtResource("7_cdba2")
+player = NodePath("../../../../../Snake")

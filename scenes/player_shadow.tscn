@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://i8u1nrww2ycy"]
+
+[ext_resource type="PackedScene" uid="uid://ds6cavk513jqc" path="res://assets/models/Red_Shadow.glb" id="1_p0m4v"]
+[ext_resource type="Material" uid="uid://bg2cs1bvgpgdx" path="res://materials/player_shadow_material.tres" id="2_fegh7"]
+
+[node name="Red_Shadow" instance=ExtResource("1_p0m4v")]
+
+[node name="Shadow_020" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_fegh7")

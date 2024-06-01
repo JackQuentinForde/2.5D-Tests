@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://df63tim4uxon5"]
+
+[ext_resource type="Texture2D" uid="uid://cwt5lcjcsowwu" path="res://assets/textures/Pallet_Town.png" id="1_gw375"]
+
+[resource]
+transparency = 1
+blend_mode = 3
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("1_gw375")
+texture_filter = 0
+billboard_mode = 2

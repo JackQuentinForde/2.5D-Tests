@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjo7rjav1fsv0"]
+
+[ext_resource type="Script" path="res://scripts/camera.gd" id="1_cjm7d"]
+
+[node name="CameraPivot2" type="Node3D"]
+top_level = true
+script = ExtResource("1_cjm7d")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.851681, 0.524061, 0, -0.524061, 0.851681, -0.1875, 19.3576, 29.1439)
+cull_mask = 1
+fov = 15.0
+near = 0.1

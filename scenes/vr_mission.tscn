@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://qeqjrwtcc6c2"]
+
+[ext_resource type="PackedScene" uid="uid://c7o7wphnx7o" path="res://assets/models/VR Mission.glb" id="1_usyt5"]
+[ext_resource type="Material" uid="uid://i7gqwpbvt8ih" path="res://materials/cube_material.tres" id="2_drfim"]
+
+[node name="VR Mission" instance=ExtResource("1_usyt5")]
+
+[node name="Level" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_drfim")

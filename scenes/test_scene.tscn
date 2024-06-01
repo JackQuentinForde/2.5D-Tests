@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck53fj46qgmo0"]
+
+[ext_resource type="PackedScene" uid="uid://ja6jjbacs67l" path="res://scenes/pallet_town.tscn" id="1_eeo8v"]
+[ext_resource type="AudioStream" uid="uid://b37vjj0o1tk88" path="res://assets/music/Pallet Town Theme.mp3" id="3_w1x3x"]
+[ext_resource type="PackedScene" uid="uid://bi7ytmfmnojhb" path="res://scenes/snake.tscn" id="3_yung1"]
+[ext_resource type="PackedScene" uid="uid://bjo7rjav1fsv0" path="res://scenes/camera_pivot.tscn" id="4_3lbib"]
+
+[node name="TestScene" type="Node3D"]
+
+[node name="Pallet Town" parent="." instance=ExtResource("1_eeo8v")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_w1x3x")
+volume_db = -32.0
+
+[node name="Snake" parent="." instance=ExtResource("3_yung1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55352, 0.282831, 0)
+
+[node name="CameraPivot2" parent="Snake" instance=ExtResource("4_3lbib")]

@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dtrssgwr5n52h"]
+
+[ext_resource type="Texture2D" uid="uid://bd8dd7s7xjuem" path="res://assets/textures/MapTexture.png" id="1_px4tr"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("1_px4tr")
+texture_filter = 0

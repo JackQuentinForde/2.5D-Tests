@@ -1,0 +1,179 @@
+[gd_scene load_steps=5 format=3 uid="uid://x2epr175086r"]
+
+[ext_resource type="PackedScene" uid="uid://6cheequ5a3de" path="res://assets/models/Pallet_Town_GameReady.glb" id="1_mg1jw"]
+[ext_resource type="Material" uid="uid://c0epf8koljk2v" path="res://materials/pallet_town_Material.tres" id="2_apxce"]
+[ext_resource type="Material" uid="uid://barlbb22m3ijw" path="res://materials/shadow_material.tres" id="3_uymc6"]
+[ext_resource type="Material" uid="uid://dmvg2q2sqde6l" path="res://materials/y_sprite_material.tres" id="4_w1e57"]
+
+[node name="Pallet_Town_GameReady" instance=ExtResource("1_mg1jw")]
+
+[node name="Building_001" parent="." index="0"]
+cast_shadow = 0
+surface_material_override/0 = ExtResource("2_apxce")
+
+[node name="Building_002" parent="." index="1"]
+cast_shadow = 0
+surface_material_override/0 = ExtResource("2_apxce")
+
+[node name="Building_052" parent="." index="2"]
+cast_shadow = 0
+surface_material_override/0 = ExtResource("2_apxce")
+
+[node name="Chimney" parent="." index="3"]
+surface_material_override/0 = ExtResource("2_apxce")
+
+[node name="Fence" parent="." index="4"]
+surface_material_override/0 = ExtResource("2_apxce")
+
+[node name="Fence_001" parent="." index="5"]
+surface_material_override/0 = ExtResource("2_apxce")
+
+[node name="Fence_019" parent="." index="6"]
+surface_material_override/0 = ExtResource("2_apxce")
+
+[node name="PostBox" parent="." index="7"]
+surface_material_override/0 = ExtResource("2_apxce")
+
+[node name="PostBox_001" parent="." index="8"]
+surface_material_override/0 = ExtResource("2_apxce")
+
+[node name="Sign" parent="." index="9"]
+surface_material_override/0 = ExtResource("2_apxce")
+
+[node name="Sign_001" parent="." index="10"]
+surface_material_override/0 = ExtResource("2_apxce")
+
+[node name="Sign_002" parent="." index="11"]
+surface_material_override/0 = ExtResource("2_apxce")
+
+[node name="Shadow_001" parent="." index="12"]
+surface_material_override/0 = ExtResource("3_uymc6")
+
+[node name="Shadow_002" parent="." index="13"]
+surface_material_override/0 = ExtResource("3_uymc6")
+
+[node name="Shadow_003" parent="." index="14"]
+surface_material_override/0 = ExtResource("3_uymc6")
+
+[node name="Shadow_004" parent="." index="15"]
+surface_material_override/0 = ExtResource("3_uymc6")
+
+[node name="Shadow_005" parent="." index="16"]
+surface_material_override/0 = ExtResource("3_uymc6")
+
+[node name="Shadow_014" parent="." index="17"]
+surface_material_override/0 = ExtResource("3_uymc6")
+
+[node name="Shadow_015" parent="." index="18"]
+surface_material_override/0 = ExtResource("3_uymc6")
+
+[node name="Shadow_016" parent="." index="19"]
+surface_material_override/0 = ExtResource("3_uymc6")
+
+[node name="Shadow_017" parent="." index="20"]
+surface_material_override/0 = ExtResource("3_uymc6")
+
+[node name="Shadow_018" parent="." index="21"]
+cast_shadow = 0
+surface_material_override/0 = ExtResource("3_uymc6")
+
+[node name="Shadow_019" parent="." index="22"]
+cast_shadow = 0
+surface_material_override/0 = ExtResource("3_uymc6")
+
+[node name="Shadow_022" parent="." index="23"]
+surface_material_override/0 = ExtResource("3_uymc6")
+
+[node name="Shadow_023" parent="." index="24"]
+surface_material_override/0 = ExtResource("3_uymc6")
+
+[node name="Tree" parent="." index="25"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_001" parent="." index="26"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_002" parent="." index="27"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_003" parent="." index="28"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_004" parent="." index="29"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_005" parent="." index="30"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_006" parent="." index="31"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_007" parent="." index="32"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_008" parent="." index="33"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_009" parent="." index="34"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_010" parent="." index="35"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_011" parent="." index="36"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_012" parent="." index="37"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_013" parent="." index="38"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_014" parent="." index="39"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_015" parent="." index="40"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_016" parent="." index="41"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_017" parent="." index="42"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_018" parent="." index="43"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_019" parent="." index="44"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_020" parent="." index="45"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_021" parent="." index="46"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_022" parent="." index="47"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_023" parent="." index="48"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_024" parent="." index="49"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_025" parent="." index="50"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_026" parent="." index="51"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_027" parent="." index="52"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Tree_028" parent="." index="53"]
+surface_material_override/0 = ExtResource("4_w1e57")
+
+[node name="Cube_101" parent="." index="54"]
+cast_shadow = 0
+surface_material_override/0 = ExtResource("2_apxce")
