@@ -132,6 +132,6 @@ transform = Transform3D(1, 0, 0, 0, 2.98023e-08, 1, 0, -1, 2.98023e-08, 12, 40, 
 cull_mask = 1047554
 projection = 1
 current = true
-size = 13.0
+size = 25.0
 script = ExtResource("7_cdba2")
 player = NodePath("../../../../../Snake")
