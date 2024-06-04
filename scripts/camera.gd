@@ -15,7 +15,6 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("view_toggle"):
-		firstPersonMode = !firstPersonMode
 		ChangeCameraMode()
 
 	playerPos = player.global_transform.origin
@@ -41,8 +40,10 @@ func ThirdPersonLogic(delta):
 			targetRotation += 90
 		player.call_deferred("RotateRight")
 
-	var newRotation = Lerp(rotation_degrees.y, targetRotation, ROT_SPEED * delta)
-	rotation_degrees.y = newRotation
+	if rotation_degrees.y != targetRotation:
+		var newRotation = Lerp(rotation_degrees.y, targetRotation, ROT_SPEED * delta)
+		rotation_degrees.y = newRotation
+		
 	global_transform.origin = global_transform.origin.lerp(playerPos, FOLLOW_SPEED * delta)
 
 func FirstPersonLogic():
@@ -61,14 +62,27 @@ func FirstPersonLogic():
 	global_transform.origin = playerPos
 
 func ChangeCameraMode(): 
-	if firstPersonMode:
+	if !firstPersonMode:
+		firstPersonMode = true
+		rotation_degrees.y = targetRotation
+		SetLookDirection()
 		$"3rdPersonCam".current = false
 		$"1stPersonCam".current = true
 	else:
+		firstPersonMode = false
 		targetRotation = round_to_nearest_90(rotation_degrees.y)
 		player.call_deferred("ResetPosition")
 		$"1stPersonCam".current = false
 		$"3rdPersonCam".current = true
+
+func SetLookDirection():
+	var lastAnim = player.get("lastAnim")
+	if lastAnim == "WalkFront":
+		rotate_y(deg_to_rad(180))
+	elif lastAnim == "WalkLeft":
+		rotate_y(deg_to_rad(90))
+	elif lastAnim == "WalkRight":
+		rotate_y(deg_to_rad(-90))
 
 func round_to_nearest_90(angle):
 	return round(angle / 90.0) * 90.0

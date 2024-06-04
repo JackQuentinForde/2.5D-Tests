@@ -6,4 +6,5 @@
 [node name="Red_Shadow" instance=ExtResource("1_p0m4v")]
 
 [node name="Shadow_020" parent="." index="0"]
+layers = 4
 surface_material_override/0 = ExtResource("2_fegh7")
