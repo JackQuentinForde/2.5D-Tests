@@ -41,10 +41,8 @@ func ThirdPersonLogic(delta):
 			targetRotation += 90
 		player.call_deferred("RotateRight")
 
-	var currentRotation = rotation_degrees.y
-	var newRotation = Lerp(currentRotation, targetRotation, ROT_SPEED * delta)
+	var newRotation = Lerp(rotation_degrees.y, targetRotation, ROT_SPEED * delta)
 	rotation_degrees.y = newRotation
-
 	global_transform.origin = global_transform.origin.lerp(playerPos, FOLLOW_SPEED * delta)
 
 func FirstPersonLogic():
@@ -67,8 +65,13 @@ func ChangeCameraMode():
 		$"3rdPersonCam".current = false
 		$"1stPersonCam".current = true
 	else:
+		targetRotation = round_to_nearest_90(rotation_degrees.y)
+		player.call_deferred("ResetPosition")
 		$"1stPersonCam".current = false
 		$"3rdPersonCam".current = true
+
+func round_to_nearest_90(angle):
+	return round(angle / 90.0) * 90.0
 
 func Lerp(a, b, t):
 	return a + (b - a) * t

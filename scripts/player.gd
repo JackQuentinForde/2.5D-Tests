@@ -77,3 +77,7 @@ func RotateRight():
 		lastAnim = "WalkRight"
 	else:
 		lastAnim = "WalkFront"
+
+func ResetPosition():
+	lastAnim = "WalkBack"
+	$AnimatedSprite3D.play("IdleBack")
