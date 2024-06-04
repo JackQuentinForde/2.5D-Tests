@@ -229,6 +229,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17455, 0)
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.112015, 0)
+layers = 4
 cast_shadow = 0
 offset = Vector2(0, 6.5)
 pixel_size = 0.0625

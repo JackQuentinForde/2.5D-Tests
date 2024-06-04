@@ -1,6 +1,7 @@
 extends Node3D
 
 const ROT_SPEED = 7.5
+const LOOK_SENSITIVITY = 2.0
 const FOLLOW_SPEED = 5.0
 
 var player
@@ -44,12 +45,22 @@ func ThirdPersonLogic(delta):
 	var newRotation = Lerp(currentRotation, targetRotation, ROT_SPEED * delta)
 	rotation_degrees.y = newRotation
 
-	var targetPos = Vector3(playerPos.x, playerPos.y, playerPos.z)
-	global_transform.origin = global_transform.origin.lerp(targetPos, FOLLOW_SPEED * delta)
+	global_transform.origin = global_transform.origin.lerp(playerPos, FOLLOW_SPEED * delta)
 
 func FirstPersonLogic():
-	#var input_dir = Input.get_vector("first_person_camera_left", "first_person_camera_right", "first_person_camera_up", "first_person_camera_down")
-	pass
+	var look_x = Input.get_action_strength("first_person_camera_right") - Input.get_action_strength("first_person_camera_left")
+	var look_y = Input.get_action_strength("first_person_camera_down") - Input.get_action_strength("first_person_camera_up")
+
+	rotate_y(deg_to_rad(-look_x * LOOK_SENSITIVITY))
+	$"1stPersonCam".rotate_x(deg_to_rad(-look_y * LOOK_SENSITIVITY))
+
+	var camera_rotation = $"1stPersonCam".rotation_degrees.x
+	if camera_rotation > 90:
+		$"1stPersonCam".rotation_degrees.x = 90
+	elif camera_rotation < -90:
+		$"1stPersonCam".rotation_degrees.x = -90
+
+	global_transform.origin = playerPos
 
 func ChangeCameraMode(): 
 	if firstPersonMode:

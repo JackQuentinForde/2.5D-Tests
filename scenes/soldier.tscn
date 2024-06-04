@@ -252,4 +252,3 @@ autoplay = "blink"
 
 [node name="FOVCone" parent="." instance=ExtResource("6_t4q0x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-visible = false
