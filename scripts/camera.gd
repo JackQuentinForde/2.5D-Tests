@@ -3,6 +3,9 @@ extends Node3D
 const ROT_SPEED = 7.5
 const LOOK_SENSITIVITY = 2.0
 const FOLLOW_SPEED = 5.0
+const ZOOM_SPEED = 50.0
+const MAX_FOV = 13
+const MIN_FOV = 4
 
 var player
 var playerPos = Vector3()
@@ -19,12 +22,29 @@ func _physics_process(delta):
 
 	playerPos = player.global_transform.origin
 
-	if firstPersonMode:
+	if firstPersonMode and $"1stPersonCam".current == false:
+		FirstPersonTransitionLogic(delta)
+	elif firstPersonMode:
 		FirstPersonLogic()
 	else:
 		ThirdPersonLogic(delta)
 
+func FirstPersonTransitionLogic(delta):
+	$"3rdPersonCam".fov -= delta * ZOOM_SPEED
+	global_transform.origin = playerPos
+	if $"3rdPersonCam".fov <= MIN_FOV:
+		$"3rdPersonCam".current = false
+		$"1stPersonCam".current = true
+		rotation_degrees.y = targetRotation
+		SetLookDirection()
+		$"3rdPersonCam".fov = MIN_FOV
+
 func ThirdPersonLogic(delta):
+	if $"3rdPersonCam".fov < MAX_FOV:
+		$"3rdPersonCam".fov += delta * ZOOM_SPEED
+		if $"3rdPersonCam".fov > MAX_FOV:
+			$"3rdPersonCam".fov = MAX_FOV
+
 	if Input.is_action_just_pressed("camera_left"):
 		if targetRotation == -180:
 			rotation_degrees.y = 180
@@ -64,10 +84,6 @@ func FirstPersonLogic():
 func ChangeCameraMode(): 
 	if !firstPersonMode:
 		firstPersonMode = true
-		rotation_degrees.y = targetRotation
-		SetLookDirection()
-		$"3rdPersonCam".current = false
-		$"1stPersonCam".current = true
 	else:
 		firstPersonMode = false
 		targetRotation = round_to_nearest_90(rotation_degrees.y)
@@ -83,6 +99,7 @@ func SetLookDirection():
 		rotate_y(deg_to_rad(90))
 	elif lastAnim == "WalkRight":
 		rotate_y(deg_to_rad(-90))
+	$"1stPersonCam".rotation_degrees.x = 0
 
 func round_to_nearest_90(angle):
 	return round(angle / 90.0) * 90.0
