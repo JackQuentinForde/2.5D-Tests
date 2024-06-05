@@ -1,9 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://ck53fj46qgmo0"]
+[gd_scene load_steps=8 format=3 uid="uid://ck53fj46qgmo0"]
 
 [ext_resource type="PackedScene" uid="uid://ja6jjbacs67l" path="res://scenes/pallet_town.tscn" id="1_eeo8v"]
-[ext_resource type="PackedScene" uid="uid://uyqxo28luvr2" path="res://scenes/red.tscn" id="3_nam1j"]
+[ext_resource type="PackedScene" uid="uid://bi7ytmfmnojhb" path="res://scenes/snake.tscn" id="3_vbwp0"]
 [ext_resource type="AudioStream" uid="uid://b37vjj0o1tk88" path="res://assets/music/Pallet Town Theme.mp3" id="3_w1x3x"]
 [ext_resource type="PackedScene" uid="uid://bjo7rjav1fsv0" path="res://scenes/camera_pivot.tscn" id="4_3lbib"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i81p8"]
+sky_top_color = Color(0.580392, 0.992157, 1, 1)
+sky_horizon_color = Color(0, 0.803922, 0.976471, 1)
+ground_bottom_color = Color(0, 0.803922, 0.976471, 1)
+ground_horizon_color = Color(0, 0.803922, 0.976471, 1)
+
+[sub_resource type="Sky" id="Sky_hxxj0"]
+sky_material = SubResource("ProceduralSkyMaterial_i81p8")
+
+[sub_resource type="Environment" id="Environment_la74b"]
+background_mode = 2
+sky = SubResource("Sky_hxxj0")
 
 [node name="TestScene" type="Node3D"]
 
@@ -13,6 +26,10 @@
 stream = ExtResource("3_w1x3x")
 volume_db = -32.0
 
-[node name="Red" parent="." instance=ExtResource("3_nam1j")]
+[node name="Snake" parent="." instance=ExtResource("3_vbwp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0.1875, 0)
 
-[node name="CameraPivot" parent="Red" instance=ExtResource("4_3lbib")]
+[node name="CameraPivot" parent="Snake" instance=ExtResource("4_3lbib")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_la74b")

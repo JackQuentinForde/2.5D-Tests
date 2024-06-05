@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0satcf1abmm7"]
+[gd_scene load_steps=9 format=3 uid="uid://d0satcf1abmm7"]
 
 [ext_resource type="PackedScene" uid="uid://qeqjrwtcc6c2" path="res://scenes/vr_mission.tscn" id="1_gqvsg"]
 [ext_resource type="PackedScene" uid="uid://b3o2n6w11evkm" path="res://scenes/vr_mission_map.tscn" id="2_1mvnw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://sl4bqqt4oqm8" path="res://scenes/soldier.tscn" id="3_dn0c4"]
 [ext_resource type="PackedScene" uid="uid://dcygh0i4lphes" path="res://scenes/goal.tscn" id="5_ah6ij"]
 [ext_resource type="Script" path="res://scripts/miniMapCamera.gd" id="7_cdba2"]
+[ext_resource type="AudioStream" uid="uid://ddjw6xc5l1ysb" path="res://assets/music/4-10 VR Mission ~Raiden - Sneaking~.mp3" id="8_7pvrl"]
 
 [node name="test_scene_2" type="Node3D"]
 
@@ -135,3 +136,7 @@ current = true
 size = 25.0
 script = ExtResource("7_cdba2")
 player = NodePath("../../../../../Snake")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_7pvrl")
+autoplay = true
