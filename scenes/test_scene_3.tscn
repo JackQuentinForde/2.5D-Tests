@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfk4l4sy6g3ut"]
+
+[ext_resource type="PackedScene" uid="uid://c7g7dryi6xhmu" path="res://scenes/test_mission_2.tscn" id="1_13q5p"]
+[ext_resource type="PackedScene" uid="uid://bi7ytmfmnojhb" path="res://scenes/snake.tscn" id="2_4rw7u"]
+[ext_resource type="PackedScene" uid="uid://bjo7rjav1fsv0" path="res://scenes/camera_pivot.tscn" id="3_4t1yv"]
+[ext_resource type="PackedScene" uid="uid://dcygh0i4lphes" path="res://scenes/goal.tscn" id="4_apr0b"]
+
+[node name="test_scene_3" type="Node3D"]
+
+[node name="Test Mission 2" parent="." instance=ExtResource("1_13q5p")]
+
+[node name="Snake" parent="." instance=ExtResource("2_4rw7u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.1875, 2)
+
+[node name="CameraPivot" parent="Snake" instance=ExtResource("3_4t1yv")]
+
+[node name="Goal" parent="." instance=ExtResource("4_apr0b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.52038, 2, -28)

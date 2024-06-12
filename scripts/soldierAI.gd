@@ -18,7 +18,9 @@ var waypoints = []
 var activeWayPoint
 
 func _ready():
-	waypoints = get_node("Waypoints").get_children()
+	var waypointsNode = get_node("Waypoints")
+	waypointsNode.top_level = true
+	waypoints = waypointsNode.get_children()
 	activeWayPoint = waypoints[0]
 	state = PATROL_STATE
 	heading = Vector3.BACK
