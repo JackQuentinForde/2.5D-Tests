@@ -1,18 +1,70 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfk4l4sy6g3ut"]
+[gd_scene load_steps=8 format=3 uid="uid://dfk4l4sy6g3ut"]
 
 [ext_resource type="PackedScene" uid="uid://c7g7dryi6xhmu" path="res://scenes/test_mission_2.tscn" id="1_13q5p"]
 [ext_resource type="PackedScene" uid="uid://bi7ytmfmnojhb" path="res://scenes/snake.tscn" id="2_4rw7u"]
 [ext_resource type="PackedScene" uid="uid://bjo7rjav1fsv0" path="res://scenes/camera_pivot.tscn" id="3_4t1yv"]
 [ext_resource type="PackedScene" uid="uid://dcygh0i4lphes" path="res://scenes/goal.tscn" id="4_apr0b"]
+[ext_resource type="PackedScene" uid="uid://p3kxi3ekrghe" path="res://scenes/patrol_route.tscn" id="5_ljtgs"]
+[ext_resource type="PackedScene" uid="uid://bk0hp15bamykq" path="res://scenes/waypoint.tscn" id="6_f78p2"]
+[ext_resource type="PackedScene" uid="uid://sl4bqqt4oqm8" path="res://scenes/soldier.tscn" id="7_qf5lb"]
 
 [node name="test_scene_3" type="Node3D"]
 
 [node name="Test Mission 2" parent="." instance=ExtResource("1_13q5p")]
 
 [node name="Snake" parent="." instance=ExtResource("2_4rw7u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.1875, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.1875, -3)
 
 [node name="CameraPivot" parent="Snake" instance=ExtResource("3_4t1yv")]
 
 [node name="Goal" parent="." instance=ExtResource("4_apr0b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.52038, 2, -28)
+
+[node name="Patrol Route" parent="." instance=ExtResource("5_ljtgs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -9)
+
+[node name="Waypoint" parent="Patrol Route" instance=ExtResource("6_f78p2")]
+pausePoint = true
+pauseTime = 2.0
+heading = "LEFT"
+
+[node name="Waypoint2" parent="Patrol Route" instance=ExtResource("6_f78p2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09509, 0, 0)
+pausePoint = true
+heading = "RIGHT"
+
+[node name="Waypoint3" parent="Patrol Route" instance=ExtResource("6_f78p2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09509, 0, 4)
+pausePoint = true
+pauseTime = 2.0
+
+[node name="Waypoint4" parent="Patrol Route" instance=ExtResource("6_f78p2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09509, 0, 0)
+pausePoint = true
+heading = "UP"
+
+[node name="Waypoint5" parent="Patrol Route" instance=ExtResource("6_f78p2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.09509, 0, 0)
+pausePoint = true
+pauseTime = 2.0
+heading = "RIGHT"
+
+[node name="Waypoint6" parent="Patrol Route" instance=ExtResource("6_f78p2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09509, 0, 0)
+pausePoint = true
+heading = "LEFT"
+
+[node name="Waypoint7" parent="Patrol Route" instance=ExtResource("6_f78p2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09509, 0, 4)
+pausePoint = true
+pauseTime = 2.0
+
+[node name="Waypoint8" parent="Patrol Route" instance=ExtResource("6_f78p2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09509, 0, 0)
+pausePoint = true
+heading = "UP"
+
+[node name="Soldier" parent="." node_paths=PackedStringArray("cameraPivot", "patrolRoute") instance=ExtResource("7_qf5lb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.11857, 0.991309, -9)
+cameraPivot = NodePath("../Snake/CameraPivot")
+patrolRoute = NodePath("../Patrol Route")

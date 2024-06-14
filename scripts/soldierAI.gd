@@ -6,6 +6,7 @@ const ROT_SPEED = 18
 const WAYPOINT_MIN_DIST = 0.075
 
 @export var cameraPivot : Node3D
+@export var patrolRoute : Node3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -18,9 +19,7 @@ var waypoints = []
 var activeWayPoint
 
 func _ready():
-	var waypointsNode = get_node("Waypoints")
-	waypointsNode.top_level = true
-	waypoints = waypointsNode.get_children()
+	waypoints = patrolRoute.get_children()
 	activeWayPoint = waypoints[0]
 	state = PATROL_STATE
 	heading = Vector3.BACK
@@ -49,8 +48,12 @@ func Patrol():
 		WaypointHit()
 
 func WaypointHit():
-	if activeWayPoint.is_in_group("PausePoints"):
-		$WaitTimer.start()
+	velocity.x = 0
+	velocity.z = 0
+	if activeWayPoint.pausePoint:
+		ChangeLookDirection(activeWayPoint.heading)
+		$Timer.wait_time = activeWayPoint.pauseTime
+		$Timer.start()
 		state = WAIT_STATE
 	else:
 		GetNextWaypoint()
@@ -63,7 +66,7 @@ func GetNextWaypoint():
 		activeWayPoint = waypoints[index + 1]
 
 func Wait():
-	if not $WaitTimer.is_stopped():
+	if not $Timer.is_stopped():
 		velocity.x = 0
 		velocity.z = 0
 	else:
@@ -116,6 +119,20 @@ func SetHeading(delta):
 			targetRotation = 0
 	var currentRotation = $FOVCone.rotation_degrees.y
 	$FOVCone.rotation_degrees.y = Lerp(currentRotation, targetRotation, ROT_SPEED * delta)
+
+func ChangeLookDirection(waypointHeading):
+	if waypointHeading == "RIGHT":
+		heading = Vector3.RIGHT
+		targetRotation = -90
+	elif waypointHeading == "LEFT":
+		heading = Vector3.LEFT
+		targetRotation = 90
+	elif waypointHeading == "DOWN":
+		heading = Vector3.BACK
+		targetRotation = 180
+	elif waypointHeading == "UP":
+		heading = Vector3.FORWARD
+		targetRotation = 0
 
 func Lerp(a, b, t):
 	return a + (b - a) * t
