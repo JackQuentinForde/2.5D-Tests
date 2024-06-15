@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bi7ytmfmnojhb"]
+[gd_scene load_steps=27 format=3 uid="uid://bi7ytmfmnojhb"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1h5gu"]
 [ext_resource type="Texture2D" uid="uid://bwq6ljwbigyfv" path="res://assets/textures/Snake.png" id="2_2n5sc"]
@@ -215,6 +215,9 @@ _data = {
 "blink": SubResource("Animation_mg7hk")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hnk7v"]
+height = 1.3
+
 [node name="Snake" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1875, 0)
 wall_min_slide_angle = 0.767945
@@ -251,3 +254,10 @@ libraries = {
 "": SubResource("AnimationLibrary_4x1jl")
 }
 autoplay = "blink"
+
+[node name="VisibilityMesh" type="Area3D" parent="." groups=["Player"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisibilityMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.455421, 0)
+visible = false
+shape = SubResource("CapsuleShape3D_hnk7v")

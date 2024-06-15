@@ -136,3 +136,7 @@ func ChangeLookDirection(waypointHeading):
 
 func Lerp(a, b, t):
 	return a + (b - a) * t
+
+func _on_detect_area_area_entered(area:Area3D):
+	if area.is_in_group("Player"):
+		print("Player Detected")
