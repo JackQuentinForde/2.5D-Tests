@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfk4l4sy6g3ut"]
+[gd_scene load_steps=8 format=3 uid="uid://dfk4l4sy6g3ut"]
 
 [ext_resource type="PackedScene" uid="uid://c7g7dryi6xhmu" path="res://scenes/test_mission_2.tscn" id="1_13q5p"]
 [ext_resource type="PackedScene" uid="uid://bi7ytmfmnojhb" path="res://scenes/snake.tscn" id="2_4rw7u"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dcygh0i4lphes" path="res://scenes/goal.tscn" id="4_apr0b"]
 [ext_resource type="PackedScene" uid="uid://bk0hp15bamykq" path="res://scenes/waypoint.tscn" id="6_f78p2"]
 [ext_resource type="PackedScene" uid="uid://sl4bqqt4oqm8" path="res://scenes/soldier.tscn" id="7_qf5lb"]
+[ext_resource type="Script" path="res://scripts/miniMapCamera.gd" id="7_ymqy8"]
 
 [node name="test_scene_3" type="Node3D"]
 
@@ -56,7 +57,7 @@ pausePoint = true
 heading = "UP"
 
 [node name="Snake" parent="." instance=ExtResource("2_4rw7u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.1875, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.1875, -3)
 
 [node name="CameraPivot" parent="Snake" instance=ExtResource("3_4t1yv")]
 
@@ -67,3 +68,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.52038, 2, -28)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.11857, 0.991309, -9)
 cameraPivot = NodePath("../Snake/CameraPivot")
 patrolRoute = NodePath("../Patrol Route")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 200.0
+grow_horizontal = 0
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+handle_input_locally = false
+canvas_cull_mask = 4294966274
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 2.98023e-08, 1, 0, -1, 2.98023e-08, 12, 40, 0)
+cull_mask = 1047554
+projection = 1
+current = true
+size = 25.0
+script = ExtResource("7_ymqy8")
+player = NodePath("../../../../../Snake")

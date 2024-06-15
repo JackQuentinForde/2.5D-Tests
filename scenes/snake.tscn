@@ -215,10 +215,10 @@ _data = {
 "blink": SubResource("Animation_mg7hk")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hnk7v"]
-height = 1.3
+[sub_resource type="BoxShape3D" id="BoxShape3D_2t0ac"]
+size = Vector3(0.24, 1.38, 0.24)
 
-[node name="Snake" type="CharacterBody3D"]
+[node name="Snake" type="CharacterBody3D" groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1875, 0)
 wall_min_slide_angle = 0.767945
 script = ExtResource("1_1h5gu")
@@ -258,6 +258,5 @@ autoplay = "blink"
 [node name="VisibilityMesh" type="Area3D" parent="." groups=["Player"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VisibilityMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.455421, 0)
-visible = false
-shape = SubResource("CapsuleShape3D_hnk7v")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.498321, 0)
+shape = SubResource("BoxShape3D_2t0ac")

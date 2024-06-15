@@ -46,18 +46,10 @@ func ThirdPersonLogic(delta):
 			$"3rdPersonCam".fov = MAX_FOV
 
 	if Input.is_action_just_pressed("camera_left"):
-		if targetRotation == -180:
-			rotation_degrees.y = 180
-			targetRotation = 90
-		else:
-			targetRotation -= 90
+		targetRotation -= 90
 		player.call_deferred("RotateLeft")
 	elif Input.is_action_just_pressed("camera_right"):
-		if targetRotation == 180:
-			rotation_degrees.y = -180
-			targetRotation = -90
-		else:
-			targetRotation += 90
+		targetRotation += 90
 		player.call_deferred("RotateRight")
 
 	if rotation_degrees.y != targetRotation:
@@ -104,5 +96,10 @@ func SetLookDirection():
 func round_to_nearest_90(angle):
 	return round(angle / 90.0) * 90.0
 
-func Lerp(a, b, t):
-	return a + (b - a) * t
+func Lerp(from, to, weight):
+	var difference = Wrapf(to - from, -180, 180)
+	return from + difference * weight
+
+func Wrapf(value, minimum, maximum):
+	var degrees = maximum - minimum
+	return minimum + fmod((value - minimum), degrees) + (degrees if value < minimum else 0)

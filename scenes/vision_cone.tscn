@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsa7exclyl13r"]
-
-[ext_resource type="PackedScene" uid="uid://cbbxalpvu1gl" path="res://assets/models/Vision Cone.glb" id="1_8cds0"]
-
-[node name="Vision Cone" instance=ExtResource("1_8cds0")]

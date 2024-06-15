@@ -1,26 +1,29 @@
 extends CharacterBody3D
 
 const PATROL_SPEED = 2.5
-const CHASE_SPEED = 5
+const CHASE_SPEED = 3
 const ROT_SPEED = 18
 const WAYPOINT_MIN_DIST = 0.075
+const TARGET_MIN_DIST = 3
+const ATTACK_TIME = 1.5
 
 @export var cameraPivot : Node3D
 @export var patrolRoute : Node3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-enum {PATROL_STATE, CHASE_STATE, WAIT_STATE, DYING_STATE}
+enum {PATROL_STATE, WAIT_STATE, CHASE_STATE, ATTACK_STATE}
 
 var state
 var heading
 var targetRotation = 0
 var waypoints = []
-var activeWayPoint
+var checkFOV = false
+var target
 
 func _ready():
 	waypoints = patrolRoute.get_children()
-	activeWayPoint = waypoints[0]
+	target = waypoints[0]
 	state = PATROL_STATE
 	heading = Vector3.BACK
 
@@ -37,33 +40,39 @@ func ApplyGravity(delta):
 func BrainLogic():
 	if state == PATROL_STATE:
 		Patrol()
+	elif state == CHASE_STATE:
+		Chase()
+	elif state == ATTACK_STATE:
+		Attack()
 	else:
 		Wait()
+	if checkFOV and state != ATTACK_STATE:
+		CheckFOV()
 
 func Patrol():
-	var direction = (activeWayPoint.global_position - global_position).normalized()
+	var direction = (target.global_position - global_position).normalized()
 	velocity.x = direction.x * PATROL_SPEED
 	velocity.z = direction.z * PATROL_SPEED
-	if global_position.distance_to(activeWayPoint.global_position) < WAYPOINT_MIN_DIST:
+	if global_position.distance_to(target.global_position) < WAYPOINT_MIN_DIST:
 		WaypointHit()
 
 func WaypointHit():
 	velocity.x = 0
 	velocity.z = 0
-	if activeWayPoint.pausePoint:
-		ChangeLookDirection(activeWayPoint.heading)
-		$Timer.wait_time = activeWayPoint.pauseTime
+	if target.pausePoint:
+		ChangeLookDirection(target.heading)
+		$Timer.wait_time = target.pauseTime
 		$Timer.start()
 		state = WAIT_STATE
 	else:
 		GetNextWaypoint()
 
 func GetNextWaypoint():
-	var index = waypoints.find(activeWayPoint)
+	var index = waypoints.find(target)
 	if index == waypoints.size() - 1:
-		activeWayPoint = waypoints[0]
+		target = waypoints[0]
 	else:
-		activeWayPoint = waypoints[index + 1]
+		target = waypoints[index + 1]
 
 func Wait():
 	if not $Timer.is_stopped():
@@ -73,9 +82,50 @@ func Wait():
 		GetNextWaypoint()
 		state = PATROL_STATE
 
+func Chase():
+	if global_position.distance_to(target.global_position) > TARGET_MIN_DIST:
+		var direction = (target.global_position - global_position).normalized()
+		velocity.x = direction.x * CHASE_SPEED
+		velocity.z = direction.z * CHASE_SPEED
+	else:
+		velocity.x = 0
+		velocity.z = 0
+		$Timer.wait_time = ATTACK_TIME
+		$Timer.start()
+		state = ATTACK_STATE
+
+	if !checkFOV:
+		RestartPatrol()
+
+func Attack():
+	if not $Timer.is_stopped():
+		velocity.x = 0
+		velocity.z = 0
+	else:
+		state = CHASE_STATE
+
+func RestartPatrol():
+	target = waypoints[0]
+	state = PATROL_STATE
+
+func CheckFOV():
+	var objects = $FOVCone/DetectArea.get_overlapping_areas()
+	if objects.size() == 0:
+		return
+
+	for object in objects:
+		if object.is_in_group("Player"):
+			$LineOfSight.look_at(object.global_transform.origin, Vector3.UP)
+			$LineOfSight.force_raycast_update()
+			if $LineOfSight.is_colliding():
+				var collider = $LineOfSight.get_collider()
+				if collider.is_in_group("Player"):
+					target = collider
+					state = CHASE_STATE
+
 func AnimLogic(delta):
 	var angle = GetCameraAngle(delta)
-	if state == PATROL_STATE:
+	if velocity.x != 0 or velocity.z != 0:
 		if angle < 45 or angle > 315:
 			$AnimatedSprite3D.play("WalkBack")
 		elif angle < 135:
@@ -103,20 +153,9 @@ func GetCameraAngle(delta):
 	return angle
 
 func SetHeading(delta):
-	if abs(velocity.x) > abs(velocity.z):
-		if velocity.x > 0:
-			heading = Vector3.RIGHT
-			targetRotation = -90
-		elif velocity.x < 0:
-			heading = Vector3.LEFT
-			targetRotation = 90
-	else:
-		if velocity.z > 0:
-			heading = Vector3.BACK
-			targetRotation = 180
-		elif velocity.z < 0:
-			heading = Vector3.FORWARD
-			targetRotation = 0
+	heading = (target.global_transform.origin - global_transform.origin).normalized()
+	var direction = -(target.global_transform.origin - $FOVCone.global_transform.origin).normalized()
+	targetRotation = rad_to_deg(atan2(direction.x, direction.z))
 	var currentRotation = $FOVCone.rotation_degrees.y
 	$FOVCone.rotation_degrees.y = Lerp(currentRotation, targetRotation, ROT_SPEED * delta)
 
@@ -134,9 +173,18 @@ func ChangeLookDirection(waypointHeading):
 		heading = Vector3.FORWARD
 		targetRotation = 0
 
-func Lerp(a, b, t):
-	return a + (b - a) * t
+func Lerp(from, to, weight):
+	var difference = Wrapf(to - from, -180, 180)
+	return from + difference * weight
+
+func Wrapf(value, minimum, maximum):
+	var degrees = maximum - minimum
+	return minimum + fmod((value - minimum), degrees) + (degrees if value < minimum else 0)
 
 func _on_detect_area_area_entered(area:Area3D):
 	if area.is_in_group("Player"):
-		print("Player Detected")
+		checkFOV = true
+
+func _on_detect_area_area_exited(area:Area3D):
+	if area.is_in_group("Player"):
+		checkFOV = false
