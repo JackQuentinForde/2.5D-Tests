@@ -4,7 +4,7 @@ const ROT_SPEED = 7.5
 const LOOK_SENSITIVITY = 2.0
 const FOLLOW_SPEED = 5.0
 const ZOOM_SPEED = 50.0
-const MAX_FOV = 12
+const MAX_FOV = 13
 const MIN_FOV = 4
 
 var player

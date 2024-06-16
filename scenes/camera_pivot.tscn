@@ -10,7 +10,7 @@ script = ExtResource("1_cjm7d")
 transform = Transform3D(1, 0, 0, 0, 0.851681, 0.524061, 0, -0.524061, 0.851681, -0.1875, 19.3576, 29.1439)
 cull_mask = 5
 current = true
-fov = 12.0
+fov = 13.0
 near = 0.1
 
 [node name="1stPersonCam" type="Camera3D" parent="."]

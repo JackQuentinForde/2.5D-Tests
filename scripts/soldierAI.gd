@@ -60,10 +60,10 @@ func WaypointHit():
 	velocity.x = 0
 	velocity.z = 0
 	if target.pausePoint:
-		ChangeLookDirection(target.heading)
 		$Timer.wait_time = target.pauseTime
 		$Timer.start()
 		state = WAIT_STATE
+		ChangeLookDirection(target.heading)
 	else:
 		GetNextWaypoint()
 
@@ -145,17 +145,17 @@ func AnimLogic(delta):
 			$AnimatedSprite3D.play("IdleLeft")
 
 func GetCameraAngle(delta):
-	SetHeading(delta)
+	if state != WAIT_STATE:
+		heading = (target.global_transform.origin - global_transform.origin).normalized()
+	SetRotation(delta)
 	var cameraBasis = -cameraPivot.global_transform.basis.z.normalized()
 	var angle = rad_to_deg(atan2(cameraBasis.x * heading.z - cameraBasis.z * heading.x, cameraBasis.x * heading.x + cameraBasis.z * heading.z))
 	if angle < 0:
 		angle += 360
 	return angle
 
-func SetHeading(delta):
-	heading = (target.global_transform.origin - global_transform.origin).normalized()
-	var direction = -(target.global_transform.origin - $FOVCone.global_transform.origin).normalized()
-	targetRotation = rad_to_deg(atan2(direction.x, direction.z))
+func SetRotation(delta):
+	targetRotation = rad_to_deg(atan2(-heading.x, -heading.z))
 	var currentRotation = $FOVCone.rotation_degrees.y
 	$FOVCone.rotation_degrees.y = Lerp(currentRotation, targetRotation, ROT_SPEED * delta)
 
