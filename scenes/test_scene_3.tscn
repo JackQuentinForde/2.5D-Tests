@@ -1,73 +1,1271 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfk4l4sy6g3ut"]
+[gd_scene load_steps=10 format=3 uid="uid://dfk4l4sy6g3ut"]
 
+[ext_resource type="Script" path="res://scripts/AStar.gd" id="1_3fygj"]
 [ext_resource type="PackedScene" uid="uid://c7g7dryi6xhmu" path="res://scenes/test_mission_2.tscn" id="1_13q5p"]
+[ext_resource type="PackedScene" uid="uid://bk0hp15bamykq" path="res://scenes/waypoint.tscn" id="1_qpnwk"]
 [ext_resource type="PackedScene" uid="uid://bi7ytmfmnojhb" path="res://scenes/snake.tscn" id="2_4rw7u"]
+[ext_resource type="PackedScene" uid="uid://djtmcmineh7xn" path="res://scenes/patrol_point.tscn" id="3_4h44a"]
 [ext_resource type="PackedScene" uid="uid://bjo7rjav1fsv0" path="res://scenes/camera_pivot.tscn" id="3_4t1yv"]
 [ext_resource type="PackedScene" uid="uid://dcygh0i4lphes" path="res://scenes/goal.tscn" id="4_apr0b"]
-[ext_resource type="PackedScene" uid="uid://bk0hp15bamykq" path="res://scenes/waypoint.tscn" id="6_f78p2"]
 [ext_resource type="PackedScene" uid="uid://sl4bqqt4oqm8" path="res://scenes/soldier.tscn" id="7_qf5lb"]
 [ext_resource type="Script" path="res://scripts/miniMapCamera.gd" id="7_ymqy8"]
 
 [node name="test_scene_3" type="Node3D"]
 
-[node name="Test Mission 2" parent="." instance=ExtResource("1_13q5p")]
+[node name="Waypoints" type="Node3D" parent="."]
+visible = false
+script = ExtResource("1_3fygj")
+
+[node name="Waypoint" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -7.5)
+
+[node name="Waypoint5" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -6.5)
+
+[node name="Waypoint6" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -5.5)
+
+[node name="Waypoint7" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -4.5)
+
+[node name="Waypoint24" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -4.5)
+
+[node name="Waypoint25" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -4.5)
+
+[node name="Waypoint26" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -4.5)
+
+[node name="Waypoint27" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -4.5)
+
+[node name="Waypoint28" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -3.5)
+
+[node name="Waypoint29" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -3.5)
+
+[node name="Waypoint30" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -3.5)
+
+[node name="Waypoint31" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -3.5)
+
+[node name="Waypoint32" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -2.5)
+
+[node name="Waypoint33" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -2.5)
+
+[node name="Waypoint34" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -2.5)
+
+[node name="Waypoint35" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -2.5)
+
+[node name="Waypoint36" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -1.5)
+
+[node name="Waypoint37" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -1.5)
+
+[node name="Waypoint38" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -1.5)
+
+[node name="Waypoint39" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -1.5)
+
+[node name="Waypoint40" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -4.5)
+
+[node name="Waypoint137" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -5.5)
+
+[node name="Waypoint138" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -5.5)
+
+[node name="Waypoint139" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -6.5)
+
+[node name="Waypoint140" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -6.5)
+
+[node name="Waypoint141" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -7.5)
+
+[node name="Waypoint142" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -7.5)
+
+[node name="Waypoint143" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -8.5)
+
+[node name="Waypoint144" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -8.5)
+
+[node name="Waypoint145" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -8.5)
+
+[node name="Waypoint146" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -8.5)
+
+[node name="Waypoint147" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -8.5)
+
+[node name="Waypoint148" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -8.5)
+
+[node name="Waypoint149" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -8.5)
+
+[node name="Waypoint150" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -8.5)
+
+[node name="Waypoint151" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -8.5)
+
+[node name="Waypoint152" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -8.5)
+
+[node name="Waypoint153" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -7.5)
+
+[node name="Waypoint154" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -7.5)
+
+[node name="Waypoint155" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -7.5)
+
+[node name="Waypoint156" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -6.5)
+
+[node name="Waypoint157" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -6.5)
+
+[node name="Waypoint158" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -6.5)
+
+[node name="Waypoint159" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -5.5)
+
+[node name="Waypoint160" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -5.5)
+
+[node name="Waypoint161" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -5.5)
+
+[node name="Waypoint41" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -3.5)
+
+[node name="Waypoint42" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -2.5)
+
+[node name="Waypoint43" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -1.5)
+
+[node name="Waypoint44" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -4.5)
+
+[node name="Waypoint45" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -3.5)
+
+[node name="Waypoint46" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -2.5)
+
+[node name="Waypoint47" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -1.5)
+
+[node name="Waypoint48" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -4.5)
+
+[node name="Waypoint49" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -3.5)
+
+[node name="Waypoint50" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -2.5)
+
+[node name="Waypoint51" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -1.5)
+
+[node name="Waypoint52" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -4.5)
+
+[node name="Waypoint53" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -3.5)
+
+[node name="Waypoint54" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -2.5)
+
+[node name="Waypoint55" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -1.5)
+
+[node name="Waypoint56" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -4.5)
+
+[node name="Waypoint57" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -3.5)
+
+[node name="Waypoint58" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -2.5)
+
+[node name="Waypoint59" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -1.5)
+
+[node name="Waypoint60" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -4.5)
+
+[node name="Waypoint61" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -3.5)
+
+[node name="Waypoint62" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -2.5)
+
+[node name="Waypoint63" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -1.5)
+
+[node name="Waypoint64" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -4.5)
+
+[node name="Waypoint65" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -3.5)
+
+[node name="Waypoint66" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -2.5)
+
+[node name="Waypoint67" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -1.5)
+
+[node name="Waypoint8" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -3.5)
+
+[node name="Waypoint9" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -2.5)
+
+[node name="Waypoint10" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -1.5)
+
+[node name="Waypoint11" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -0.5)
+
+[node name="Waypoint83" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -4.5)
+
+[node name="Waypoint84" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -3.5)
+
+[node name="Waypoint85" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -2.5)
+
+[node name="Waypoint86" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -1.5)
+
+[node name="Waypoint87" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -0.5)
+
+[node name="Waypoint88" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -4.5)
+
+[node name="Waypoint89" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -3.5)
+
+[node name="Waypoint90" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -2.5)
+
+[node name="Waypoint91" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -1.5)
+
+[node name="Waypoint92" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -0.5)
+
+[node name="Waypoint93" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -4.5)
+
+[node name="Waypoint94" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3.5)
+
+[node name="Waypoint95" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -2.5)
+
+[node name="Waypoint96" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -1.5)
+
+[node name="Waypoint97" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -0.5)
+
+[node name="Waypoint98" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -4.5)
+
+[node name="Waypoint121" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -5.5)
+
+[node name="Waypoint122" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -5.5)
+
+[node name="Waypoint123" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -5.5)
+
+[node name="Waypoint124" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -5.5)
+
+[node name="Waypoint125" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -6.5)
+
+[node name="Waypoint126" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -6.5)
+
+[node name="Waypoint127" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -6.5)
+
+[node name="Waypoint128" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -6.5)
+
+[node name="Waypoint129" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -7.5)
+
+[node name="Waypoint130" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -7.5)
+
+[node name="Waypoint131" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -7.5)
+
+[node name="Waypoint132" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -7.5)
+
+[node name="Waypoint133" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -8.5)
+
+[node name="Waypoint134" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -8.5)
+
+[node name="Waypoint135" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -8.5)
+
+[node name="Waypoint136" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -8.5)
+
+[node name="Waypoint99" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -3.5)
+
+[node name="Waypoint100" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -2.5)
+
+[node name="Waypoint101" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -1.5)
+
+[node name="Waypoint102" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+
+[node name="Waypoint12" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -0.5)
+
+[node name="Waypoint13" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -0.5)
+
+[node name="Waypoint14" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -0.5)
+
+[node name="Waypoint15" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -0.5)
+
+[node name="Waypoint16" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -0.5)
+
+[node name="Waypoint68" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -0.5)
+
+[node name="Waypoint69" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -0.5)
+
+[node name="Waypoint70" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -0.5)
+
+[node name="Waypoint71" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -0.5)
+
+[node name="Waypoint72" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -0.5)
+
+[node name="Waypoint73" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -0.5)
+
+[node name="Waypoint17" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 0.5)
+
+[node name="Waypoint18" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 1.5)
+
+[node name="Waypoint74" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 0.5)
+
+[node name="Waypoint75" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 1.5)
+
+[node name="Waypoint19" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 1.5)
+
+[node name="Waypoint20" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 1.5)
+
+[node name="Waypoint21" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 1.5)
+
+[node name="Waypoint22" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 1.5)
+
+[node name="Waypoint2" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -8.5)
+
+[node name="Waypoint3" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -8.5)
+
+[node name="Waypoint4" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -8.5)
+
+[node name="Waypoint162" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -9.5)
+
+[node name="Waypoint163" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -9.5)
+
+[node name="Waypoint164" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -9.5)
+
+[node name="Waypoint165" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -9.5)
+
+[node name="Waypoint166" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -9.5)
+
+[node name="Waypoint167" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -9.5)
+
+[node name="Waypoint168" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -9.5)
+
+[node name="Waypoint169" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -9.5)
+
+[node name="Waypoint170" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -9.5)
+
+[node name="Waypoint171" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -9.5)
+
+[node name="Waypoint216" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -10.5)
+
+[node name="Waypoint217" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -10.5)
+
+[node name="Waypoint218" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -10.5)
+
+[node name="Waypoint219" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -11.5)
+
+[node name="Waypoint220" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -11.5)
+
+[node name="Waypoint221" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -11.5)
+
+[node name="Waypoint222" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -12.5)
+
+[node name="Waypoint223" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -12.5)
+
+[node name="Waypoint224" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -12.5)
+
+[node name="Waypoint225" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -13.5)
+
+[node name="Waypoint226" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -13.5)
+
+[node name="Waypoint227" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -13.5)
+
+[node name="Waypoint228" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -14.5)
+
+[node name="Waypoint229" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -14.5)
+
+[node name="Waypoint231" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -13.5)
+
+[node name="Waypoint232" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -13.5)
+
+[node name="Waypoint233" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -14.5)
+
+[node name="Waypoint234" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -14.5)
+
+[node name="Waypoint235" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -13.5)
+
+[node name="Waypoint236" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -13.5)
+
+[node name="Waypoint237" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -14.5)
+
+[node name="Waypoint238" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -14.5)
+
+[node name="Waypoint239" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -13.5)
+
+[node name="Waypoint240" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -13.5)
+
+[node name="Waypoint241" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -14.5)
+
+[node name="Waypoint242" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -14.5)
+
+[node name="Waypoint243" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -13.5)
+
+[node name="Waypoint244" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -13.5)
+
+[node name="Waypoint245" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -14.5)
+
+[node name="Waypoint246" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -14.5)
+
+[node name="Waypoint247" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -13.5)
+
+[node name="Waypoint248" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -13.5)
+
+[node name="Waypoint249" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -14.5)
+
+[node name="Waypoint250" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -14.5)
+
+[node name="Waypoint251" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -15.5)
+
+[node name="Waypoint252" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -15.5)
+
+[node name="Waypoint253" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -15.5)
+
+[node name="Waypoint254" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -15.5)
+
+[node name="Waypoint255" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -15.5)
+
+[node name="Waypoint256" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -15.5)
+
+[node name="Waypoint257" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -15.5)
+
+[node name="Waypoint258" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -15.5)
+
+[node name="Waypoint259" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -15.5)
+
+[node name="Waypoint260" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -15.5)
+
+[node name="Waypoint261" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -15.5)
+
+[node name="Waypoint262" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -16.5)
+
+[node name="Waypoint263" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -16.5)
+
+[node name="Waypoint264" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -16.5)
+
+[node name="Waypoint265" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -16.5)
+
+[node name="Waypoint266" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -16.5)
+
+[node name="Waypoint267" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -16.5)
+
+[node name="Waypoint268" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -16.5)
+
+[node name="Waypoint269" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -16.5)
+
+[node name="Waypoint270" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -16.5)
+
+[node name="Waypoint271" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -16.5)
+
+[node name="Waypoint272" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -16.5)
+
+[node name="Waypoint273" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -17.5)
+
+[node name="Waypoint274" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -17.5)
+
+[node name="Waypoint275" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -17.5)
+
+[node name="Waypoint276" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -17.5)
+
+[node name="Waypoint277" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -17.5)
+
+[node name="Waypoint278" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -17.5)
+
+[node name="Waypoint279" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -17.5)
+
+[node name="Waypoint280" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -17.5)
+
+[node name="Waypoint281" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -17.5)
+
+[node name="Waypoint282" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -17.5)
+
+[node name="Waypoint283" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -17.5)
+
+[node name="Waypoint284" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -16.5)
+
+[node name="Waypoint285" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -16.5)
+
+[node name="Waypoint286" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -17.5)
+
+[node name="Waypoint288" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -16.5)
+
+[node name="Waypoint289" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -17.5)
+
+[node name="Waypoint287" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -17.5)
+
+[node name="Waypoint290" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -18.5)
+
+[node name="Waypoint291" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -18.5)
+
+[node name="Waypoint292" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -18.5)
+
+[node name="Waypoint304" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -18.5)
+
+[node name="Waypoint305" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -18.5)
+
+[node name="Waypoint293" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -18.5)
+
+[node name="Waypoint294" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -18.5)
+
+[node name="Waypoint295" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -18.5)
+
+[node name="Waypoint296" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -18.5)
+
+[node name="Waypoint297" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -18.5)
+
+[node name="Waypoint298" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -18.5)
+
+[node name="Waypoint299" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -18.5)
+
+[node name="Waypoint300" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -18.5)
+
+[node name="Waypoint301" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -18.5)
+
+[node name="Waypoint302" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -18.5)
+
+[node name="Waypoint303" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -18.5)
+
+[node name="Waypoint306" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -19.5)
+
+[node name="Waypoint307" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -19.5)
+
+[node name="Waypoint308" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -19.5)
+
+[node name="Waypoint309" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -19.5)
+
+[node name="Waypoint310" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -19.5)
+
+[node name="Waypoint311" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -19.5)
+
+[node name="Waypoint312" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -19.5)
+
+[node name="Waypoint313" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -19.5)
+
+[node name="Waypoint314" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -19.5)
+
+[node name="Waypoint315" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -19.5)
+
+[node name="Waypoint316" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -19.5)
+
+[node name="Waypoint317" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -19.5)
+
+[node name="Waypoint318" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -19.5)
+
+[node name="Waypoint319" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -19.5)
+
+[node name="Waypoint320" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -19.5)
+
+[node name="Waypoint321" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -19.5)
+
+[node name="Waypoint322" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -20.5)
+
+[node name="Waypoint323" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -20.5)
+
+[node name="Waypoint324" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -20.5)
+
+[node name="Waypoint325" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -20.5)
+
+[node name="Waypoint380" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -21.5)
+
+[node name="Waypoint378" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -22.5)
+
+[node name="Waypoint379" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -23.5)
+
+[node name="Waypoint326" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -20.5)
+
+[node name="Waypoint327" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -20.5)
+
+[node name="Waypoint328" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -20.5)
+
+[node name="Waypoint329" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -20.5)
+
+[node name="Waypoint330" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -20.5)
+
+[node name="Waypoint331" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -20.5)
+
+[node name="Waypoint332" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -20.5)
+
+[node name="Waypoint333" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -20.5)
+
+[node name="Waypoint334" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -20.5)
+
+[node name="Waypoint335" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -20.5)
+
+[node name="Waypoint336" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -20.5)
+
+[node name="Waypoint337" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -20.5)
+
+[node name="Waypoint338" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -21.5)
+
+[node name="Waypoint339" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -21.5)
+
+[node name="Waypoint340" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -21.5)
+
+[node name="Waypoint341" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -21.5)
+
+[node name="Waypoint381" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -22.5)
+
+[node name="Waypoint382" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -23.5)
+
+[node name="Waypoint342" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -21.5)
+
+[node name="Waypoint343" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -21.5)
+
+[node name="Waypoint344" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -21.5)
+
+[node name="Waypoint345" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -21.5)
+
+[node name="Waypoint346" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -21.5)
+
+[node name="Waypoint347" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -21.5)
+
+[node name="Waypoint348" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -22.5)
+
+[node name="Waypoint349" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -22.5)
+
+[node name="Waypoint350" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -22.5)
+
+[node name="Waypoint351" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -22.5)
+
+[node name="Waypoint352" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -22.5)
+
+[node name="Waypoint353" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -23.5)
+
+[node name="Waypoint354" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, -23.5)
+
+[node name="Waypoint355" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, -23.5)
+
+[node name="Waypoint356" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -23.5)
+
+[node name="Waypoint357" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -23.5)
+
+[node name="Waypoint358" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -23.5)
+
+[node name="Waypoint359" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -23.5)
+
+[node name="Waypoint360" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -23.5)
+
+[node name="Waypoint361" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -23.5)
+
+[node name="Waypoint362" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -23.5)
+
+[node name="Waypoint363" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -22.5)
+
+[node name="Waypoint364" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -22.5)
+
+[node name="Waypoint365" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -22.5)
+
+[node name="Waypoint366" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -22.5)
+
+[node name="Waypoint367" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -22.5)
+
+[node name="Waypoint383" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -25.5)
+
+[node name="Waypoint384" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -25.5)
+
+[node name="Waypoint385" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -25.5)
+
+[node name="Waypoint386" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -24.5)
+
+[node name="Waypoint387" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -24.5)
+
+[node name="Waypoint388" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -24.5)
+
+[node name="Waypoint389" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -27.5)
+
+[node name="Waypoint390" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -27.5)
+
+[node name="Waypoint391" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -27.5)
+
+[node name="Waypoint395" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -28.5)
+
+[node name="Waypoint396" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -28.5)
+
+[node name="Waypoint397" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -28.5)
+
+[node name="Waypoint392" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -26.5)
+
+[node name="Waypoint393" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -26.5)
+
+[node name="Waypoint394" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -26.5)
+
+[node name="Waypoint368" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -22.5)
+
+[node name="Waypoint369" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -22.5)
+
+[node name="Waypoint370" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -22.5)
+
+[node name="Waypoint371" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -22.5)
+
+[node name="Waypoint372" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -22.5)
+
+[node name="Waypoint373" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -23.5)
+
+[node name="Waypoint374" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -23.5)
+
+[node name="Waypoint375" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -23.5)
+
+[node name="Waypoint376" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -23.5)
+
+[node name="Waypoint377" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -23.5)
+
+[node name="Waypoint230" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -14.5)
+
+[node name="Waypoint172" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -9.5)
+
+[node name="Waypoint173" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -9.5)
+
+[node name="Waypoint174" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -9.5)
+
+[node name="Waypoint175" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -9.5)
+
+[node name="Waypoint176" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -9.5)
+
+[node name="Waypoint177" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -9.5)
+
+[node name="Waypoint178" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -9.5)
+
+[node name="Waypoint179" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -10.5)
+
+[node name="Waypoint180" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -10.5)
+
+[node name="Waypoint181" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -10.5)
+
+[node name="Waypoint182" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -10.5)
+
+[node name="Waypoint183" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -10.5)
+
+[node name="Waypoint184" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -10.5)
+
+[node name="Waypoint185" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -10.5)
+
+[node name="Waypoint186" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -10.5)
+
+[node name="Waypoint187" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -10.5)
+
+[node name="Waypoint188" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -10.5)
+
+[node name="Waypoint189" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -10.5)
+
+[node name="Waypoint190" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -11.5)
+
+[node name="Waypoint191" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -11.5)
+
+[node name="Waypoint192" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -11.5)
+
+[node name="Waypoint193" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -11.5)
+
+[node name="Waypoint194" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -11.5)
+
+[node name="Waypoint195" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -11.5)
+
+[node name="Waypoint196" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -11.5)
+
+[node name="Waypoint197" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -11.5)
+
+[node name="Waypoint198" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -11.5)
+
+[node name="Waypoint199" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -11.5)
+
+[node name="Waypoint200" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -11.5)
+
+[node name="Waypoint201" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -12.5)
+
+[node name="Waypoint202" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -12.5)
+
+[node name="Waypoint203" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -12.5)
+
+[node name="Waypoint204" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -12.5)
+
+[node name="Waypoint205" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -12.5)
+
+[node name="Waypoint206" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -12.5)
+
+[node name="Waypoint207" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -12.5)
+
+[node name="Waypoint208" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -12.5)
+
+[node name="Waypoint212" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -13.5)
+
+[node name="Waypoint213" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -13.5)
+
+[node name="Waypoint214" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -14.5)
+
+[node name="Waypoint215" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -14.5)
+
+[node name="Waypoint209" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -12.5)
+
+[node name="Waypoint210" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -12.5)
+
+[node name="Waypoint211" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -12.5)
+
+[node name="Waypoint23" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 1.5)
+
+[node name="Waypoint76" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, 2.5)
+
+[node name="Waypoint77" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 2.5)
+
+[node name="Waypoint78" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, 2.5)
+
+[node name="Waypoint79" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 2.5)
+
+[node name="Waypoint80" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 2.5)
+
+[node name="Waypoint81" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 2.5)
+
+[node name="Waypoint82" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 2.5)
+
+[node name="Waypoint103" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 1.5)
+
+[node name="Waypoint104" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 1.5)
+
+[node name="Waypoint105" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 1.5)
+
+[node name="Waypoint106" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 1.5)
+
+[node name="Waypoint107" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 2.5)
+
+[node name="Waypoint108" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 2.5)
+
+[node name="Waypoint109" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 2.5)
+
+[node name="Waypoint110" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 2.5)
+
+[node name="Waypoint111" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 1.5)
+
+[node name="Waypoint112" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 1.5)
+
+[node name="Waypoint113" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 1.5)
+
+[node name="Waypoint114" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 1.5)
+
+[node name="Waypoint115" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0, 2.5)
+
+[node name="Waypoint119" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 1.5)
+
+[node name="Waypoint120" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, 2.5)
+
+[node name="Waypoint116" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 2.5)
+
+[node name="Waypoint117" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 2.5)
+
+[node name="Waypoint118" parent="Waypoints" instance=ExtResource("1_qpnwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 2.5)
 
 [node name="Patrol Route" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -9)
+visible = false
 
-[node name="Waypoint" parent="Patrol Route" instance=ExtResource("6_f78p2")]
+[node name="Patrol Point" parent="Patrol Route" instance=ExtResource("3_4h44a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -9)
 pausePoint = true
 pauseTime = 2.0
 heading = "LEFT"
 
-[node name="Waypoint2" parent="Patrol Route" instance=ExtResource("6_f78p2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09509, 0, 0)
+[node name="Patrol Point2" parent="Patrol Route" instance=ExtResource("3_4h44a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -9)
 pausePoint = true
 heading = "RIGHT"
 
-[node name="Waypoint3" parent="Patrol Route" instance=ExtResource("6_f78p2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09509, 0, 4)
+[node name="Patrol Point3" parent="Patrol Route" instance=ExtResource("3_4h44a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -5)
 pausePoint = true
 pauseTime = 2.0
 
-[node name="Waypoint4" parent="Patrol Route" instance=ExtResource("6_f78p2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09509, 0, 0)
+[node name="Patrol Point4" parent="Patrol Route" instance=ExtResource("3_4h44a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -9)
 pausePoint = true
 heading = "UP"
 
-[node name="Waypoint5" parent="Patrol Route" instance=ExtResource("6_f78p2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.09509, 0, 0)
+[node name="Patrol Point5" parent="Patrol Route" instance=ExtResource("3_4h44a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -9)
 pausePoint = true
 pauseTime = 2.0
 heading = "RIGHT"
 
-[node name="Waypoint6" parent="Patrol Route" instance=ExtResource("6_f78p2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09509, 0, 0)
+[node name="Patrol Point6" parent="Patrol Route" instance=ExtResource("3_4h44a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -9)
 pausePoint = true
 heading = "LEFT"
 
-[node name="Waypoint7" parent="Patrol Route" instance=ExtResource("6_f78p2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09509, 0, 4)
+[node name="Patrol Point7" parent="Patrol Route" instance=ExtResource("3_4h44a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -5)
 pausePoint = true
 pauseTime = 2.0
 
-[node name="Waypoint8" parent="Patrol Route" instance=ExtResource("6_f78p2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09509, 0, 0)
+[node name="Patrol Point8" parent="Patrol Route" instance=ExtResource("3_4h44a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -9)
 pausePoint = true
 heading = "UP"
+
+[node name="Test Mission 2" parent="." instance=ExtResource("1_13q5p")]
 
 [node name="Snake" parent="." instance=ExtResource("2_4rw7u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.1875, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1.1875, 2.5)
 
 [node name="CameraPivot" parent="Snake" instance=ExtResource("3_4t1yv")]
 
 [node name="Goal" parent="." instance=ExtResource("4_apr0b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.52038, 2, -28)
 
-[node name="Soldier" parent="." node_paths=PackedStringArray("cameraPivot", "patrolRoute") instance=ExtResource("7_qf5lb")]
+[node name="Soldier" parent="." node_paths=PackedStringArray("cameraPivot", "waypointsNode", "patrolRouteNode") instance=ExtResource("7_qf5lb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.11857, 0.991309, -9)
 cameraPivot = NodePath("../Snake/CameraPivot")
-patrolRoute = NodePath("../Patrol Route")
+waypointsNode = NodePath("../Waypoints")
+patrolRouteNode = NodePath("../Patrol Route")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -89,7 +1287,7 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 2.98023e-08, 1, 0, -1, 2.98023e-08, 12, 40, 0)
-cull_mask = 1047554
+cull_mask = 2
 projection = 1
 current = true
 size = 25.0

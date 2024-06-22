@@ -53,7 +53,7 @@ func ThirdPersonLogic(delta):
 		player.call_deferred("RotateRight")
 
 	if rotation_degrees.y != targetRotation:
-		var newRotation = Lerp(rotation_degrees.y, targetRotation, ROT_SPEED * delta)
+		var newRotation = MathFunctions.Lerp(rotation_degrees.y, targetRotation, ROT_SPEED * delta)
 		rotation_degrees.y = newRotation
 		
 	global_transform.origin = global_transform.origin.lerp(playerPos, FOLLOW_SPEED * delta)
@@ -78,7 +78,7 @@ func ChangeCameraMode():
 		firstPersonMode = true
 	else:
 		firstPersonMode = false
-		targetRotation = round_to_nearest_90(rotation_degrees.y)
+		targetRotation = MathFunctions.RoundToNearestDegrees(rotation_degrees.y, 90.0)
 		player.call_deferred("ResetPosition")
 		$"1stPersonCam".current = false
 		$"3rdPersonCam".current = true
@@ -92,14 +92,3 @@ func SetLookDirection():
 	elif lastAnim == "WalkRight":
 		rotate_y(deg_to_rad(-90))
 	$"1stPersonCam".rotation_degrees.x = 0
-
-func round_to_nearest_90(angle):
-	return round(angle / 90.0) * 90.0
-
-func Lerp(from, to, weight):
-	var difference = Wrapf(to - from, -180, 180)
-	return from + difference * weight
-
-func Wrapf(value, minimum, maximum):
-	var degrees = maximum - minimum
-	return minimum + fmod((value - minimum), degrees) + (degrees if value < minimum else 0)

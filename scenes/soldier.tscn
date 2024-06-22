@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bdn5gtomm6rvy" path="res://scenes/fov.tscn" id="6_t4q0x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wprfi"]
-radius = 0.625
 height = 1.4
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eergt"]

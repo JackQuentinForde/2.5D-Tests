@@ -1,6 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://bk0hp15bamykq"]
+[gd_scene load_steps=4 format=3 uid="uid://bk0hp15bamykq"]
 
-[ext_resource type="Script" path="res://scripts/waypoint.gd" id="1_uoglc"]
+[ext_resource type="Texture2D" uid="uid://bsk2b8hchg7hb" path="res://icon.svg" id="2_rojsx"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8vdnd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dktv7"]
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("2_rojsx")
 
 [node name="Waypoint" type="Node3D"]
-script = ExtResource("1_uoglc")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+
+[node name="Sprite3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.4, 6.03983e-08, -3.49691e-08, -6.03983e-08, -0.4, -6.03984e-08, -3.49691e-08, -6.03984e-08, 0.4, 0, 9, 0)
+layers = 524288
+mesh = SubResource("PlaneMesh_8vdnd")
+surface_material_override/0 = SubResource("StandardMaterial3D_dktv7")

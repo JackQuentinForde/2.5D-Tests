@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://58cbs08xq7v4" path="res://assets/textures/playerIcon.png" id="4_8y8eh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jm7mo"]
-radius = 0.625
+radius = 0.54
 height = 1.4
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6jj4c"]
