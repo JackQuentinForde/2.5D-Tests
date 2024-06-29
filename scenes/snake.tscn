@@ -220,6 +220,7 @@ size = Vector3(0.24, 1.38, 0.24)
 
 [node name="Snake" type="CharacterBody3D" groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1875, 0)
+collision_layer = 4
 wall_min_slide_angle = 0.767945
 script = ExtResource("1_1h5gu")
 
@@ -255,8 +256,9 @@ libraries = {
 }
 autoplay = "blink"
 
-[node name="VisibilityMesh" type="Area3D" parent="." groups=["Player"]]
+[node name="VisibilityArea" type="Area3D" parent="." groups=["Player"]]
+collision_layer = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="VisibilityMesh"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisibilityArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.498321, 0)
 shape = SubResource("BoxShape3D_2t0ac")

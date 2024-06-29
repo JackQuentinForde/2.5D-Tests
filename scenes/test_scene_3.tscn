@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dfk4l4sy6g3ut"]
+[gd_scene load_steps=11 format=3 uid="uid://dfk4l4sy6g3ut"]
 
 [ext_resource type="Script" path="res://scripts/AStar.gd" id="1_3fygj"]
 [ext_resource type="PackedScene" uid="uid://c7g7dryi6xhmu" path="res://scenes/test_mission_2.tscn" id="1_13q5p"]
+[ext_resource type="Script" path="res://scripts/AlertStatus.gd" id="1_o3xqu"]
 [ext_resource type="PackedScene" uid="uid://bk0hp15bamykq" path="res://scenes/waypoint.tscn" id="1_qpnwk"]
 [ext_resource type="PackedScene" uid="uid://bi7ytmfmnojhb" path="res://scenes/snake.tscn" id="2_4rw7u"]
 [ext_resource type="PackedScene" uid="uid://djtmcmineh7xn" path="res://scenes/patrol_point.tscn" id="3_4h44a"]
@@ -11,6 +12,35 @@
 [ext_resource type="Script" path="res://scripts/miniMapCamera.gd" id="7_ymqy8"]
 
 [node name="test_scene_3" type="Node3D"]
+
+[node name="AlertStatus" type="Node3D" parent="." node_paths=PackedStringArray("player", "soldiersNode")]
+script = ExtResource("1_o3xqu")
+player = NodePath("../Snake")
+soldiersNode = NodePath("../Soldiers")
+
+[node name="AlertTimer" type="Timer" parent="AlertStatus"]
+wait_time = 2.0
+one_shot = true
+
+[node name="HeightenedTimer" type="Timer" parent="AlertStatus"]
+wait_time = 60.0
+one_shot = true
+
+[node name="Soldiers" type="Node3D" parent="."]
+
+[node name="Soldier" parent="Soldiers" node_paths=PackedStringArray("cameraPivot", "waypointsNode", "patrolRouteNode", "alertStatusNode") instance=ExtResource("7_qf5lb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.11857, 0.991309, -9)
+cameraPivot = NodePath("../../Snake/CameraPivot")
+waypointsNode = NodePath("../../Waypoints")
+patrolRouteNode = NodePath("../../Patrol Route")
+alertStatusNode = NodePath("../../AlertStatus")
+
+[node name="Soldier2" parent="Soldiers" node_paths=PackedStringArray("cameraPivot", "waypointsNode", "patrolRouteNode", "alertStatusNode") instance=ExtResource("7_qf5lb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.61857, 0.991309, -20)
+cameraPivot = NodePath("../../Snake/CameraPivot")
+waypointsNode = NodePath("../../Waypoints")
+patrolRouteNode = NodePath("../../Patrol Route 2")
+alertStatusNode = NodePath("../../AlertStatus")
 
 [node name="Waypoints" type="Node3D" parent="."]
 visible = false
@@ -1251,6 +1281,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -9)
 pausePoint = true
 heading = "UP"
 
+[node name="Patrol Route 2" type="Node3D" parent="."]
+visible = false
+
+[node name="Patrol Point" parent="Patrol Route 2" instance=ExtResource("3_4h44a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -20.5)
+pausePoint = true
+pauseTime = 2.0
+
+[node name="Patrol Point2" parent="Patrol Route 2" instance=ExtResource("3_4h44a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -22.5)
+heading = "UP"
+
+[node name="Patrol Point3" parent="Patrol Route 2" instance=ExtResource("3_4h44a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -22.5)
+pausePoint = true
+pauseTime = 2.0
+heading = "UP"
+
+[node name="Patrol Point4" parent="Patrol Route 2" instance=ExtResource("3_4h44a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -20.5)
+
 [node name="Test Mission 2" parent="." instance=ExtResource("1_13q5p")]
 
 [node name="Snake" parent="." instance=ExtResource("2_4rw7u")]
@@ -1261,13 +1312,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1.1875, 2.5)
 [node name="Goal" parent="." instance=ExtResource("4_apr0b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.52038, 2, -28)
 
-[node name="Soldier" parent="." node_paths=PackedStringArray("cameraPivot", "waypointsNode", "patrolRouteNode") instance=ExtResource("7_qf5lb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.11857, 0.991309, -9)
-cameraPivot = NodePath("../Snake/CameraPivot")
-waypointsNode = NodePath("../Waypoints")
-patrolRouteNode = NodePath("../Patrol Route")
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
 anchors_preset = 1
@@ -1281,7 +1327,7 @@ grow_horizontal = 0
 handle_input_locally = false
 canvas_cull_mask = 4294966274
 size = Vector2i(200, 200)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Node3D" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 
@@ -1293,3 +1339,5 @@ current = true
 size = 25.0
 script = ExtResource("7_ymqy8")
 player = NodePath("../../../../../Snake")
+
+[connection signal="timeout" from="AlertStatus/AlertTimer" to="AlertStatus" method="_on_alert_timer_timeout"]

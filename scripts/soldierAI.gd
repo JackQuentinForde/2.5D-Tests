@@ -1,16 +1,17 @@
 extends CharacterBody3D
 
 const PATROL_SPEED = 2.5
-const CHASE_SPEED = 3
-const ROT_SPEED = 18
+const CHASE_SPEED = 3.0
+const ROT_SPEED = 18.0
 const WAYPOINT_MIN_DIST = 0.075
-const TARGET_MIN_DIST = 2
-const ATTACK_TIME = 1.5
+const TARGET_MIN_DIST = 2.0
+const ATTACK_TIME = 0.75
 const SEARCH_END_WAIT_TIME = 1.5
 
 @export var cameraPivot : Node3D
 @export var waypointsNode : Node3D
 @export var patrolRouteNode : Node3D
+@export var alertStatusNode : Node3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 enum {PATROL_STATE, WAIT_STATE, CHASE_STATE, SEARCH_STATE, RETURN_STATE, ATTACK_STATE}
@@ -19,10 +20,11 @@ var speed = PATROL_SPEED
 var patrolRoute = []
 var currentRoute = []
 var target
+var player
 var state = PATROL_STATE
 var heading = Vector3.BACK
 var targetRotation = 0
-var checkFOV = false
+var playerInFOV = false
 
 func _ready():
 	patrolRoute = patrolRouteNode.get_children()
@@ -40,16 +42,22 @@ func ApplyGravity(delta):
 		velocity.y -= gravity * delta
 
 func BrainLogic():
-	if state == PATROL_STATE or state == SEARCH_STATE or state == RETURN_STATE:
+	if state == PATROL_STATE or state == RETURN_STATE:
 		Navigate()
+	elif state == SEARCH_STATE:
+		Search()	
 	elif state == CHASE_STATE:
 		Chase()
 	elif state == ATTACK_STATE:
 		Attack()
 	else:
-		Wait()
-	if checkFOV:
-		CheckFOV()
+		Wait()	
+	CheckFOV()
+
+func Search():
+	if alertStatusNode.IsAlert():
+		UpdateSearch()
+	Navigate()
 
 func Navigate():
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
@@ -111,7 +119,8 @@ func Chase():
 		$Timer.start()
 		state = ATTACK_STATE
 
-	if !checkFOV:
+	if !playerInFOV:
+		alertStatusNode.HostileLost(self)
 		StartSearch()
 
 func Attack():
@@ -125,7 +134,12 @@ func StartSearch():
 	speed = CHASE_SPEED
 	state = SEARCH_STATE
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
-	var targetPos = Vector3(target.global_position.x, 0, target.global_position.z)
+	var targetPos = Vector3(player.global_position.x, 0, player.global_position.z)
+	CalculatePath(currentPos, targetPos)
+
+func UpdateSearch():
+	var currentPos = Vector3(global_position.x, 0, global_position.z)
+	var targetPos = Vector3(player.global_position.x, 0, player.global_position.z)
 	CalculatePath(currentPos, targetPos)
 
 func SearchEnded():
@@ -155,15 +169,17 @@ func CheckFOV():
 				var collider = $LineOfSight.get_collider()
 				if collider.is_in_group("Player"):
 					target = collider
+					player = target
 					if state != ATTACK_STATE:
 						state = CHASE_STATE
+						alertStatusNode.HostileEncountered(self)
 				else:
-					checkFOV = false
+					playerInFOV = false
 
 func AnimLogic(delta):
 	var angle = GetCameraAngle(delta)
 	if velocity.x != 0 or velocity.z != 0:
-		if angle < 45 or angle > 315:
+		if angle <= 45 or angle >= 315:
 			$AnimatedSprite3D.play("WalkBack")
 		elif angle < 135:
 			$AnimatedSprite3D.play("WalkRight")
@@ -172,7 +188,7 @@ func AnimLogic(delta):
 		else:
 			$AnimatedSprite3D.play("WalkLeft")
 	else:
-		if angle < 45 or angle > 315:
+		if angle <= 45 or angle >= 315:
 			$AnimatedSprite3D.play("IdleBack")
 		elif angle < 135:
 			$AnimatedSprite3D.play("IdleRight")
@@ -219,10 +235,16 @@ func CalculatePath(start, end, fullRoute = true):
 	else:
 		StartPatrol()
 
+func Alert(body):
+	if state == SEARCH_STATE:
+		return
+	player = body
+	StartSearch()
+
 func _on_detect_area_area_entered(area:Area3D):
 	if area.is_in_group("Player"):
-		checkFOV = true
+		playerInFOV = true
 
 func _on_detect_area_area_exited(area:Area3D):
 	if area.is_in_group("Player"):
-		checkFOV = false
+		playerInFOV = false

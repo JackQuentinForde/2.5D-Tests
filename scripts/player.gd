@@ -18,10 +18,10 @@ func ApplyGravity(delta):
 		velocity.y -= gravity * delta
 
 func MoveLogic():
-	#if $CameraPivot.get("firstPersonMode"):
-		#velocity.x = 0
-		#velocity.z = 0
-		#return
+	if $CameraPivot.get("firstPersonMode"):
+		velocity.x = 0
+		velocity.z = 0
+		return
 
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

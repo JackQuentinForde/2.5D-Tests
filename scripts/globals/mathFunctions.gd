@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 
 func Lerp(from, to, weight):
 	var difference = Wrapf(to - from, -180, 180)
