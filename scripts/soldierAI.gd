@@ -14,10 +14,11 @@ const SEARCH_END_WAIT_TIME = 1.5
 @export var alertStatusNode : Node3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-enum {PATROL_STATE, WAIT_STATE, CHASE_STATE, SEARCH_STATE, RETURN_STATE, ATTACK_STATE}
+enum {PATROL_STATE, WAIT_STATE, CHASE_STATE, SEARCH_STATE, SEARCH_OVER, RETURN_STATE, ATTACK_STATE}
 
 var speed = PATROL_SPEED
 var patrolRoute = []
+var lastPatrolPointIndex = 0
 var currentRoute = []
 var target
 var player
@@ -71,11 +72,7 @@ func Navigate():
 
 func WaypointHit():
 	if state == PATROL_STATE and target.pausePoint:
-		velocity.x = 0
-		velocity.z = 0
-		$Timer.wait_time = target.pauseTime
-		$Timer.start()
-		state = WAIT_STATE
+		PatrolPause()
 		ChangeLookDirection(target.heading)
 	else:
 		GetNextWaypoint()
@@ -84,26 +81,39 @@ func GetNextWaypoint():
 	var index = currentRoute.find(target)
 	if index == currentRoute.size() - 1:
 		if state == SEARCH_STATE:
-			velocity.x = 0
-			velocity.z = 0
-			$Timer.wait_time = SEARCH_END_WAIT_TIME
-			$Timer.start()
-			state = WAIT_STATE
+			SearchPause()
 		else:
+			if state == PATROL_STATE:
+				lastPatrolPointIndex = 0
 			StartPatrol()
 	else:
 		target = currentRoute[index + 1]
+		if state == PATROL_STATE:
+			lastPatrolPointIndex = index + 1
+
+func SearchPause():
+	Pause(SEARCH_END_WAIT_TIME)
+	state = SEARCH_OVER
+
+func PatrolPause():
+	Pause(target.pauseTime)
+	state = WAIT_STATE
+
+func Pause(pauseTime):
+	velocity.x = 0
+	velocity.z = 0
+	$Timer.wait_time = pauseTime
+	$Timer.start()
 
 func Wait():
 	if not $Timer.is_stopped():
 		velocity.x = 0
 		velocity.z = 0
 	else:
-		if patrolRoute.has(target):
-			GetNextWaypoint()
-			state = PATROL_STATE
-		else:
+		if state == SEARCH_OVER:
 			SearchEnded()
+		else:
+			WaitOver()
 
 func Chase():
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
@@ -122,6 +132,12 @@ func Chase():
 	if !playerInFOV:
 		alertStatusNode.HostileLost(self)
 		StartSearch()
+
+func WaitOver():
+	speed = PATROL_SPEED
+	state = PATROL_STATE
+	currentRoute = patrolRoute
+	GetNextWaypoint()
 
 func Attack():
 	if not $Timer.is_stopped():
@@ -146,13 +162,13 @@ func SearchEnded():
 	speed = CHASE_SPEED
 	state = RETURN_STATE
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
-	var patrolPoint = patrolRoute[0]
-	var targetPos = Vector3(patrolPoint.global_position.x, 0, patrolPoint.global_position.z)
+	target = patrolRoute[lastPatrolPointIndex]
+	var targetPos = Vector3(target.global_position.x, 0, target.global_position.z)
 	CalculatePath(currentPos, targetPos, false)
 
 func StartPatrol():
 	currentRoute = patrolRoute
-	target = currentRoute[0]
+	target = currentRoute[lastPatrolPointIndex]
 	speed = PATROL_SPEED
 	state = PATROL_STATE
 
