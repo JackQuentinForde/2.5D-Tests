@@ -1313,7 +1313,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1.1875, 2.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.52038, 2, -28)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
 anchors_preset = 1
@@ -1327,7 +1326,7 @@ grow_horizontal = 0
 handle_input_locally = false
 canvas_cull_mask = 4294966274
 size = Vector2i(200, 200)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Node3D" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 

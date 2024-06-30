@@ -146,8 +146,8 @@ func SearchEnded():
 	speed = CHASE_SPEED
 	state = RETURN_STATE
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
-	var patrolStart = patrolRoute[0]
-	var targetPos = Vector3(patrolStart.global_position.x, 0, patrolStart.global_position.z)
+	var patrolPoint = patrolRoute[0]
+	var targetPos = Vector3(patrolPoint.global_position.x, 0, patrolPoint.global_position.z)
 	CalculatePath(currentPos, targetPos, false)
 
 func StartPatrol():
