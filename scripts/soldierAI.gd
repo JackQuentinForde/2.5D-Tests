@@ -4,11 +4,11 @@ const PATROL_SPEED = 2.5
 const CHASE_SPEED = 3.0
 const ROT_SPEED = 18.0
 const WAYPOINT_MIN_DIST = 0.075
-const TARGET_MIN_DIST = 2.0
-const ATTACK_TIME = 0.75
+const TARGET_MIN_DIST = 4.0
+const ATTACK_TIME = 1.0
 const SEARCH_END_WAIT_TIME = 1.5
-const STARTLE_TIME = 0.4
-const ALERT_TIME = 0.5
+const STARTLE_TIME = 0.5
+const CALL_TIME = 2.0
 
 @export var cameraPivot : Node3D
 @export var waypointsNode : Node3D
@@ -16,7 +16,7 @@ const ALERT_TIME = 0.5
 @export var alertStatusNode : Node3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-enum {PATROL_STATE, WAIT_STATE, STARTLED_STATE, ALERTING_STATE, CHASE_STATE, SEARCH_STATE, SEARCH_OVER, RETURN_STATE, ATTACK_STATE}
+enum {PATROL_STATE, WAIT_STATE, STARTLED_STATE, ALERTING_STATE, CALLING_STATE, CHASE_STATE, SEARCH_STATE, SEARCH_OVER, RETURN_STATE, ATTACK_STATE}
 
 var speed = PATROL_SPEED
 var patrolRoute = []
@@ -53,6 +53,8 @@ func BrainLogic():
 		React()
 	elif state == ALERTING_STATE:
 		Alerting()
+	elif state == CALLING_STATE:
+		CallingForBackUp()
 	elif state == CHASE_STATE:
 		Chase()
 	elif state == ATTACK_STATE:
@@ -70,33 +72,47 @@ func Startled():
 	$Timer.wait_time = STARTLE_TIME
 	$Timer.start()
 	$Exclamation.visible = true
+	$StartledTimer.start()
 	state = STARTLED_STATE
+	$FOVCone.call_deferred("SetToRed")
 
 func React():
 	if not $Timer.is_stopped():
 		velocity.x = 0
 		velocity.z = 0
 	else:
-		$Exclamation.visible = false
 		var currentPos = Vector3(global_position.x, 0, global_position.z)
-		var targetPos = Vector3(target.global_position.x, 0, target.global_position.z)
+		var targetPos = Vector3(player.global_position.x, 0, player.global_position.z)
 		if currentPos.distance_to(targetPos) > TARGET_MIN_DIST:
 			BeginAlerting()
 		else:
 			BeginAttack()
 
 func BeginAlerting():
-	$Timer.wait_time = ALERT_TIME
-	$Timer.start()
+	speed = CHASE_SPEED
 	state = ALERTING_STATE
+	var currentPos = Vector3(global_position.x, 0, global_position.z)
+	var targetPos = waypointsNode.GetClosestCoverPoint(currentPos)
+	CalculatePath(currentPos, targetPos)
 
 func Alerting():
+	Navigate()
+
+func StartCallForBackup():
+	state = CALLING_STATE
+	velocity.x = 0
+	velocity.z = 0
+	$Timer.wait_time = CALL_TIME
+	$Timer.start()
+
+func CallingForBackUp():
 	if not $Timer.is_stopped():
 		velocity.x = 0
 		velocity.z = 0
 	else:
-		alertStatusNode.HostileEncountered(self)
 		state = CHASE_STATE
+		alertStatusNode.HostileEncountered(self)
+		$FOVCone.call_deferred("SetToRed")
 
 func Navigate():
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
@@ -120,6 +136,8 @@ func GetNextWaypoint():
 	if index == currentRoute.size() - 1:
 		if state == SEARCH_STATE:
 			SearchPause()
+		elif state == ALERTING_STATE:
+			StartCallForBackup()
 		else:
 			if state == PATROL_STATE:
 				lastPatrolPointIndex = 0
@@ -132,6 +150,7 @@ func GetNextWaypoint():
 func SearchPause():
 	Pause(SEARCH_END_WAIT_TIME)
 	state = SEARCH_OVER
+	$FOVCone.call_deferred("SetToYellow")
 
 func PatrolPause():
 	Pause(target.pauseTime)
@@ -166,7 +185,7 @@ func Chase():
 		BeginAttack()
 
 	if !playerInFOV:
-		alertStatusNode.HostileLost(self)	
+		alertStatusNode.HostileLost(self)
 		StartSearch()
 
 func WaitOver():
@@ -187,8 +206,10 @@ func Attack():
 	else:
 		if alertStatusNode.IsAlert():
 			state = CHASE_STATE
+			alertStatusNode.HostileEncountered(self)
+			$FOVCone.call_deferred("SetToRed")
 		else:
-			state = ALERTING_STATE
+			BeginAlerting()
 
 func StartSearch():
 	speed = CHASE_SPEED
@@ -205,6 +226,7 @@ func UpdateSearch():
 func SearchEnded():
 	speed = CHASE_SPEED
 	state = RETURN_STATE
+	$FOVCone.call_deferred("SetToGreen")
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
 	target = patrolRoute[lastPatrolPointIndex]
 	var targetPos = Vector3(target.global_position.x, 0, target.global_position.z)
@@ -228,21 +250,22 @@ func CheckFOV():
 			if $LineOfSight.is_colliding():
 				var collider = $LineOfSight.get_collider()
 				if collider.is_in_group("Player"):
-					target = collider
-					player = target
+					player = collider
 					if !AlreadyStartled():
 						Startled()
 					elif !AlreadyEngaged():
+						target = player
 						state = CHASE_STATE
 						alertStatusNode.HostileEncountered(self)
+						$FOVCone.call_deferred("SetToRed")
 				else:
 					playerInFOV = false
 
 func AlreadyStartled():
-	return alertStatusNode.IsAlert() or state == STARTLED_STATE or state == ATTACK_STATE or state == ALERTING_STATE or state == CHASE_STATE or state == SEARCH_STATE
+	return alertStatusNode.IsAlert() or state == STARTLED_STATE or state == ATTACK_STATE or state == ALERTING_STATE or state == CHASE_STATE or state == SEARCH_STATE or state == CALLING_STATE
 
 func AlreadyEngaged():
-	return state == ATTACK_STATE or state == STARTLED_STATE or state == ALERTING_STATE
+	return state == ATTACK_STATE or state == STARTLED_STATE or state == ALERTING_STATE or state == CALLING_STATE
 
 func AnimLogic(delta):
 	var angle = GetCameraAngle(delta)
@@ -296,6 +319,7 @@ func ChangeLookDirection(waypointHeading):
 		targetRotation = 0
 
 func CalculatePath(start, end, fullRoute = true):
+	#print("Calculating path")
 	var route = waypointsNode.CalculatePath(start, end, fullRoute)
 	if route and route.size() > 0:
 		currentRoute = route
@@ -307,6 +331,7 @@ func Alert(body):
 	if state == SEARCH_STATE:
 		return
 	player = body
+	$FOVCone.call_deferred("SetToRed")
 	StartSearch()
 
 func _on_detect_area_area_entered(area:Area3D):
@@ -316,3 +341,6 @@ func _on_detect_area_area_entered(area:Area3D):
 func _on_detect_area_area_exited(area:Area3D):
 	if area.is_in_group("Player"):
 		playerInFOV = false
+
+func _on_startled_timer_timeout():
+	$Exclamation.visible = false

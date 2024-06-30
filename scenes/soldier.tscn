@@ -283,5 +283,10 @@ target_position = Vector3(0, 0, -8)
 collision_mask = 5
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
+[node name="StartledTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="area_entered" from="FOVCone/DetectArea" to="." method="_on_detect_area_area_entered"]
 [connection signal="area_exited" from="FOVCone/DetectArea" to="." method="_on_detect_area_area_exited"]
+[connection signal="timeout" from="StartledTimer" to="." method="_on_startled_timer_timeout"]
