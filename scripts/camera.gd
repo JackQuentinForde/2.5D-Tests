@@ -3,7 +3,7 @@ extends Node3D
 const ROT_SPEED = 7.5
 const LOOK_SENSITIVITY = 2.0
 const FOLLOW_SPEED = 5.0
-const ZOOM_SPEED = 50.0
+const ZOOM_SPEED = 60.0
 const MAX_FOV = 15
 const MIN_FOV = 4
 

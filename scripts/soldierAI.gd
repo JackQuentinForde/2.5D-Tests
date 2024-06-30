@@ -7,6 +7,8 @@ const WAYPOINT_MIN_DIST = 0.075
 const TARGET_MIN_DIST = 2.0
 const ATTACK_TIME = 0.75
 const SEARCH_END_WAIT_TIME = 1.5
+const STARTLE_TIME = 0.4
+const ALERT_TIME = 0.5
 
 @export var cameraPivot : Node3D
 @export var waypointsNode : Node3D
@@ -14,7 +16,7 @@ const SEARCH_END_WAIT_TIME = 1.5
 @export var alertStatusNode : Node3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-enum {PATROL_STATE, WAIT_STATE, CHASE_STATE, SEARCH_STATE, SEARCH_OVER, RETURN_STATE, ATTACK_STATE}
+enum {PATROL_STATE, WAIT_STATE, STARTLED_STATE, ALERTING_STATE, CHASE_STATE, SEARCH_STATE, SEARCH_OVER, RETURN_STATE, ATTACK_STATE}
 
 var speed = PATROL_SPEED
 var patrolRoute = []
@@ -46,7 +48,11 @@ func BrainLogic():
 	if state == PATROL_STATE or state == RETURN_STATE:
 		Navigate()
 	elif state == SEARCH_STATE:
-		Search()	
+		Search()
+	elif state == STARTLED_STATE:
+		React()
+	elif state == ALERTING_STATE:
+		Alerting()
 	elif state == CHASE_STATE:
 		Chase()
 	elif state == ATTACK_STATE:
@@ -59,6 +65,38 @@ func Search():
 	if alertStatusNode.IsAlert():
 		UpdateSearch()
 	Navigate()
+
+func Startled():
+	$Timer.wait_time = STARTLE_TIME
+	$Timer.start()
+	$Exclamation.visible = true
+	state = STARTLED_STATE
+
+func React():
+	if not $Timer.is_stopped():
+		velocity.x = 0
+		velocity.z = 0
+	else:
+		$Exclamation.visible = false
+		var currentPos = Vector3(global_position.x, 0, global_position.z)
+		var targetPos = Vector3(target.global_position.x, 0, target.global_position.z)
+		if currentPos.distance_to(targetPos) > TARGET_MIN_DIST:
+			BeginAlerting()
+		else:
+			BeginAttack()
+
+func BeginAlerting():
+	$Timer.wait_time = ALERT_TIME
+	$Timer.start()
+	state = ALERTING_STATE
+
+func Alerting():
+	if not $Timer.is_stopped():
+		velocity.x = 0
+		velocity.z = 0
+	else:
+		alertStatusNode.HostileEncountered(self)
+		state = CHASE_STATE
 
 func Navigate():
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
@@ -89,7 +127,7 @@ func GetNextWaypoint():
 	else:
 		target = currentRoute[index + 1]
 		if state == PATROL_STATE:
-			lastPatrolPointIndex = index + 1
+			lastPatrolPointIndex += 1
 
 func SearchPause():
 	Pause(SEARCH_END_WAIT_TIME)
@@ -125,12 +163,10 @@ func Chase():
 	else:
 		velocity.x = 0
 		velocity.z = 0
-		$Timer.wait_time = ATTACK_TIME
-		$Timer.start()
-		state = ATTACK_STATE
+		BeginAttack()
 
 	if !playerInFOV:
-		alertStatusNode.HostileLost(self)
+		alertStatusNode.HostileLost(self)	
 		StartSearch()
 
 func WaitOver():
@@ -139,12 +175,20 @@ func WaitOver():
 	currentRoute = patrolRoute
 	GetNextWaypoint()
 
+func BeginAttack():
+	$Timer.wait_time = ATTACK_TIME
+	$Timer.start()
+	state = ATTACK_STATE
+
 func Attack():
 	if not $Timer.is_stopped():
 		velocity.x = 0
 		velocity.z = 0
 	else:
-		state = CHASE_STATE
+		if alertStatusNode.IsAlert():
+			state = CHASE_STATE
+		else:
+			state = ALERTING_STATE
 
 func StartSearch():
 	speed = CHASE_SPEED
@@ -186,11 +230,19 @@ func CheckFOV():
 				if collider.is_in_group("Player"):
 					target = collider
 					player = target
-					if state != ATTACK_STATE:
+					if !AlreadyStartled():
+						Startled()
+					elif !AlreadyEngaged():
 						state = CHASE_STATE
 						alertStatusNode.HostileEncountered(self)
 				else:
 					playerInFOV = false
+
+func AlreadyStartled():
+	return alertStatusNode.IsAlert() or state == STARTLED_STATE or state == ATTACK_STATE or state == ALERTING_STATE or state == CHASE_STATE or state == SEARCH_STATE
+
+func AlreadyEngaged():
+	return state == ATTACK_STATE or state == STARTLED_STATE or state == ALERTING_STATE
 
 func AnimLogic(delta):
 	var angle = GetCameraAngle(delta)
