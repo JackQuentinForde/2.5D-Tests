@@ -81,6 +81,7 @@ func BeginAlerting():
 func StartCallForBackup():
 	velocity.x = 0
 	velocity.z = 0
+	$SpeechBubble.visible = true
 	ChangeState(CALLING_STATE)
 
 func CallingForBackUp():
@@ -88,6 +89,7 @@ func CallingForBackUp():
 		velocity.x = 0
 		velocity.z = 0
 	else:
+		$SpeechBubble.visible = false
 		ChangeState(CHASE_STATE)
 		alertStatusNode.HostileEncountered(self)
 
@@ -155,6 +157,7 @@ func Chase():
 	if !playerInFOV:
 		alertStatusNode.HostileLost(self)
 		StartSearch()
+		return
 
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
 	var targetPos = Vector3(player.global_position.x, 0, player.global_position.z)
@@ -175,7 +178,10 @@ func Attack():
 		velocity.x = 0
 		velocity.z = 0
 	else:
-		ChangeState(CHASE_STATE)
+		if alertStatusNode.IsAlert():
+			ChangeState(CHASE_STATE)
+		else:
+			BeginAlerting()
 
 func StartSearch():
 	ChangeState(SEARCH_STATE)

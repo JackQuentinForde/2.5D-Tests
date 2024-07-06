@@ -18,7 +18,6 @@ func HostileEncountered(engagedUnit):
 	for unit in allUnits:
 		if !engagedUnits.has(unit):
 			unit.Alert(player)
-			engagedUnits.append(unit)
 
 func HostileLost(unit):
 	if unit in engagedUnits:

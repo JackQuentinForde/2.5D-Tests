@@ -1,10 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://sl4bqqt4oqm8"]
+[gd_scene load_steps=30 format=3 uid="uid://sl4bqqt4oqm8"]
 
 [ext_resource type="PackedScene" uid="uid://i8u1nrww2ycy" path="res://scenes/player_shadow.tscn" id="1_jrgh1"]
 [ext_resource type="Script" path="res://scripts/soldierAI.gd" id="1_u1yll"]
 [ext_resource type="Texture2D" uid="uid://cl2od37dqfjow" path="res://assets/textures/Guard.png" id="2_8ig2n"]
 [ext_resource type="Texture2D" uid="uid://d15xff6yvt7hh" path="res://assets/textures/enemyIcon.png" id="4_akfkr"]
 [ext_resource type="Texture2D" uid="uid://cesmoifkb0mbn" path="res://assets/textures/exclamation.png" id="5_jshdy"]
+[ext_resource type="Texture2D" uid="uid://cv3mvwpjs4b1o" path="res://assets/textures/speechBubble.png" id="6_e44cc"]
 [ext_resource type="PackedScene" uid="uid://bdn5gtomm6rvy" path="res://scenes/fov.tscn" id="6_t4q0x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wprfi"]
@@ -250,11 +251,18 @@ render_priority = 1
 texture = ExtResource("4_akfkr")
 
 [node name="Exclamation" type="Sprite3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.875, 0)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.875, -0.0625)
 visible = false
 billboard = 1
 texture_filter = 0
 texture = ExtResource("5_jshdy")
+
+[node name="SpeechBubble" type="Sprite3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.875, -0.0625)
+visible = false
+billboard = 1
+texture_filter = 0
+texture = ExtResource("6_e44cc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
