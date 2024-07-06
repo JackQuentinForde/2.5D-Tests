@@ -16,7 +16,7 @@ const CALL_TIME = 2.0
 @export var alertStatusNode : Node3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-enum {PATROL_STATE, WAIT_STATE, STARTLED_STATE, ALERTING_STATE, CALLING_STATE, CHASE_STATE, SEARCH_STATE, SEARCH_OVER_STATE, RETURN_STATE, ATTACK_STATE}
+enum {PATROL_STATE, WAIT_STATE, STARTLED_STATE, ALERT_STATE, CALLING_STATE, CHASE_STATE, SEARCH_STATE, SEARCH_OVER_STATE, RETURN_STATE, ATTACK_STATE}
 
 var speed = PATROL_SPEED
 var patrolRoute = []
@@ -36,7 +36,7 @@ func _ready():
 
 func _physics_process(delta):
 	ApplyGravity(delta)
-	BrainLogic()
+	StateMachine()
 	AnimLogic(delta)
 	move_and_slide()
 
@@ -44,16 +44,14 @@ func ApplyGravity(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-func BrainLogic():
+func StateMachine():
 	match state:
-		PATROL_STATE, RETURN_STATE:
+		PATROL_STATE, RETURN_STATE, ALERT_STATE:
 			Navigate()
 		SEARCH_STATE:
 			Search()
 		STARTLED_STATE:
 			React()
-		ALERTING_STATE:
-			Alerting()
 		CALLING_STATE:
 			CallingForBackUp()
 		CHASE_STATE:
@@ -91,13 +89,10 @@ func React():
 
 func BeginAlerting():
 	speed = CHASE_SPEED
-	state = ALERTING_STATE
+	state = ALERT_STATE
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
 	var targetPos = waypointsNode.GetClosestCoverPoint(currentPos)
 	CalculatePath(currentPos, targetPos)
-
-func Alerting():
-	Navigate()
 
 func StartCallForBackup():
 	state = CALLING_STATE
@@ -137,7 +132,7 @@ func GetNextWaypoint():
 	if index == currentRoute.size() - 1:
 		if state == SEARCH_STATE:
 			SearchPause()
-		elif state == ALERTING_STATE:
+		elif state == ALERT_STATE:
 			StartCallForBackup()
 		else:
 			if state == PATROL_STATE:
@@ -263,10 +258,10 @@ func CheckFOV():
 					playerInFOV = false
 
 func AlreadyStartled():
-	return state == STARTLED_STATE or state == ATTACK_STATE or state == ALERTING_STATE or state == CHASE_STATE or state == SEARCH_STATE or state == CALLING_STATE
+	return state == STARTLED_STATE or state == ATTACK_STATE or state == ALERT_STATE or state == CHASE_STATE or state == SEARCH_STATE or state == CALLING_STATE
 
 func AlreadyEngaged():
-	return state == ATTACK_STATE or state == STARTLED_STATE or state == ALERTING_STATE or state == CALLING_STATE
+	return state == ATTACK_STATE or state == STARTLED_STATE or state == ALERT_STATE or state == CALLING_STATE
 
 func AnimLogic(delta):
 	var angle = GetCameraAngle(delta)
