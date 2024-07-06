@@ -60,16 +60,8 @@ func StateMachine():
 			Wait()
 	CheckFOV()
 
-func Startled():
-	$Timer.wait_time = STARTLE_TIME
-	$Timer.start()
-	$Exclamation.visible = true
-	$StartledTimer.start()
-	state = STARTLED_STATE
-	$FOVCone.call_deferred("SetToRed")
-
 func React():
-	if not $Timer.is_stopped():
+	if not $StartledTimer.is_stopped():
 		velocity.x = 0
 		velocity.z = 0
 	else:
@@ -78,30 +70,26 @@ func React():
 		if currentPos.distance_to(targetPos) > TARGET_MIN_DIST:
 			BeginAlerting()
 		else:
-			BeginAttack()
+			ChangeState(ATTACK_STATE)
 
 func BeginAlerting():
-	speed = CHASE_SPEED
-	state = ALERT_STATE
+	ChangeState(ALERT_STATE)
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
 	var targetPos = waypointsNode.GetClosestCoverPoint(currentPos)
 	CalculatePath(currentPos, targetPos)
 
 func StartCallForBackup():
-	state = CALLING_STATE
 	velocity.x = 0
 	velocity.z = 0
-	$Timer.wait_time = CALL_TIME
-	$Timer.start()
+	ChangeState(CALLING_STATE)
 
 func CallingForBackUp():
 	if not $Timer.is_stopped():
 		velocity.x = 0
 		velocity.z = 0
 	else:
-		state = CHASE_STATE
+		ChangeState(CHASE_STATE)
 		alertStatusNode.HostileEncountered(self)
-		$FOVCone.call_deferred("SetToRed")
 
 func Navigate():
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
@@ -141,12 +129,11 @@ func GetNextWaypoint():
 
 func SearchPause():
 	Pause(SEARCH_END_WAIT_TIME)
-	state = SEARCH_OVER_STATE
-	$FOVCone.call_deferred("SetToYellow")
+	ChangeState(SEARCH_OVER_STATE)
 
 func PatrolPause():
 	Pause(target.pauseTime)
-	state = WAIT_STATE
+	ChangeState(WAIT_STATE)
 
 func Pause(pauseTime):
 	velocity.x = 0
@@ -168,46 +155,31 @@ func Chase():
 	if !playerInFOV:
 		alertStatusNode.HostileLost(self)
 		StartSearch()
-		return
 
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
 	var targetPos = Vector3(player.global_position.x, 0, player.global_position.z)
 	if currentPos.distance_to(targetPos) > TARGET_MIN_DIST:
 		var direction = (targetPos - currentPos).normalized()
-		velocity.x = direction.x * CHASE_SPEED
-		velocity.z = direction.z * CHASE_SPEED
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 	else:
-		BeginAttack()
+		ChangeState(ATTACK_STATE)
 
 func WaitOver():
-	speed = PATROL_SPEED
-	state = PATROL_STATE
+	ChangeState(PATROL_STATE)
 	currentRoute = patrolRoute
 	GetNextWaypoint()
-
-func BeginAttack():
-	state = ATTACK_STATE
-	$Timer.wait_time = ATTACK_TIME
-	$Timer.start()
 
 func Attack():
 	if !$Timer.is_stopped():
 		velocity.x = 0
 		velocity.z = 0
 	else:
-		if alertStatusNode.IsAlert():
-			state = CHASE_STATE
-			alertStatusNode.HostileEncountered(self)
-			$FOVCone.call_deferred("SetToRed")
-		else:
-			BeginAlerting()
+		ChangeState(CHASE_STATE)
 
 func StartSearch():
-	speed = CHASE_SPEED
-	state = SEARCH_STATE
-	var currentPos = Vector3(global_position.x, 0, global_position.z)
-	var targetPos = Vector3(player.global_position.x, 0, player.global_position.z)
-	CalculatePath(currentPos, targetPos)
+	ChangeState(SEARCH_STATE)
+	UpdateSearch()
 
 func UpdateSearch():
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
@@ -215,9 +187,7 @@ func UpdateSearch():
 	CalculatePath(currentPos, targetPos)
 
 func SearchEnded():
-	speed = CHASE_SPEED
-	state = RETURN_STATE
-	$FOVCone.call_deferred("SetToGreen")
+	ChangeState(RETURN_STATE)
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
 	target = patrolRoute[lastPatrolPointIndex]
 	var targetPos = Vector3(target.global_position.x, 0, target.global_position.z)
@@ -226,8 +196,7 @@ func SearchEnded():
 func StartPatrol():
 	currentRoute = patrolRoute
 	target = currentRoute[lastPatrolPointIndex]
-	speed = PATROL_SPEED
-	state = PATROL_STATE
+	ChangeState(PATROL_STATE)
 
 func CheckFOV():
 	var objects = $FOVCone/DetectArea.get_overlapping_areas()
@@ -243,17 +212,16 @@ func CheckFOV():
 				if collider.is_in_group("Player"):
 					player = collider
 					if !AlreadyStartled():
-						Startled()
+						ChangeState(STARTLED_STATE)
 					elif !AlreadyEngaged():
 						target = player
-						state = CHASE_STATE
+						ChangeState(CHASE_STATE)
 						alertStatusNode.HostileEncountered(self)
-						$FOVCone.call_deferred("SetToRed")
 				else:
 					playerInFOV = false
 
 func AlreadyStartled():
-	return state == STARTLED_STATE or state == ATTACK_STATE or state == ALERT_STATE or state == CHASE_STATE or state == SEARCH_STATE or state == CALLING_STATE
+	return state == STARTLED_STATE or state == ATTACK_STATE or state == ALERT_STATE or state == CHASE_STATE or state == SEARCH_STATE or state == CALLING_STATE or state == SEARCH_OVER_STATE
 
 func AlreadyEngaged():
 	return state == ATTACK_STATE or state == STARTLED_STATE or state == ALERT_STATE or state == CALLING_STATE
@@ -322,8 +290,36 @@ func Alert(body):
 		UpdateSearch()
 		return
 	player = body
-	$FOVCone.call_deferred("SetToRed")
 	StartSearch()
+
+func ChangeState(newState):
+	state = newState
+	if state == ATTACK_STATE:
+		$Timer.wait_time = ATTACK_TIME
+		$Timer.start()
+	elif state == STARTLED_STATE:
+		$StartledTimer.start()
+		$Exclamation.visible = true
+	elif state == CALLING_STATE:
+		$Timer.wait_time = CALL_TIME
+		$Timer.start()
+	UpdateSpeed()
+	UpdateFOVColour()
+
+func UpdateSpeed():
+	if state == PATROL_STATE or state == RETURN_STATE:
+		speed = PATROL_SPEED
+	elif state == CHASE_STATE or state == SEARCH_STATE or state == ALERT_STATE:
+		speed = CHASE_SPEED
+
+func UpdateFOVColour():
+	match state:
+		PATROL_STATE, RETURN_STATE:
+			$FOVCone.call_deferred("SetToGreen")
+		CHASE_STATE, SEARCH_STATE, ALERT_STATE, STARTLED_STATE:
+			$FOVCone.call_deferred("SetToRed")
+		SEARCH_OVER_STATE:
+			$FOVCone.call_deferred("SetToYellow")
 
 func _on_detect_area_area_entered(area:Area3D):
 	if area.is_in_group("Player"):
