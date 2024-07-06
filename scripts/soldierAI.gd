@@ -299,16 +299,16 @@ func Alert(body):
 	StartSearch()
 
 func ChangeState(newState):
-	state = newState
-	if state == ATTACK_STATE:
+	if newState == ATTACK_STATE:
 		$Timer.wait_time = ATTACK_TIME
 		$Timer.start()
-	elif state == STARTLED_STATE:
+	elif newState == STARTLED_STATE:
 		$StartledTimer.start()
 		$Exclamation.visible = true
-	elif state == CALLING_STATE:
+	elif newState == CALLING_STATE:
 		$Timer.wait_time = CALL_TIME
 		$Timer.start()
+	state = newState
 	UpdateSpeed()
 	UpdateFOVColour()
 
