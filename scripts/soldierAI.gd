@@ -16,7 +16,7 @@ const CALL_TIME = 2.0
 @export var alertStatusNode : Node3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-enum {PATROL_STATE, WAIT_STATE, STARTLED_STATE, ALERTING_STATE, CALLING_STATE, CHASE_STATE, SEARCH_STATE, SEARCH_OVER, RETURN_STATE, ATTACK_STATE}
+enum {PATROL_STATE, WAIT_STATE, STARTLED_STATE, ALERTING_STATE, CALLING_STATE, CHASE_STATE, SEARCH_STATE, SEARCH_OVER_STATE, RETURN_STATE, ATTACK_STATE}
 
 var speed = PATROL_SPEED
 var patrolRoute = []
@@ -45,22 +45,23 @@ func ApplyGravity(delta):
 		velocity.y -= gravity * delta
 
 func BrainLogic():
-	if state == PATROL_STATE or state == RETURN_STATE:
-		Navigate()
-	elif state == SEARCH_STATE:
-		Search()
-	elif state == STARTLED_STATE:
-		React()
-	elif state == ALERTING_STATE:
-		Alerting()
-	elif state == CALLING_STATE:
-		CallingForBackUp()
-	elif state == CHASE_STATE:
-		Chase()
-	elif state == ATTACK_STATE:
-		Attack()
-	else:
-		Wait()	
+	match state:
+		PATROL_STATE, RETURN_STATE:
+			Navigate()
+		SEARCH_STATE:
+			Search()
+		STARTLED_STATE:
+			React()
+		ALERTING_STATE:
+			Alerting()
+		CALLING_STATE:
+			CallingForBackUp()
+		CHASE_STATE:
+			Chase()
+		ATTACK_STATE:
+			Attack()
+		WAIT_STATE, SEARCH_OVER_STATE:
+			Wait()
 	CheckFOV()
 
 func Search():
@@ -149,7 +150,7 @@ func GetNextWaypoint():
 
 func SearchPause():
 	Pause(SEARCH_END_WAIT_TIME)
-	state = SEARCH_OVER
+	state = SEARCH_OVER_STATE
 	$FOVCone.call_deferred("SetToYellow")
 
 func PatrolPause():
@@ -167,14 +168,14 @@ func Wait():
 		velocity.x = 0
 		velocity.z = 0
 	else:
-		if state == SEARCH_OVER:
+		if state == SEARCH_OVER_STATE:
 			SearchEnded()
 		else:
 			WaitOver()
 
 func Chase():
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
-	var targetPos = Vector3(target.global_position.x, 0, target.global_position.z)
+	var targetPos = Vector3(player.global_position.x, 0, player.global_position.z)
 	if currentPos.distance_to(targetPos) > TARGET_MIN_DIST:
 		var direction = (targetPos - currentPos).normalized()
 		velocity.x = direction.x * CHASE_SPEED
@@ -262,7 +263,7 @@ func CheckFOV():
 					playerInFOV = false
 
 func AlreadyStartled():
-	return alertStatusNode.IsAlert() or state == STARTLED_STATE or state == ATTACK_STATE or state == ALERTING_STATE or state == CHASE_STATE or state == SEARCH_STATE or state == CALLING_STATE
+	return state == STARTLED_STATE or state == ATTACK_STATE or state == ALERTING_STATE or state == CHASE_STATE or state == SEARCH_STATE or state == CALLING_STATE
 
 func AlreadyEngaged():
 	return state == ATTACK_STATE or state == STARTLED_STATE or state == ALERTING_STATE or state == CALLING_STATE
@@ -328,7 +329,7 @@ func CalculatePath(start, end, fullRoute = true):
 		StartPatrol()
 
 func Alert(body):
-	if state == SEARCH_STATE:
+	if AlreadyStartled() or AlreadyEngaged():
 		return
 	player = body
 	$FOVCone.call_deferred("SetToRed")
