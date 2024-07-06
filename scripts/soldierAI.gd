@@ -5,10 +5,10 @@ const CHASE_SPEED = 3.0
 const ROT_SPEED = 18.0
 const WAYPOINT_MIN_DIST = 0.075
 const TARGET_MIN_DIST = 4.0
-const ATTACK_TIME = 1.0
 const SEARCH_END_WAIT_TIME = 1.5
 const STARTLE_TIME = 0.5
 const CALL_TIME = 2.0
+const ATTACK_TIME = 1.0
 
 @export var cameraPivot : Node3D
 @export var waypointsNode : Node3D
@@ -46,10 +46,8 @@ func ApplyGravity(delta):
 
 func StateMachine():
 	match state:
-		PATROL_STATE, RETURN_STATE, ALERT_STATE:
+		PATROL_STATE, RETURN_STATE, ALERT_STATE, SEARCH_STATE:
 			Navigate()
-		SEARCH_STATE:
-			Search()
 		STARTLED_STATE:
 			React()
 		CALLING_STATE:
@@ -61,11 +59,6 @@ func StateMachine():
 		WAIT_STATE, SEARCH_OVER_STATE:
 			Wait()
 	CheckFOV()
-
-func Search():
-	if alertStatusNode.IsAlert():
-		UpdateSearch()
-	Navigate()
 
 func Startled():
 	$Timer.wait_time = STARTLE_TIME
@@ -131,7 +124,10 @@ func GetNextWaypoint():
 	var index = currentRoute.find(target)
 	if index == currentRoute.size() - 1:
 		if state == SEARCH_STATE:
-			SearchPause()
+			if alertStatusNode.IsAlert():
+				UpdateSearch()
+			else:
+				SearchPause()
 		elif state == ALERT_STATE:
 			StartCallForBackup()
 		else:
@@ -169,6 +165,11 @@ func Wait():
 			WaitOver()
 
 func Chase():
+	if !playerInFOV:
+		alertStatusNode.HostileLost(self)
+		StartSearch()
+		return
+
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
 	var targetPos = Vector3(player.global_position.x, 0, player.global_position.z)
 	if currentPos.distance_to(targetPos) > TARGET_MIN_DIST:
@@ -176,13 +177,7 @@ func Chase():
 		velocity.x = direction.x * CHASE_SPEED
 		velocity.z = direction.z * CHASE_SPEED
 	else:
-		velocity.x = 0
-		velocity.z = 0
 		BeginAttack()
-
-	if !playerInFOV:
-		alertStatusNode.HostileLost(self)
-		StartSearch()
 
 func WaitOver():
 	speed = PATROL_SPEED
@@ -191,12 +186,12 @@ func WaitOver():
 	GetNextWaypoint()
 
 func BeginAttack():
+	state = ATTACK_STATE
 	$Timer.wait_time = ATTACK_TIME
 	$Timer.start()
-	state = ATTACK_STATE
 
 func Attack():
-	if not $Timer.is_stopped():
+	if !$Timer.is_stopped():
 		velocity.x = 0
 		velocity.z = 0
 	else:
@@ -315,7 +310,6 @@ func ChangeLookDirection(waypointHeading):
 		targetRotation = 0
 
 func CalculatePath(start, end, fullRoute = true):
-	#print("Calculating path")
 	var route = waypointsNode.CalculatePath(start, end, fullRoute)
 	if route and route.size() > 0:
 		currentRoute = route
@@ -325,6 +319,7 @@ func CalculatePath(start, end, fullRoute = true):
 
 func Alert(body):
 	if AlreadyStartled() or AlreadyEngaged():
+		UpdateSearch()
 		return
 	player = body
 	$FOVCone.call_deferred("SetToRed")
