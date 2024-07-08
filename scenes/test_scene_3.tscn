@@ -1285,22 +1285,22 @@ heading = "UP"
 visible = false
 
 [node name="Patrol Point" parent="Patrol Route 2" instance=ExtResource("3_4h44a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -20.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4, 0, -20.5)
 pausePoint = true
 pauseTime = 2.0
 
 [node name="Patrol Point2" parent="Patrol Route 2" instance=ExtResource("3_4h44a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -22.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4, 0, -22.5)
 heading = "UP"
 
 [node name="Patrol Point3" parent="Patrol Route 2" instance=ExtResource("3_4h44a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -22.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6, 0, -22.5)
 pausePoint = true
 pauseTime = 2.0
 heading = "UP"
 
 [node name="Patrol Point4" parent="Patrol Route 2" instance=ExtResource("3_4h44a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -20.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6, 0, -20.5)
 
 [node name="Test Mission 2" parent="." instance=ExtResource("1_13q5p")]
 

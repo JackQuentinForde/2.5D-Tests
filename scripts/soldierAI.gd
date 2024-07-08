@@ -124,9 +124,9 @@ func GetNextWaypoint():
 		elif state == ALERT_STATE:
 			StartCallForBackup()
 		elif state == PATROL_STATE:
-				lastPatrolPointIndex = 0
-		elif state == RETURN_STATE:
 			StartPatrol()
+		elif state == RETURN_STATE:
+			ResumePatrol()
 	else:
 		target = currentRoute[index + 1]
 		if state == PATROL_STATE:
@@ -173,7 +173,6 @@ func Chase():
 
 func WaitOver():
 	ChangeState(PATROL_STATE)
-	currentRoute = patrolRoute
 	GetNextWaypoint()
 
 func Attack():
@@ -203,6 +202,10 @@ func SearchEnded():
 	CalculatePath(currentPos, targetPos, false)
 
 func StartPatrol():
+	lastPatrolPointIndex = 0
+	ResumePatrol()
+
+func ResumePatrol():
 	currentRoute = patrolRoute
 	target = currentRoute[lastPatrolPointIndex]
 	ChangeState(PATROL_STATE)
