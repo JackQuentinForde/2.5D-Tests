@@ -28,6 +28,7 @@ var state = PATROL_STATE
 var heading = Vector3.BACK
 var targetRotation = 0
 var playerInFOV = false
+var playerVisible = false
 
 func _ready():
 	patrolRoute = patrolRouteNode.get_children()
@@ -58,7 +59,9 @@ func StateMachine():
 			Attack()
 		WAIT_STATE, SEARCH_OVER_STATE:
 			Wait()
-	CheckFOV()
+			
+	if playerInFOV:
+		CheckFOV()
 
 func React():
 	if not $StartledTimer.is_stopped():
@@ -154,7 +157,7 @@ func Wait():
 			WaitOver()
 
 func Chase():
-	if !playerInFOV:
+	if !playerVisible:
 		alertStatusNode.HostileLost(self)
 		StartSearch()
 		return
@@ -217,6 +220,7 @@ func CheckFOV():
 				var collider = $LineOfSight.get_collider()
 				if collider.is_in_group("Player"):
 					player = collider
+					playerVisible = true
 					if !AlreadyStartled():
 						ChangeState(STARTLED_STATE)
 					elif !AlreadyEngaged():
@@ -224,7 +228,7 @@ func CheckFOV():
 						ChangeState(CHASE_STATE)
 						alertStatusNode.HostileEncountered(self)
 				else:
-					playerInFOV = false
+					playerVisible = false
 
 func AlreadyStartled():
 	return state == STARTLED_STATE or state == ATTACK_STATE or state == ALERT_STATE or state == CHASE_STATE or state == SEARCH_STATE or state == CALLING_STATE or state == SEARCH_OVER_STATE
@@ -332,6 +336,7 @@ func _on_detect_area_area_entered(area:Area3D):
 func _on_detect_area_area_exited(area:Area3D):
 	if area.is_in_group("Player"):
 		playerInFOV = false
+		playerVisible = false
 
 func _on_startled_timer_timeout():
 	$Exclamation.visible = false
