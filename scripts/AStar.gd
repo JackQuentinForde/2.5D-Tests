@@ -46,7 +46,7 @@ func CalculatePath(start, end, fullRoute = true):
 	if !fullRoute:
 		lastIndex -= 1
 	for i in lastIndex:
-		if i == 0:
+		if i == 0 and route.size() > 1:
 			continue
 		var waypointIndex = waypoints.find(route[i])
 		var waypoint = get_child(waypointIndex)

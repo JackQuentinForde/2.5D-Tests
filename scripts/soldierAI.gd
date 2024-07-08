@@ -120,9 +120,9 @@ func GetNextWaypoint():
 				SearchPause()
 		elif state == ALERT_STATE:
 			StartCallForBackup()
-		else:
-			if state == PATROL_STATE:
+		elif state == PATROL_STATE:
 				lastPatrolPointIndex = 0
+		elif state == RETURN_STATE:
 			StartPatrol()
 	else:
 		target = currentRoute[index + 1]
@@ -150,7 +150,7 @@ func Wait():
 	else:
 		if state == SEARCH_OVER_STATE:
 			SearchEnded()
-		else:
+		elif state == WAIT_STATE:
 			WaitOver()
 
 func Chase():
@@ -285,11 +285,8 @@ func ChangeLookDirection(waypointHeading):
 
 func CalculatePath(start, end, fullRoute = true):
 	var route = waypointsNode.CalculatePath(start, end, fullRoute)
-	if route and route.size() > 0:
-		currentRoute = route
-		target = currentRoute[0]
-	else:
-		StartPatrol()
+	currentRoute = route
+	target = currentRoute[0]
 
 func Alert(body):
 	if AlreadyStartled() or AlreadyEngaged():
@@ -299,6 +296,7 @@ func Alert(body):
 	StartSearch()
 
 func ChangeState(newState):
+	#print(state)
 	if newState == ATTACK_STATE:
 		$Timer.wait_time = ATTACK_TIME
 		$Timer.start()
