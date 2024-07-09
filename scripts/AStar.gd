@@ -43,10 +43,10 @@ func CalculatePath(start, end, fullRoute = true):
 	var route = astar.get_point_path(startId, endId)
 	var routeNodes = []
 	var lastIndex = route.size()
-	if !fullRoute:
+	if !fullRoute and lastIndex > 1:
 		lastIndex -= 1
 	for i in lastIndex:
-		if i == 0 and route.size() > 1:
+		if i == 0 and lastIndex > 1:
 			continue
 		var waypointIndex = waypoints.find(route[i])
 		var waypoint = get_child(waypointIndex)

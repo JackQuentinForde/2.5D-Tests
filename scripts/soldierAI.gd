@@ -131,6 +131,8 @@ func GetNextWaypoint():
 		target = currentRoute[index + 1]
 		if state == PATROL_STATE:
 			lastPatrolPointIndex += 1
+		elif state == SEARCH_STATE and alertStatusNode.IsAlert():
+			UpdateSearch()
 
 func SearchPause():
 	Pause(SEARCH_END_WAIT_TIME)
@@ -325,11 +327,11 @@ func UpdateSpeed():
 
 func UpdateFOVColour():
 	match state:
-		PATROL_STATE, RETURN_STATE:
+		PATROL_STATE:
 			$FOVCone.call_deferred("SetToGreen")
 		CHASE_STATE, SEARCH_STATE, ALERT_STATE, STARTLED_STATE:
 			$FOVCone.call_deferred("SetToRed")
-		SEARCH_OVER_STATE:
+		SEARCH_OVER_STATE, RETURN_STATE:
 			$FOVCone.call_deferred("SetToYellow")
 
 func _on_detect_area_area_entered(area:Area3D):
