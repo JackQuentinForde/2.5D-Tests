@@ -305,7 +305,6 @@ func Alert(body):
 	StartSearch()
 
 func ChangeState(newState):
-	#print(state)
 	if newState == ATTACK_STATE:
 		$Timer.wait_time = ATTACK_TIME
 		$Timer.start()
@@ -320,9 +319,9 @@ func ChangeState(newState):
 	UpdateFOVColour()
 
 func UpdateSpeed():
-	if state == PATROL_STATE or state == RETURN_STATE:
+	if state == PATROL_STATE:
 		speed = PATROL_SPEED
-	elif state == CHASE_STATE or state == SEARCH_STATE or state == ALERT_STATE:
+	elif state == CHASE_STATE or state == SEARCH_STATE or state == ALERT_STATE or state == RETURN_STATE:
 		speed = CHASE_SPEED
 
 func UpdateFOVColour():
