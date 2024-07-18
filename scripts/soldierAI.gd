@@ -9,6 +9,7 @@ const SEARCH_END_WAIT_TIME = 1.5
 const STARTLE_TIME = 0.5
 const CALL_TIME = 2.0
 const ATTACK_TIME = 1.0
+const WAIT_FOR_LEADER_TIME = 0.5
 
 @export var cameraPivot : Node3D
 @export var waypointsNode : Node3D
@@ -29,6 +30,7 @@ var heading = Vector3.BACK
 var targetRotation = 0
 var playerInFOV = false
 var playerVisible = false
+var inMyPersonalSpace = false
 
 func _ready():
 	patrolRoute = patrolRouteNode.get_children()
@@ -97,6 +99,9 @@ func CallingForBackUp():
 		alertStatusNode.HostileEncountered(self)
 
 func Navigate():
+	if not $Timer.is_stopped() or inMyPersonalSpace:
+		return
+
 	var currentPos = Vector3(global_position.x, 0, global_position.z)
 	var targetPos = Vector3(target.global_position.x, 0, target.global_position.z)
 	if currentPos.distance_to(targetPos) < WAYPOINT_MIN_DIST:
@@ -159,6 +164,9 @@ func Wait():
 			WaitOver()
 
 func Chase():
+	if not $Timer.is_stopped() or inMyPersonalSpace:
+		return
+
 	if !playerVisible:
 		alertStatusNode.HostileLost(self)
 		StartSearch()
@@ -301,6 +309,7 @@ func Alert(body):
 	if AlreadyStartled() or AlreadyEngaged():
 		UpdateSearch()
 		return
+	$Timer.stop()
 	player = body
 	StartSearch()
 
@@ -309,6 +318,7 @@ func ChangeState(newState):
 		$Timer.wait_time = ATTACK_TIME
 		$Timer.start()
 	elif newState == STARTLED_STATE:
+		$Timer.stop()
 		$StartledTimer.start()
 		$Exclamation.visible = true
 	elif newState == CALLING_STATE:
@@ -344,3 +354,17 @@ func _on_detect_area_area_exited(area:Area3D):
 
 func _on_startled_timer_timeout():
 	$Exclamation.visible = false
+
+func _on_personal_space_area_entered(area:Area3D):
+	if AlreadyEngaged() or AlreadyStartled():
+		var currentPos = Vector3(global_position.x, 0, global_position.z)
+		var otherSoldierPos = Vector3(area.global_position.x, 0, area.global_position.z)
+		var targetPos = Vector3(player.global_position.x, 0, player.global_position.z)
+		var distToPlayer = currentPos.distance_to(targetPos)
+		var otherSoldierDistToPlayer = otherSoldierPos.distance_to(targetPos)
+		if otherSoldierDistToPlayer < distToPlayer:
+			inMyPersonalSpace = true
+			Pause(WAIT_FOR_LEADER_TIME)
+
+func _on_personal_space_area_exited(_area:Area3D):
+	inMyPersonalSpace = false

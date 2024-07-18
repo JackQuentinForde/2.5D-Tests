@@ -269,6 +269,14 @@ libraries = {
 }
 autoplay = "blink"
 
+[node name="PersonalSpace" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PersonalSpace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6875, 0)
+shape = SubResource("CapsuleShape3D_wprfi")
+
 [node name="FOVCone" parent="." instance=ExtResource("6_t4q0x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
@@ -294,6 +302,8 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 wait_time = 0.5
 one_shot = true
 
+[connection signal="area_entered" from="PersonalSpace" to="." method="_on_personal_space_area_entered"]
+[connection signal="area_exited" from="PersonalSpace" to="." method="_on_personal_space_area_exited"]
 [connection signal="area_entered" from="FOVCone/DetectArea" to="." method="_on_detect_area_area_entered"]
 [connection signal="area_exited" from="FOVCone/DetectArea" to="." method="_on_detect_area_area_exited"]
 [connection signal="timeout" from="StartledTimer" to="." method="_on_startled_timer_timeout"]
