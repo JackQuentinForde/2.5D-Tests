@@ -31,3 +31,7 @@ func IsAlert():
 func _on_alert_timer_timeout():
 	if engagedUnits.size() == 0:
 		currentStatus = HIGHTENED_STATUS
+
+func EndPursuit():
+	for unit in allUnits:
+		unit.SearchEnded()

@@ -222,7 +222,6 @@ points = PackedVector3Array(-0.000673056, -3.43182, -1.1535, -2.43815, -2.36973,
 
 [node name="Soldier" type="CharacterBody3D"]
 collision_layer = 2
-collision_mask = 3
 script = ExtResource("1_u1yll")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

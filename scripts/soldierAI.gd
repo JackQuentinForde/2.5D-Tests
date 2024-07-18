@@ -154,7 +154,7 @@ func Wait():
 		velocity.z = 0
 	else:
 		if state == SEARCH_OVER_STATE:
-			SearchEnded()
+			alertStatusNode.EndPursuit()
 		elif state == WAIT_STATE:
 			WaitOver()
 
