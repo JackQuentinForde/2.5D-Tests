@@ -251,24 +251,44 @@ func AlreadyEngaged():
 
 func AnimLogic(delta):
 	var angle = GetCameraAngle(delta)
-	if velocity.x != 0 or velocity.z != 0:
-		if angle <= 45 or angle >= 315:
+	var is_moving = velocity.x != 0 or velocity.z != 0
+	
+	# Moving diagonally or in cardinal directions
+	if is_moving:
+		if angle <= 22.5 or angle > 337.5:
 			$AnimatedSprite3D.play("WalkBack")
-		elif angle < 135:
+		elif angle <= 67.5:
+			$AnimatedSprite3D.play("WalkBackRight")
+		elif angle <= 112.5:
 			$AnimatedSprite3D.play("WalkRight")
-		elif angle < 225:
+		elif angle <= 157.5:
+			$AnimatedSprite3D.play("WalkFrontRight")
+		elif angle <= 202.5:
 			$AnimatedSprite3D.play("WalkFront")
-		else:
+		elif angle <= 247.5:
+			$AnimatedSprite3D.play("WalkFrontLeft")
+		elif angle <= 292.5:
 			$AnimatedSprite3D.play("WalkLeft")
-	else:
-		if angle <= 45 or angle >= 315:
-			$AnimatedSprite3D.play("IdleBack")
-		elif angle < 135:
-			$AnimatedSprite3D.play("IdleRight")
-		elif angle < 225:
-			$AnimatedSprite3D.play("IdleFront")
 		else:
+			$AnimatedSprite3D.play("WalkBackLeft")
+	# Idle in diagonal or cardinal directions
+	else:
+		if angle <= 22.5 or angle > 337.5:
+			$AnimatedSprite3D.play("IdleBack")
+		elif angle <= 67.5:
+			$AnimatedSprite3D.play("IdleBackRight")
+		elif angle <= 112.5:
+			$AnimatedSprite3D.play("IdleRight")
+		elif angle <= 157.5:
+			$AnimatedSprite3D.play("IdleFrontRight")
+		elif angle <= 202.5:
+			$AnimatedSprite3D.play("IdleFront")
+		elif angle <= 247.5:
+			$AnimatedSprite3D.play("IdleFrontLeft")
+		elif angle <= 292.5:
 			$AnimatedSprite3D.play("IdleLeft")
+		else:
+			$AnimatedSprite3D.play("IdleBackLeft")
 
 func GetCameraAngle(delta):
 	if state != WAIT_STATE:

@@ -83,16 +83,16 @@ func ChangeCameraMode():
 		firstPersonMode = true
 	else:
 		firstPersonMode = false
-		#if angleShift < 0:
-		#	targetRotation = MathFunctions.RoundToNearestDegrees(rotation_degrees.y, 45.0)
-        #    
-		#	if int(targetRotation) % 90 == 0:
-		#		if targetRotation > rotation_degrees.y:
-		#			targetRotation -= 45.0
-		#		else:
-		#			targetRotation += 45.0
-		#else:
-		targetRotation = MathFunctions.RoundToNearestDegrees(rotation_degrees.y, 45.0)
+		if angleShift < 0:
+			targetRotation = MathFunctions.RoundToNearestDegrees(rotation_degrees.y, 45.0)
+            
+			if int(targetRotation) % 90 == 0:
+				if targetRotation > rotation_degrees.y:
+					targetRotation -= 45.0
+				else:
+					targetRotation += 45.0
+		else:
+			targetRotation = MathFunctions.RoundToNearestDegrees(rotation_degrees.y, 90.0)
 
 		player.call_deferred("ResetPosition")
 		$"1stPersonCam".current = false

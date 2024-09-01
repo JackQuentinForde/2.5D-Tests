@@ -14,6 +14,6 @@ fov = 15.0
 near = 0.1
 
 [node name="1stPersonCam" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5625, 0)
 cull_mask = 1
 fov = 40.0
