@@ -18,11 +18,6 @@ func ApplyGravity(delta):
 		velocity.y -= gravity * delta
 
 func MoveLogic():
-	if $CameraPivot.get("firstPersonMode"):
-		velocity.x = 0
-		velocity.z = 0
-		return
-
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -35,20 +30,52 @@ func MoveLogic():
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 func AnimLogic():
+	var is_moving = false
+
 	if Input.is_action_pressed("ui_up"):
-		$AnimatedSprite3D.play("WalkBack")
-		lastAnim = "WalkBack"
+		if Input.is_action_pressed("ui_right"):
+			$AnimatedSprite3D.play("WalkBackRight")
+			lastAnim = "WalkBackRight"
+			is_moving = true
+		elif Input.is_action_pressed("ui_left"):
+			$AnimatedSprite3D.play("WalkBackLeft")
+			lastAnim = "WalkBackLeft"
+			is_moving = true
+		else:
+			$AnimatedSprite3D.play("WalkBack")
+			lastAnim = "WalkBack"
+			is_moving = true	
 	elif Input.is_action_pressed("ui_down"):
-		$AnimatedSprite3D.play("WalkFront")
-		lastAnim = "WalkFront"
+		if Input.is_action_pressed("ui_right"):
+			$AnimatedSprite3D.play("WalkFrontRight")
+			lastAnim = "WalkFrontRight"
+			is_moving = true
+		elif Input.is_action_pressed("ui_left"):
+			$AnimatedSprite3D.play("WalkFrontLeft")
+			lastAnim = "WalkFrontLeft"
+			is_moving = true
+		else:
+			$AnimatedSprite3D.play("WalkFront")
+			lastAnim = "WalkFront"
+			is_moving = true	
 	elif Input.is_action_pressed("ui_right"):
 		$AnimatedSprite3D.play("WalkRight")
 		lastAnim = "WalkRight"
+		is_moving = true	
 	elif Input.is_action_pressed("ui_left"):
 		$AnimatedSprite3D.play("WalkLeft")
 		lastAnim = "WalkLeft"
-	else:
+		is_moving = true	
+	if not is_moving:
 		match lastAnim:
+			"WalkBackRight":
+				$AnimatedSprite3D.play("IdleBackRight")
+			"WalkBackLeft":
+				$AnimatedSprite3D.play("IdleBackLeft")
+			"WalkFrontRight":
+				$AnimatedSprite3D.play("IdleFrontRight")
+			"WalkFrontLeft":
+				$AnimatedSprite3D.play("IdleFrontLeft")
 			"WalkBack":
 				$AnimatedSprite3D.play("IdleBack")
 			"WalkFront":
