@@ -30,43 +30,33 @@ func MoveLogic():
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 func AnimLogic():
-	var is_moving = false
-
 	if Input.is_action_pressed("ui_up"):
 		if Input.is_action_pressed("ui_right"):
 			$AnimatedSprite3D.play("WalkBackRight")
 			lastAnim = "WalkBackRight"
-			is_moving = true
 		elif Input.is_action_pressed("ui_left"):
 			$AnimatedSprite3D.play("WalkBackLeft")
 			lastAnim = "WalkBackLeft"
-			is_moving = true
 		else:
 			$AnimatedSprite3D.play("WalkBack")
 			lastAnim = "WalkBack"
-			is_moving = true	
 	elif Input.is_action_pressed("ui_down"):
 		if Input.is_action_pressed("ui_right"):
 			$AnimatedSprite3D.play("WalkFrontRight")
 			lastAnim = "WalkFrontRight"
-			is_moving = true
 		elif Input.is_action_pressed("ui_left"):
 			$AnimatedSprite3D.play("WalkFrontLeft")
 			lastAnim = "WalkFrontLeft"
-			is_moving = true
 		else:
 			$AnimatedSprite3D.play("WalkFront")
-			lastAnim = "WalkFront"
-			is_moving = true	
+			lastAnim = "WalkFront"	
 	elif Input.is_action_pressed("ui_right"):
 		$AnimatedSprite3D.play("WalkRight")
-		lastAnim = "WalkRight"
-		is_moving = true	
+		lastAnim = "WalkRight"	
 	elif Input.is_action_pressed("ui_left"):
 		$AnimatedSprite3D.play("WalkLeft")
 		lastAnim = "WalkLeft"
-		is_moving = true	
-	if not is_moving:
+	if velocity.x == 0.0 and velocity.z == 0.0:
 		match lastAnim:
 			"WalkBackRight":
 				$AnimatedSprite3D.play("IdleBackRight")
