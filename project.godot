@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 MathFunctions="*res://scripts/globals/mathFunctions.gd"
+flowerwall_pp_autoload="*res://addons/flowerwall_postprocess/scenes/flowerwall_pp.tscn"
 
 [display]
 
@@ -25,6 +26,10 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/mode=2
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/flowerwall_postprocess/plugin.cfg")
 
 [input]
 
