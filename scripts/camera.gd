@@ -9,13 +9,14 @@ const MIN_FOV = 4
 
 var player
 var playerPos = Vector3()
-var targetRotation = 0
+var targetRotation = -45
 var firstPersonMode = false
 var angleShift = 45
 
 func _ready():
 	player = get_parent()
 	global_transform.origin = player.global_transform.origin
+	rotation_degrees.y = targetRotation
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("view_toggle"):
