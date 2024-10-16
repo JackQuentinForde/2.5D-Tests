@@ -54,7 +54,7 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_qk5sn")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pilqa"]
 shader = ExtResource("5_h5wqk")
 shader_parameter/bloom_threshold = 0.14
-shader_parameter/bloom_intensity = 2.2
+shader_parameter/bloom_intensity = 1.8
 shader_parameter/bloom_blur_iterations = 5
 shader_parameter/bloom_blur_size = 0.002
 shader_parameter/bloom_blur_subdivisions = 8

@@ -7,6 +7,7 @@
 [node name="Test Mission 2" instance=ExtResource("1_6knpn")]
 
 [node name="Cube_358" parent="." index="0"]
+transform = Transform3D(1, 0.000166941, -0.000260225, -0.000166899, 1, 0.000162072, 0.000260252, -0.00016203, 1, 11.5, 2.1, -11.5)
 surface_material_override/0 = ExtResource("2_1m0ib")
 
 [node name="Cube_399" parent="." index="1"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bi7ytmfmnojhb"]
+[gd_scene load_steps=45 format=3 uid="uid://bi7ytmfmnojhb"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1h5gu"]
 [ext_resource type="Texture2D" uid="uid://bwq6ljwbigyfv" path="res://assets/textures/Snake.png" id="2_2n5sc"]
@@ -8,6 +8,30 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jm7mo"]
 radius = 0.54
 height = 1.4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1miap"]
+atlas = ExtResource("2_2n5sc")
+region = Rect2(51, 75, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8d4e0"]
+atlas = ExtResource("2_2n5sc")
+region = Rect2(68, 75, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cy01y"]
+atlas = ExtResource("2_2n5sc")
+region = Rect2(85, 100, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flj0l"]
+atlas = ExtResource("2_2n5sc")
+region = Rect2(102, 100, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnxq2"]
+atlas = ExtResource("2_2n5sc")
+region = Rect2(51, 100, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jee4h"]
+atlas = ExtResource("2_2n5sc")
+region = Rect2(68, 100, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6jj4c"]
 atlas = ExtResource("2_2n5sc")
@@ -123,6 +147,48 @@ region = Rect2(34, 75, 16, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7gk0f"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1miap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8d4e0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8d4e0")
+}],
+"loop": false,
+"name": &"AttackFront",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cy01y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flj0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flj0l")
+}],
+"loop": false,
+"name": &"AttackLeft",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnxq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jee4h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jee4h")
+}],
+"loop": false,
+"name": &"AttackRight",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6jj4c")
@@ -389,7 +455,7 @@ billboard = 1
 double_sided = false
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_7gk0f")
-animation = &"IdleBack"
+animation = &"AttackLeft"
 
 [node name="PlayerIcon" type="Sprite3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 1.25, 0)
