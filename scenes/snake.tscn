@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bi7ytmfmnojhb"]
+[gd_scene load_steps=47 format=3 uid="uid://bi7ytmfmnojhb"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1h5gu"]
 [ext_resource type="Texture2D" uid="uid://bwq6ljwbigyfv" path="res://assets/textures/Snake.png" id="2_2n5sc"]
@@ -8,6 +8,14 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jm7mo"]
 radius = 0.54
 height = 1.4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0c534"]
+atlas = ExtResource("2_2n5sc")
+region = Rect2(85, 75, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8hbf"]
+atlas = ExtResource("2_2n5sc")
+region = Rect2(102, 75, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1miap"]
 atlas = ExtResource("2_2n5sc")
@@ -149,6 +157,20 @@ region = Rect2(34, 75, 16, 24)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_0c534")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8hbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8hbf")
+}],
+"loop": false,
+"name": &"AttackBack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_1miap")
 }, {
 "duration": 1.0,
@@ -193,7 +215,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6jj4c")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleBack",
 "speed": 5.0
 }, {
@@ -201,7 +223,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ltq3f")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleBackLeft",
 "speed": 5.0
 }, {
@@ -209,7 +231,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dkgfc")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleBackRight",
 "speed": 5.0
 }, {
@@ -217,7 +239,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o0734")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleFront",
 "speed": 5.0
 }, {
@@ -225,7 +247,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qwgwt")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleFrontLeft",
 "speed": 5.0
 }, {
@@ -233,7 +255,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xm1j5")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleFrontRight",
 "speed": 5.0
 }, {
@@ -241,7 +263,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_up05t")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleLeft",
 "speed": 5.0
 }, {
@@ -249,7 +271,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6fpgg")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleRight",
 "speed": 5.0
 }, {
@@ -455,7 +477,7 @@ billboard = 1
 double_sided = false
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_7gk0f")
-animation = &"AttackLeft"
+animation = &"WalkBack"
 
 [node name="PlayerIcon" type="Sprite3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 1.25, 0)

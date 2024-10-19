@@ -39,12 +39,14 @@ func ActionLogic():
 		velocity.x = 0.0
 		velocity.z = 0.0
 		attacking = true
-		if lastAnim == "WalkRight":
+		if lastAnim == "WalkRight" or lastAnim == "WalkFrontRight" or lastAnim == "WalkBackRight":
 			$AnimatedSprite3D.play("AttackRight")
-		elif lastAnim == "WalkLeft":
+		elif lastAnim == "WalkLeft" or lastAnim == "WalkFrontLeft" or lastAnim == "WalkBackLeft":
 			$AnimatedSprite3D.play("AttackLeft")
-		else:
+		elif lastAnim == "WalkFront":
 			$AnimatedSprite3D.play("AttackFront")
+		else:
+			$AnimatedSprite3D.play("AttackBack")
 
 func AnimLogic():
 	if attacking and $AnimatedSprite3D.is_playing():

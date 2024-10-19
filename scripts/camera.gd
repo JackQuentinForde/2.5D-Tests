@@ -9,7 +9,7 @@ const MIN_FOV = 4
 
 var player
 var playerPos = Vector3()
-var targetRotation = -45
+var targetRotation = 0
 var firstPersonMode = false
 var angleShift = -45
 
