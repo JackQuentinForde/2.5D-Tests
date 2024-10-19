@@ -11,7 +11,7 @@ var player
 var playerPos = Vector3()
 var targetRotation = 0
 var firstPersonMode = false
-var angleShift = -45
+var angleShift = 45
 
 func _ready():
 	player = get_parent()
