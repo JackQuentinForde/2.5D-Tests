@@ -1,1 +1,1 @@
-This is just a project I'm using to test out 2.5D graphics in Godot Engine
+This is a prototype for a 2.5D stealth-based action game I am actively working on in Godot Engine
