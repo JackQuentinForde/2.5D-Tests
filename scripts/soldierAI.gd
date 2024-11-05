@@ -1,15 +1,17 @@
 extends CharacterBody3D
 
 const PATROL_SPEED = 2.5
-const CHASE_SPEED = 3.0
+const ALERT_SPEED = 3.5
+const CHASE_SPEED = 4.5
 const ROT_SPEED = 18.0
+const PATROL_ANIM_SPEED = 1
+const CHASE_ANIM_SPEED = 1.5
 const WAYPOINT_MIN_DIST = 0.075
-const TARGET_MIN_DIST = 4.0
+const TARGET_MIN_DIST = 1.0
 const SEARCH_END_WAIT_TIME = 1.5
-const STARTLE_TIME = 0.5
-const CALL_TIME = 2.0
-const ATTACK_TIME = 1.0
-const WAIT_FOR_LEADER_TIME = 0.5
+const STARTLE_TIME = 0.75
+const ATTACK_TIME = 0.75
+const WAIT_FOR_LEADER_TIME = 0.25
 
 @export var cameraPivot : Node3D
 @export var waypointsNode : Node3D
@@ -17,9 +19,10 @@ const WAIT_FOR_LEADER_TIME = 0.5
 @export var alertStatusNode : Node3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-enum {PATROL_STATE, WAIT_STATE, STARTLED_STATE, ALERT_STATE, CALLING_STATE, CHASE_STATE, SEARCH_STATE, SEARCH_OVER_STATE, RETURN_STATE, ATTACK_STATE}
+enum {PATROL_STATE, WAIT_STATE, STARTLED_STATE, ALERT_STATE, CHASE_STATE, SEARCH_STATE, SEARCH_OVER_STATE, RETURN_STATE, ATTACK_STATE}
 
 var speed = PATROL_SPEED
+var animSpeed = PATROL_ANIM_SPEED
 var patrolRoute = []
 var lastPatrolPointIndex = 0
 var currentRoute = []
@@ -53,8 +56,6 @@ func StateMachine():
 			Navigate()
 		STARTLED_STATE:
 			React()
-		CALLING_STATE:
-			CallingForBackUp()
 		CHASE_STATE:
 			Chase()
 		ATTACK_STATE:
@@ -73,30 +74,13 @@ func React():
 		var currentPos = Vector3(global_position.x, 0, global_position.z)
 		var targetPos = Vector3(player.global_position.x, 0, player.global_position.z)
 		if currentPos.distance_to(targetPos) > TARGET_MIN_DIST:
-			BeginAlerting()
+			StartChase()
 		else:
 			ChangeState(ATTACK_STATE)
 
-func BeginAlerting():
-	ChangeState(ALERT_STATE)
-	var currentPos = Vector3(global_position.x, 0, global_position.z)
-	var targetPos = waypointsNode.GetClosestCoverPoint(currentPos)
-	CalculatePath(currentPos, targetPos)
-
-func StartCallForBackup():
-	velocity.x = 0
-	velocity.z = 0
-	$SpeechBubble.visible = true
-	ChangeState(CALLING_STATE)
-
-func CallingForBackUp():
-	if not $Timer.is_stopped():
-		velocity.x = 0
-		velocity.z = 0
-	else:
-		$SpeechBubble.visible = false
-		ChangeState(CHASE_STATE)
-		alertStatusNode.HostileEncountered(self)
+func StartChase():
+	ChangeState(CHASE_STATE)
+	alertStatusNode.HostileEncountered(self)
 
 func Navigate():
 	if not $Timer.is_stopped() or inMyPersonalSpace:
@@ -127,7 +111,7 @@ func GetNextWaypoint():
 			else:
 				SearchPause()
 		elif state == ALERT_STATE:
-			StartCallForBackup()
+			StartChase()
 		elif state == PATROL_STATE:
 			StartPatrol()
 		elif state == RETURN_STATE:
@@ -193,7 +177,7 @@ func Attack():
 		if alertStatusNode.IsAlert():
 			ChangeState(CHASE_STATE)
 		else:
-			BeginAlerting()
+			StartSearch()
 
 func StartSearch():
 	ChangeState(SEARCH_STATE)
@@ -244,51 +228,49 @@ func CheckFOV():
 					playerVisible = false
 
 func AlreadyStartled():
-	return state == STARTLED_STATE or state == ATTACK_STATE or state == ALERT_STATE or state == CHASE_STATE or state == SEARCH_STATE or state == CALLING_STATE or state == SEARCH_OVER_STATE
+	return state == STARTLED_STATE or state == ATTACK_STATE or state == ALERT_STATE or state == CHASE_STATE or state == SEARCH_STATE or state == SEARCH_OVER_STATE
 
 func AlreadyEngaged():
-	return state == ATTACK_STATE or state == STARTLED_STATE or state == ALERT_STATE or state == CALLING_STATE
+	return state == ATTACK_STATE or state == STARTLED_STATE or state == ALERT_STATE
 
 func AnimLogic(delta):
 	var angle = GetCameraAngle(delta)
 	var is_moving = velocity.x != 0 or velocity.z != 0
 	
-	# Moving diagonally or in cardinal directions
 	if is_moving:
 		if angle <= 22.5 or angle > 337.5:
-			$AnimatedSprite3D.play("WalkBack")
+			$AnimatedSprite3D.play("WalkBack", animSpeed)
 		elif angle <= 67.5:
-			$AnimatedSprite3D.play("WalkBackRight")
+			$AnimatedSprite3D.play("WalkBackRight", animSpeed)
 		elif angle <= 112.5:
-			$AnimatedSprite3D.play("WalkRight")
+			$AnimatedSprite3D.play("WalkRight", animSpeed)
 		elif angle <= 157.5:
-			$AnimatedSprite3D.play("WalkFrontRight")
+			$AnimatedSprite3D.play("WalkFrontRight", animSpeed)
 		elif angle <= 202.5:
-			$AnimatedSprite3D.play("WalkFront")
+			$AnimatedSprite3D.play("WalkFront", animSpeed)
 		elif angle <= 247.5:
-			$AnimatedSprite3D.play("WalkFrontLeft")
+			$AnimatedSprite3D.play("WalkFrontLeft", animSpeed)
 		elif angle <= 292.5:
-			$AnimatedSprite3D.play("WalkLeft")
+			$AnimatedSprite3D.play("WalkLeft", animSpeed)
 		else:
-			$AnimatedSprite3D.play("WalkBackLeft")
-	# Idle in diagonal or cardinal directions
+			$AnimatedSprite3D.play("WalkBackLeft", animSpeed)
 	else:
 		if angle <= 22.5 or angle > 337.5:
-			$AnimatedSprite3D.play("IdleBack")
+			$AnimatedSprite3D.play("IdleBack", animSpeed)
 		elif angle <= 67.5:
-			$AnimatedSprite3D.play("IdleBackRight")
+			$AnimatedSprite3D.play("IdleBackRight", animSpeed)
 		elif angle <= 112.5:
-			$AnimatedSprite3D.play("IdleRight")
+			$AnimatedSprite3D.play("IdleRight", animSpeed)
 		elif angle <= 157.5:
-			$AnimatedSprite3D.play("IdleFrontRight")
+			$AnimatedSprite3D.play("IdleFrontRight", animSpeed)
 		elif angle <= 202.5:
-			$AnimatedSprite3D.play("IdleFront")
+			$AnimatedSprite3D.play("IdleFront", animSpeed)
 		elif angle <= 247.5:
-			$AnimatedSprite3D.play("IdleFrontLeft")
+			$AnimatedSprite3D.play("IdleFrontLeft", animSpeed)
 		elif angle <= 292.5:
-			$AnimatedSprite3D.play("IdleLeft")
+			$AnimatedSprite3D.play("IdleLeft", animSpeed)
 		else:
-			$AnimatedSprite3D.play("IdleBackLeft")
+			$AnimatedSprite3D.play("IdleBackLeft", animSpeed)
 
 func GetCameraAngle(delta):
 	if state != WAIT_STATE:
@@ -341,9 +323,6 @@ func ChangeState(newState):
 		$Timer.stop()
 		$StartledTimer.start()
 		$Exclamation.visible = true
-	elif newState == CALLING_STATE:
-		$Timer.wait_time = CALL_TIME
-		$Timer.start()
 	state = newState
 	UpdateSpeed()
 	UpdateFOVColour()
@@ -351,8 +330,13 @@ func ChangeState(newState):
 func UpdateSpeed():
 	if state == PATROL_STATE:
 		speed = PATROL_SPEED
-	elif state == CHASE_STATE or state == SEARCH_STATE or state == ALERT_STATE or state == RETURN_STATE:
+		animSpeed = PATROL_ANIM_SPEED
+	elif state == SEARCH_STATE or state == ALERT_STATE or state == RETURN_STATE:
+		speed = ALERT_SPEED
+		animSpeed = PATROL_ANIM_SPEED
+	elif state == CHASE_STATE:
 		speed = CHASE_SPEED
+		animSpeed = CHASE_ANIM_SPEED
 
 func UpdateFOVColour():
 	match state:

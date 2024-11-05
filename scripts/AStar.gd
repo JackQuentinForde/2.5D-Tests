@@ -4,15 +4,12 @@ const GRID_STEP = 1
 const SEARCH_COORDS = [-GRID_STEP, 0, GRID_STEP]
 
 var waypoints = []
-var coverPoints = []
 var astar = AStar3D.new()
 
 func _ready():
 	for waypoint in get_children():
 		var waypointPos = Vector3(waypoint.global_position.x, 0, waypoint.global_position.z)
 		waypoints.append(waypointPos)
-		if waypoint.is_in_group("Cover"):
-			coverPoints.append(waypointPos)
 	
 	for i in range(waypoints.size()):
 		astar.add_point(i, waypoints[i], 1)
@@ -52,13 +49,3 @@ func CalculatePath(start, end, fullRoute = true):
 		var waypoint = get_child(waypointIndex)
 		routeNodes.append(waypoint)
 	return routeNodes
-
-func GetClosestCoverPoint(pos):
-	var closestCover = Vector3.ZERO
-	var closestDist = 1000000
-	for cover in coverPoints:
-		var dist = pos.distance_to(cover)
-		if dist < closestDist:
-			closestDist = dist
-			closestCover = cover
-	return closestCover

@@ -477,7 +477,7 @@ billboard = 1
 double_sided = false
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_7gk0f")
-animation = &"WalkBack"
+animation = &"IdleRight"
 
 [node name="PlayerIcon" type="Sprite3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 1.25, 0)

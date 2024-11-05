@@ -129,7 +129,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eergt")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleBack",
 "speed": 3.5
 }, {
@@ -137,23 +137,23 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jfq78")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleBackLeft",
-"speed": 5.0
+"speed": 3.5
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_624a7")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleBackRight",
-"speed": 5.0
+"speed": 3.5
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mc6b8")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleFront",
 "speed": 3.5
 }, {
@@ -161,23 +161,23 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o046r")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleFrontLeft",
-"speed": 5.0
+"speed": 3.5
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8xaih")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleFrontRight",
-"speed": 5.0
+"speed": 3.5
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ssl4v")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleLeft",
 "speed": 3.5
 }, {
@@ -185,7 +185,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vivde")
 }],
-"loop": true,
+"loop": false,
 "name": &"IdleRight",
 "speed": 3.5
 }, {
@@ -202,7 +202,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_12ga3")
 }],
-"loop": true,
+"loop": false,
 "name": &"WalkBack",
 "speed": 3.5
 }, {
@@ -219,9 +219,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jfq78")
 }],
-"loop": true,
+"loop": false,
 "name": &"WalkBackLeft",
-"speed": 5.0
+"speed": 3.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -236,9 +236,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_624a7")
 }],
-"loop": true,
+"loop": false,
 "name": &"WalkBackRight",
-"speed": 5.0
+"speed": 3.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -253,7 +253,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_u2ib3")
 }],
-"loop": true,
+"loop": false,
 "name": &"WalkFront",
 "speed": 3.5
 }, {
@@ -270,9 +270,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o046r")
 }],
-"loop": true,
+"loop": false,
 "name": &"WalkFrontLeft",
-"speed": 5.0
+"speed": 3.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -287,9 +287,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8xaih")
 }],
-"loop": true,
+"loop": false,
 "name": &"WalkFrontRight",
-"speed": 5.0
+"speed": 3.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -304,7 +304,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_w1y2j")
 }],
-"loop": true,
+"loop": false,
 "name": &"WalkLeft",
 "speed": 3.5
 }, {
@@ -321,7 +321,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_k87bg")
 }],
-"loop": true,
+"loop": false,
 "name": &"WalkRight",
 "speed": 3.5
 }]
@@ -388,7 +388,7 @@ billboard = 1
 double_sided = false
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_fyw1w")
-animation = &"IdleBackLeft"
+animation = &"WalkFront"
 
 [node name="EnemyIcon" type="Sprite3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 1.4375, 0)
