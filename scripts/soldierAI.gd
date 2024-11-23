@@ -170,14 +170,15 @@ func WaitOver():
 	GetNextWaypoint()
 
 func Attack():
-	if !$Timer.is_stopped():
-		velocity.x = 0
-		velocity.z = 0
-	else:
-		if alertStatusNode.IsAlert():
-			ChangeState(CHASE_STATE)
-		else:
-			StartSearch()
+	get_tree().change_scene_to_file("res://scenes/battle_scene.tscn")
+	#if !$Timer.is_stopped():
+	#	velocity.x = 0
+	#	velocity.z = 0
+	#else:
+	#	if alertStatusNode.IsAlert():
+	#		ChangeState(CHASE_STATE)
+	#	else:
+	#		StartSearch()
 
 func StartSearch():
 	ChangeState(SEARCH_STATE)

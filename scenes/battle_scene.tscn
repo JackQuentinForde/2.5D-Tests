@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://dvu2e1afseflo"]
+
+[ext_resource type="Texture2D" uid="uid://bcvupvbl3l0xc" path="res://assets/textures/GuardBattle.png" id="1_nqygs"]
+[ext_resource type="PackedScene" uid="uid://bjo7rjav1fsv0" path="res://scenes/camera_pivot.tscn" id="2_x1f40"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_5ufdv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwpsx"]
+shading_mode = 0
+specular_mode = 1
+albedo_color = Color(0.572549, 0.631373, 0.72549, 1)
+texture_filter = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5bpf"]
+atlas = ExtResource("1_nqygs")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nt0la"]
+atlas = ExtResource("1_nqygs")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qy15r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5bpf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nt0la")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}]
+
+[node name="BattleScene" type="Node3D"]
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(24, 0, 0, 0, -1.04907e-06, 24, 0, -24, -1.04907e-06, 0, 0, 0)
+mesh = SubResource("QuadMesh_5ufdv")
+surface_material_override/0 = SubResource("StandardMaterial3D_qwpsx")
+
+[node name="GuardBattle" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0.728094, 0)
+billboard = 1
+double_sided = false
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_qy15r")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.951485
+
+[node name="CameraPivot" parent="." instance=ExtResource("2_x1f40")]

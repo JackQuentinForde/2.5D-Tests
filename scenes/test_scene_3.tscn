@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfk4l4sy6g3ut"]
+[gd_scene load_steps=15 format=3 uid="uid://dfk4l4sy6g3ut"]
 
 [ext_resource type="Script" path="res://scripts/AStar.gd" id="1_3fygj"]
 [ext_resource type="PackedScene" uid="uid://c7g7dryi6xhmu" path="res://scenes/test_mission_2.tscn" id="1_13q5p"]
@@ -10,6 +10,29 @@
 [ext_resource type="PackedScene" uid="uid://dcygh0i4lphes" path="res://scenes/goal.tscn" id="4_apr0b"]
 [ext_resource type="PackedScene" uid="uid://sl4bqqt4oqm8" path="res://scenes/soldier.tscn" id="7_qf5lb"]
 [ext_resource type="Script" path="res://scripts/miniMapCamera.gd" id="7_ymqy8"]
+[ext_resource type="Texture2D" uid="uid://bcvupvbl3l0xc" path="res://assets/textures/GuardBattle.png" id="11_ic8id"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5bpf"]
+atlas = ExtResource("11_ic8id")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nt0la"]
+atlas = ExtResource("11_ic8id")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_limhf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5bpf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nt0la")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}]
 
 [node name="test_scene_3" type="Node3D"]
 
@@ -1339,5 +1362,16 @@ current = true
 size = 32.0
 script = ExtResource("7_ymqy8")
 player = NodePath("../../../../../Snake")
+
+[node name="GuardBattle" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 8.25, 1.72809, -16.25)
+visible = false
+billboard = 1
+double_sided = false
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_limhf")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.147153
 
 [connection signal="timeout" from="AlertStatus/AlertTimer" to="AlertStatus" method="_on_alert_timer_timeout"]

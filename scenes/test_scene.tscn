@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ck53fj46qgmo0"]
+[gd_scene load_steps=12 format=3 uid="uid://ck53fj46qgmo0"]
 
 [ext_resource type="PackedScene" uid="uid://ja6jjbacs67l" path="res://scenes/pallet_town.tscn" id="1_eeo8v"]
 [ext_resource type="PackedScene" uid="uid://bi7ytmfmnojhb" path="res://scenes/snake.tscn" id="3_vbwp0"]
 [ext_resource type="AudioStream" uid="uid://b37vjj0o1tk88" path="res://assets/music/Pallet Town Theme.mp3" id="3_w1x3x"]
 [ext_resource type="PackedScene" uid="uid://bjo7rjav1fsv0" path="res://scenes/camera_pivot.tscn" id="4_3lbib"]
+[ext_resource type="Texture2D" uid="uid://bcvupvbl3l0xc" path="res://assets/textures/GuardBattle.png" id="5_ivdfa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i81p8"]
 sky_top_color = Color(0.580392, 0.992157, 1, 1)
@@ -17,6 +18,28 @@ sky_material = SubResource("ProceduralSkyMaterial_i81p8")
 [sub_resource type="Environment" id="Environment_la74b"]
 background_mode = 2
 sky = SubResource("Sky_hxxj0")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5bpf"]
+atlas = ExtResource("5_ivdfa")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nt0la"]
+atlas = ExtResource("5_ivdfa")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e8eqr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5bpf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nt0la")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}]
 
 [node name="TestScene" type="Node3D"]
 
@@ -33,3 +56,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0.1875, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_la74b")
+
+[node name="GuardBattle" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -1.60433, 0.718485, -5.625)
+visible = false
+billboard = 1
+double_sided = false
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_e8eqr")
+animation = &"Idle"
+autoplay = "Idle"
