@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvu2e1afseflo"]
+[gd_scene load_steps=9 format=3 uid="uid://dvu2e1afseflo"]
 
+[ext_resource type="Script" path="res://scripts/battle.gd" id="1_ey8w1"]
 [ext_resource type="Texture2D" uid="uid://bcvupvbl3l0xc" path="res://assets/textures/GuardBattle.png" id="1_nqygs"]
 [ext_resource type="PackedScene" uid="uid://bjo7rjav1fsv0" path="res://scenes/camera_pivot.tscn" id="2_x1f40"]
 
@@ -34,6 +35,7 @@ animations = [{
 }]
 
 [node name="BattleScene" type="Node3D"]
+script = ExtResource("1_ey8w1")
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(24, 0, 0, 0, -1.04907e-06, 24, 0, -24, -1.04907e-06, 0, 0, 0)
