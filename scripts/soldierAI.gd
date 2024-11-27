@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
-const PATROL_SPEED = 2.5
-const ALERT_SPEED = 3.5
-const CHASE_SPEED = 4.5
+const PATROL_SPEED = 3.0
+const ALERT_SPEED = 5.0
+const CHASE_SPEED = 5.5
 const ROT_SPEED = 18.0
 const PATROL_ANIM_SPEED = 1
 const CHASE_ANIM_SPEED = 1.5

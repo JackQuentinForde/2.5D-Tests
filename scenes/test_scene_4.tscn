@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://bgqntur1iu7yn"]
+
+[ext_resource type="PackedScene" uid="uid://cbtogr7556hat" path="res://scenes/kanagawa_game_ready.tscn" id="1_jm0yi"]
+[ext_resource type="PackedScene" uid="uid://ds8enkghe50q5" path="res://scenes/EB_Player.tscn" id="2_i8jw8"]
+[ext_resource type="PackedScene" uid="uid://bjo7rjav1fsv0" path="res://scenes/camera_pivot.tscn" id="3_x3svk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fa08s"]
+sky_top_color = Color(0.580392, 0.992157, 1, 1)
+sky_horizon_color = Color(0, 0.803922, 0.976471, 1)
+ground_bottom_color = Color(0, 0.803922, 0.976471, 1)
+ground_horizon_color = Color(0, 0.803922, 0.976471, 1)
+
+[sub_resource type="Sky" id="Sky_hxxj0"]
+sky_material = SubResource("ProceduralSkyMaterial_fa08s")
+
+[sub_resource type="Environment" id="Environment_yte64"]
+background_mode = 2
+sky = SubResource("Sky_hxxj0")
+
+[node name="test_scene_4" type="Node3D"]
+
+[node name="Kanagawa_GameReady" parent="." instance=ExtResource("1_jm0yi")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_i8jw8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.4375, 0.1875, 17.75)
+
+[node name="CameraPivot" parent="Player" instance=ExtResource("3_x3svk")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yte64")

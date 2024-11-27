@@ -12,12 +12,12 @@ sky_horizon_color = Color(0, 0.803922, 0.976471, 1)
 ground_bottom_color = Color(0, 0.803922, 0.976471, 1)
 ground_horizon_color = Color(0, 0.803922, 0.976471, 1)
 
-[sub_resource type="Sky" id="Sky_hxxj0"]
+[sub_resource type="Sky" id="Sky_lwemf"]
 sky_material = SubResource("ProceduralSkyMaterial_i81p8")
 
 [sub_resource type="Environment" id="Environment_la74b"]
 background_mode = 2
-sky = SubResource("Sky_hxxj0")
+sky = SubResource("Sky_lwemf")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d5bpf"]
 atlas = ExtResource("5_ivdfa")
