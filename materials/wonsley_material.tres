@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bhw8l3dkixkno"]
+
+[ext_resource type="Texture2D" uid="uid://2uaxuvby8eh3" path="res://assets/textures/Anglo's House.png" id="1_sn501"]
+
+[resource]
+cull_mode = 2
+depth_draw_mode = 1
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("1_sn501")
+texture_filter = 0

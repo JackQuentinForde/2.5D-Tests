@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://chnn40fg5qdko"]
+
+[ext_resource type="PackedScene" uid="uid://bsrc4lnajhkot" path="res://scenes/wonsley.tscn" id="1_buof6"]
+[ext_resource type="PackedScene" uid="uid://ds8enkghe50q5" path="res://scenes/EB_Player.tscn" id="2_2xpb7"]
+[ext_resource type="PackedScene" uid="uid://bjo7rjav1fsv0" path="res://scenes/camera_pivot.tscn" id="3_txj6j"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Wonsley_Merged" parent="." instance=ExtResource("1_buof6")]
+
+[node name="Player" parent="." instance=ExtResource("2_2xpb7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 0.3125, 3)
+
+[node name="CameraPivot" parent="Player" instance=ExtResource("3_txj6j")]

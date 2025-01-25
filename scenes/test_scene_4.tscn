@@ -10,12 +10,12 @@ sky_horizon_color = Color(0, 0.803922, 0.976471, 1)
 ground_bottom_color = Color(0, 0.803922, 0.976471, 1)
 ground_horizon_color = Color(0, 0.803922, 0.976471, 1)
 
-[sub_resource type="Sky" id="Sky_hxxj0"]
+[sub_resource type="Sky" id="Sky_rajrp"]
 sky_material = SubResource("ProceduralSkyMaterial_fa08s")
 
 [sub_resource type="Environment" id="Environment_yte64"]
 background_mode = 2
-sky = SubResource("Sky_hxxj0")
+sky = SubResource("Sky_rajrp")
 
 [node name="test_scene_4" type="Node3D"]
 
