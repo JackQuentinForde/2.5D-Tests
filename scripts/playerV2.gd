@@ -12,7 +12,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _physics_process(delta):
 	ApplyGravity(delta)
 	MoveLogic()
-	ActionLogic()
 	AnimLogic()
 	move_and_slide()
 
@@ -33,20 +32,6 @@ func MoveLogic():
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-func ActionLogic():
-	if !attacking and Input.is_action_just_pressed("attack"):
-		velocity.x = 0.0
-		velocity.z = 0.0
-		attacking = true
-		if lastAnim == "WalkRight" or lastAnim == "WalkFrontRight" or lastAnim == "WalkBackRight":
-			$AnimatedSprite3D.play("AttackRight")
-		elif lastAnim == "WalkLeft" or lastAnim == "WalkFrontLeft" or lastAnim == "WalkBackLeft":
-			$AnimatedSprite3D.play("AttackLeft")
-		elif lastAnim == "WalkFront":
-			$AnimatedSprite3D.play("AttackFront")
-		else:
-			$AnimatedSprite3D.play("AttackBack")
 
 func AnimLogic():
 	if attacking and $AnimatedSprite3D.is_playing():
@@ -109,24 +94,57 @@ func AnimLogic():
 
 func RotateLeft():
 	if lastAnim == "WalkFront":
+		$AnimatedSprite3D.flip_h = true
 		lastAnim = "WalkRight"
 	elif lastAnim == "WalkRight":
+		$AnimatedSprite3D.flip_h = false
 		lastAnim = "WalkBack"
 	elif lastAnim == "WalkBack":
+		$AnimatedSprite3D.flip_h = false
 		lastAnim = "WalkLeft"
+	elif lastAnim == "WalkFrontRight":
+		$AnimatedSprite3D.flip_h = true
+		lastAnim = "WalkBackRight"
+	elif lastAnim == "WalkBackRight":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkBackLeft"
+	elif lastAnim == "WalkBackLeft":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkFrontLeft"
+	elif lastAnim == "WalkFrontLeft":
+		$AnimatedSprite3D.flip_h = true
+		lastAnim = "WalkFrontRight"
 	else:
+		$AnimatedSprite3D.flip_h = false
 		lastAnim = "WalkFront"
 
 func RotateRight():
 	if lastAnim == "WalkFront":
+		$AnimatedSprite3D.flip_h = false
 		lastAnim = "WalkLeft"
 	elif lastAnim == "WalkLeft":
+		$AnimatedSprite3D.flip_h = false
 		lastAnim = "WalkBack"
 	elif lastAnim == "WalkBack":
+		$AnimatedSprite3D.flip_h = true
 		lastAnim = "WalkRight"
+	elif lastAnim == "WalkFrontRight":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkFrontLeft"
+	elif lastAnim == "WalkFrontLeft":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkBackLeft"
+	elif lastAnim == "WalkBackLeft":
+		$AnimatedSprite3D.flip_h = true
+		lastAnim = "WalkBackRight"
+	elif lastAnim == "WalkBackRight":
+		$AnimatedSprite3D.flip_h = true
+		lastAnim = "WalkFrontRight"
 	else:
+		$AnimatedSprite3D.flip_h = false
 		lastAnim = "WalkFront"
 
 func ResetPosition():
+	$AnimatedSprite3D.flip_h = false
 	lastAnim = "WalkBack"
 	$AnimatedSprite3D.play("IdleBack")
