@@ -17,6 +17,7 @@ func _ready():
 	player = get_parent()
 	global_transform.origin = player.global_transform.origin
 	rotation_degrees.y = targetRotation
+	$"3rdPersonCam".fov = MAX_FOV
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("view_toggle"):

@@ -1,0 +1,125 @@
+[gd_scene load_steps=4 format=3 uid="uid://div4oc8c44p4p"]
+
+[ext_resource type="PackedScene" uid="uid://dppkpf51hulw1" path="res://assets/models/Levels/Wonsley_Merged 2.glb" id="1_qk08j"]
+[ext_resource type="Material" uid="uid://bhw8l3dkixkno" path="res://materials/wonsley_material.tres" id="2_m50s6"]
+[ext_resource type="Material" uid="uid://y8cd4x6op3eb" path="res://materials/wonsley_2d_material.tres" id="3_cnq40"]
+
+[node name="Wonsley_Merged 2" instance=ExtResource("1_qk08j")]
+
+[node name="Fence" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="House" parent="." index="1"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Road" parent="." index="2"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Pavement_001" parent="." index="3"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Pavement" parent="." index="4"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Fence_001" parent="." index="5"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="House_001" parent="." index="6"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Cube" parent="." index="7"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Cube_006" parent="." index="8"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Wall_001" parent="." index="9"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Cube_021" parent="." index="10"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Cube_023" parent="." index="11"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Slabs_001" parent="." index="12"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Flower" parent="." index="13"]
+surface_material_override/0 = ExtResource("3_cnq40")
+
+[node name="Flower_001" parent="." index="14"]
+surface_material_override/0 = ExtResource("3_cnq40")
+
+[node name="Flower_002" parent="." index="15"]
+surface_material_override/0 = ExtResource("3_cnq40")
+
+[node name="Flower_003" parent="." index="16"]
+surface_material_override/0 = ExtResource("3_cnq40")
+
+[node name="Flower_004" parent="." index="17"]
+surface_material_override/0 = ExtResource("3_cnq40")
+
+[node name="Flower_005" parent="." index="18"]
+surface_material_override/0 = ExtResource("3_cnq40")
+
+[node name="Flower_006" parent="." index="19"]
+surface_material_override/0 = ExtResource("3_cnq40")
+
+[node name="Flower_007" parent="." index="20"]
+surface_material_override/0 = ExtResource("3_cnq40")
+
+[node name="Flower_008" parent="." index="21"]
+surface_material_override/0 = ExtResource("3_cnq40")
+
+[node name="MedBush" parent="." index="22"]
+surface_material_override/0 = ExtResource("3_cnq40")
+
+[node name="Grass_003" parent="." index="23"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Grass_002" parent="." index="24"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Plane_013" parent="." index="25"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="TallBush_001" parent="." index="26"]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 2.78125, 0.125, -1.3125)
+surface_material_override/0 = ExtResource("3_cnq40")
+
+[node name="TallBush_002" parent="." index="27"]
+surface_material_override/0 = ExtResource("3_cnq40")
+
+[node name="Concrete" parent="." index="28"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Slabs" parent="." index="29"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Grass_001" parent="." index="30"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Wall" parent="." index="31"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Cube_051" parent="." index="32"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Cube_052" parent="." index="33"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Wall_002" parent="." index="34"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Grass" parent="." index="35"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Cube_005" parent="." index="36"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Cube_007" parent="." index="37"]
+surface_material_override/0 = ExtResource("2_m50s6")
+
+[node name="Concrete_001" parent="." index="38"]
+surface_material_override/0 = ExtResource("2_m50s6")

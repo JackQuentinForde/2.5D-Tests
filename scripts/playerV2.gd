@@ -64,6 +64,7 @@ func AnimLogic():
 			$AnimatedSprite3D.play("WalkBackLeft")
 			lastAnim = "WalkBackLeft"
 		else:
+			$AnimatedSprite3D.flip_h = false
 			$AnimatedSprite3D.play("WalkBack")
 			lastAnim = "WalkBack"
 	elif Input.is_action_pressed("ui_down"):
@@ -76,6 +77,7 @@ func AnimLogic():
 			$AnimatedSprite3D.play("WalkFrontLeft")
 			lastAnim = "WalkFrontLeft"
 		else:
+			$AnimatedSprite3D.flip_h = false
 			$AnimatedSprite3D.play("WalkFront")
 			lastAnim = "WalkFront"	
 	elif Input.is_action_pressed("ui_right"):
