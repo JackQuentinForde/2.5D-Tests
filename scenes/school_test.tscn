@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://drqhuv4rutivs"]
+
+[ext_resource type="PackedScene" uid="uid://cqvk3508xhnlk" path="res://assets/models/Levels/School Test.glb" id="1_ecv5b"]
+[ext_resource type="Material" uid="uid://c3g0ylvqtbp20" path="res://materials/school_material.tres" id="2_s8dl4"]
+[ext_resource type="Material" uid="uid://c0uch44btx0xs" path="res://materials/school_backface_cull_material.tres" id="3_o48pe"]
+
+[node name="School Test" instance=ExtResource("1_ecv5b")]
+
+[node name="Floor" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_s8dl4")
+
+[node name="Walls" parent="." index="1"]
+surface_material_override/0 = ExtResource("3_o48pe")

@@ -96,9 +96,6 @@ func RotateLeft():
 	if lastAnim == "WalkFront":
 		$AnimatedSprite3D.flip_h = true
 		lastAnim = "WalkRight"
-	elif lastAnim == "WalkRight":
-		$AnimatedSprite3D.flip_h = false
-		lastAnim = "WalkBack"
 	elif lastAnim == "WalkBack":
 		$AnimatedSprite3D.flip_h = false
 		lastAnim = "WalkLeft"
@@ -114,6 +111,9 @@ func RotateLeft():
 	elif lastAnim == "WalkFrontLeft":
 		$AnimatedSprite3D.flip_h = true
 		lastAnim = "WalkFrontRight"
+	elif lastAnim == "WalkRight":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkBack"
 	else:
 		$AnimatedSprite3D.flip_h = false
 		lastAnim = "WalkFront"
@@ -122,24 +122,82 @@ func RotateRight():
 	if lastAnim == "WalkFront":
 		$AnimatedSprite3D.flip_h = false
 		lastAnim = "WalkLeft"
-	elif lastAnim == "WalkLeft":
-		$AnimatedSprite3D.flip_h = false
-		lastAnim = "WalkBack"
-	elif lastAnim == "WalkBack":
-		$AnimatedSprite3D.flip_h = true
-		lastAnim = "WalkRight"
-	elif lastAnim == "WalkFrontRight":
-		$AnimatedSprite3D.flip_h = false
-		lastAnim = "WalkFrontLeft"
 	elif lastAnim == "WalkFrontLeft":
 		$AnimatedSprite3D.flip_h = false
 		lastAnim = "WalkBackLeft"
+	elif lastAnim == "WalkFrontRight":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkFrontLeft"
 	elif lastAnim == "WalkBackLeft":
 		$AnimatedSprite3D.flip_h = true
 		lastAnim = "WalkBackRight"
+	elif lastAnim == "WalkBack":
+		$AnimatedSprite3D.flip_h = true
+		lastAnim = "WalkRight"
+	elif lastAnim == "WalkLeft":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkBack"
 	elif lastAnim == "WalkBackRight":
 		$AnimatedSprite3D.flip_h = true
 		lastAnim = "WalkFrontRight"
+	else:
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkFront"
+
+func HalfRotateLeft():
+	if lastAnim == "WalkFront":
+		$AnimatedSprite3D.flip_h = true
+		lastAnim = "WalkFrontRight"
+	elif lastAnim == "WalkFrontRight":
+		$AnimatedSprite3D.flip_h = true
+		lastAnim = "WalkRight"
+	elif lastAnim == "WalkRight":
+		$AnimatedSprite3D.flip_h = true
+		lastAnim = "WalkBackRight"
+	elif lastAnim == "WalkBackLeft":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkLeft"
+	elif lastAnim == "WalkBack":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkBackLeft"
+	elif lastAnim == "WalkBackRight":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkBack"
+	elif lastAnim == "WalkLeft":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkFrontLeft"
+	else:
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkFront"
+
+func HalfRotateRight():
+	if lastAnim == "WalkFront":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkFrontLeft"
+	elif lastAnim == "WalkRight":
+		$AnimatedSprite3D.flip_h = true
+		lastAnim = "WalkFrontRight"
+	elif lastAnim == "WalkBack":
+		$AnimatedSprite3D.flip_h = true
+		lastAnim = "WalkBackRight"
+	elif lastAnim == "WalkLeft":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkBackLeft"
+	elif lastAnim == "WalkBackLeft":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkBack"
+	elif lastAnim == "WalkFrontRight":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkFront"
+	elif lastAnim == "WalkFrontLeft":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkLeft"
+	elif lastAnim == "WalkBackRight":
+		$AnimatedSprite3D.flip_h = true
+		lastAnim = "WalkRight"
+	elif lastAnim == "WalkBackRight":
+		$AnimatedSprite3D.flip_h = false
+		lastAnim = "WalkFrontLeft"
 	else:
 		$AnimatedSprite3D.flip_h = false
 		lastAnim = "WalkFront"

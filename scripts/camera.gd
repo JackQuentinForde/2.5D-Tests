@@ -4,7 +4,7 @@ const ROT_SPEED = 7.5
 const LOOK_SENSITIVITY = 3.0
 const FOLLOW_SPEED = 5.0
 const ZOOM_SPEED = 60.0
-const MAX_FOV = 22
+const MAX_FOV = 15
 const MIN_FOV = 4
 
 var player
@@ -50,6 +50,10 @@ func ThirdPersonLogic(delta):
 
 	if Input.is_action_just_pressed("change_camera_angle"):
 		targetRotation += angleShift
+		if angleShift > 0:
+			player.call_deferred("HalfRotateRight")
+		else:
+			player.call_deferred("HalfRotateLeft")
 		angleShift *= -1
 
 	if Input.is_action_just_pressed("camera_left"):
