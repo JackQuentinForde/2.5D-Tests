@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://clvlcvjelh55g"]
+
+[ext_resource type="PackedScene" uid="uid://ds8enkghe50q5" path="res://scenes/EB_Player.tscn" id="1_okavf"]
+[ext_resource type="PackedScene" uid="uid://bjo7rjav1fsv0" path="res://scenes/camera_pivot.tscn" id="2_3h53m"]
+[ext_resource type="PackedScene" uid="uid://bno7ch5eow7mf" path="res://scenes/classroom.tscn" id="3_8flxq"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_okavf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 0.1875, 3.875)
+
+[node name="CameraPivot" parent="Player" instance=ExtResource("2_3h53m")]
+
+[node name="Classroom" parent="." instance=ExtResource("3_8flxq")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1875, 2, 1.5625)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1875, 2, 6.375)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5625, 2, 1.5625)
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5625, 2, 6.375)
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.8125, 2, 6.375)
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.75, 2, 1.5625)
+
+[node name="OmniLight3D10" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0625, 2, 6.375)

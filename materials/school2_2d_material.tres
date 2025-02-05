@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dcn7uw65e46ly"]
+
+[ext_resource type="Texture2D" uid="uid://cwk71wubix4ji" path="res://assets/textures/School.png" id="1_mk6wg"]
+
+[resource]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("1_mk6wg")
+texture_filter = 0

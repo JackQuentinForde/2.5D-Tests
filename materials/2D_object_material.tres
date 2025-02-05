@@ -5,8 +5,8 @@
 [resource]
 transparency = 1
 cull_mode = 2
-shading_mode = 0
 diffuse_mode = 3
 specular_mode = 2
 albedo_texture = ExtResource("1_ebjsj")
+emission_texture = ExtResource("1_ebjsj")
 texture_filter = 0

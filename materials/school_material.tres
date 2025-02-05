@@ -8,4 +8,6 @@ depth_draw_mode = 1
 diffuse_mode = 3
 specular_mode = 2
 albedo_texture = ExtResource("1_2pff7")
+emission_energy_multiplier = 0.0
+emission_texture = ExtResource("1_2pff7")
 texture_filter = 0

@@ -12,3 +12,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 0.3125, 3)
 [node name="CameraPivot" parent="Player" instance=ExtResource("3_txj6j")]
 
 [node name="Wonsley_Merged 2" parent="." instance=ExtResource("3_by03d")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.621736, 0.783227, 0, -0.783227, 0.621736, 0, 0, 0)
