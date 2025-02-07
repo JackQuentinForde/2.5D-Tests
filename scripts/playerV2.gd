@@ -9,11 +9,16 @@ var attacking = false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 func _physics_process(delta):
 	ApplyGravity(delta)
 	MoveLogic()
 	AnimLogic()
 	move_and_slide()
+	if Input.is_action_pressed("QuitGame"):
+		get_tree().quit()
 
 func ApplyGravity(delta):
 	if not is_on_floor():

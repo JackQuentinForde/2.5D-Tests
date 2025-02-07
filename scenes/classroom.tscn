@@ -1,15 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://bno7ch5eow7mf"]
+[gd_scene load_steps=7 format=3 uid="uid://bno7ch5eow7mf"]
 
 [ext_resource type="PackedScene" uid="uid://bgtp67ro6sv3a" path="res://assets/models/Levels/Classroom.glb" id="1_56hvo"]
-[ext_resource type="Material" uid="uid://dcn7uw65e46ly" path="res://materials/school2_2d_material.tres" id="2_sdr7u"]
 [ext_resource type="Material" uid="uid://cxnmhus55o8gb" path="res://materials/school2_material.tres" id="2_tmdtq"]
+[ext_resource type="Material" uid="uid://d3h003vo2gnon" path="res://materials/school2_2d_no_cull_material.tres" id="2_xw4jl"]
 [ext_resource type="Material" uid="uid://v14kv6hch4m7" path="res://materials/school2_backface_cull_material.tres" id="3_ladg8"]
 [ext_resource type="Material" uid="uid://xdgmv0rdq4w5" path="res://materials/classroom_window_material.tres" id="5_2i8f4"]
+[ext_resource type="Material" uid="uid://c3g0ylvqtbp20" path="res://materials/school_material.tres" id="5_jc8ex"]
 
 [node name="Classroom" instance=ExtResource("1_56hvo")]
 
 [node name="Door" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_sdr7u")
+surface_material_override/0 = ExtResource("2_xw4jl")
 
 [node name="Bookshelf" parent="." index="1"]
 surface_material_override/0 = ExtResource("2_tmdtq")
@@ -23,87 +24,93 @@ surface_material_override/0 = ExtResource("2_tmdtq")
 [node name="Blackboard" parent="." index="4"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Wall_001" parent="." index="29"]
+[node name="Screen" parent="." index="5"]
+surface_material_override/0 = ExtResource("2_xw4jl")
+
+[node name="Projector" parent="." index="6"]
+surface_material_override/0 = ExtResource("5_jc8ex")
+
+[node name="Wall_001" parent="." index="32"]
 surface_material_override/0 = ExtResource("3_ladg8")
 
-[node name="Wall_002" parent="." index="30"]
+[node name="Wall_002" parent="." index="33"]
 surface_material_override/0 = ExtResource("3_ladg8")
 
-[node name="Wall_003" parent="." index="31"]
+[node name="Wall_003" parent="." index="34"]
 surface_material_override/0 = ExtResource("3_ladg8")
 
-[node name="Plane_028" parent="." index="32"]
+[node name="Plane_028" parent="." index="35"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Chair" parent="." index="33"]
+[node name="Chair" parent="." index="36"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Desk" parent="." index="34"]
+[node name="Desk" parent="." index="37"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Chair_001" parent="." index="35"]
+[node name="Chair_001" parent="." index="38"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Desk_001" parent="." index="36"]
+[node name="Desk_001" parent="." index="39"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Chair_002" parent="." index="37"]
+[node name="Chair_002" parent="." index="40"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Desk_002" parent="." index="38"]
+[node name="Desk_002" parent="." index="41"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Chair_003" parent="." index="39"]
+[node name="Chair_003" parent="." index="42"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Desk_003" parent="." index="40"]
+[node name="Desk_003" parent="." index="43"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Chair_004" parent="." index="41"]
+[node name="Chair_004" parent="." index="44"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Desk_004" parent="." index="42"]
+[node name="Desk_004" parent="." index="45"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Chair_005" parent="." index="43"]
+[node name="Chair_005" parent="." index="46"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Desk_005" parent="." index="44"]
+[node name="Desk_005" parent="." index="47"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Desk_006" parent="." index="45"]
+[node name="Desk_006" parent="." index="48"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Chair_006" parent="." index="46"]
+[node name="Chair_006" parent="." index="49"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Desk_007" parent="." index="47"]
+[node name="Desk_007" parent="." index="50"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Cube_010" parent="." index="48"]
+[node name="Cube_010" parent="." index="51"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Plane_034" parent="." index="49"]
+[node name="Plane_034" parent="." index="52"]
 transparency = 0.1
 surface_material_override/0 = ExtResource("5_2i8f4")
 
-[node name="Cube" parent="." index="50"]
+[node name="Cube" parent="." index="53"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Cube_004" parent="." index="51"]
+[node name="Cube_004" parent="." index="54"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Cube_005" parent="." index="52"]
+[node name="Cube_005" parent="." index="55"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Cube_006" parent="." index="53"]
+[node name="Cube_006" parent="." index="56"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Cube_007" parent="." index="54"]
+[node name="Cube_007" parent="." index="57"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Cube_008" parent="." index="55"]
+[node name="Cube_008" parent="." index="58"]
 surface_material_override/0 = ExtResource("2_tmdtq")
 
-[node name="Cube_009" parent="." index="56"]
+[node name="Cube_009" parent="." index="59"]
 surface_material_override/0 = ExtResource("2_tmdtq")
