@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bno7ch5eow7mf"]
+[gd_scene load_steps=8 format=3 uid="uid://bno7ch5eow7mf"]
 
 [ext_resource type="PackedScene" uid="uid://bgtp67ro6sv3a" path="res://assets/models/Levels/Classroom.glb" id="1_56hvo"]
+[ext_resource type="Material" uid="uid://dcn7uw65e46ly" path="res://materials/school2_2d_material.tres" id="2_0u4rc"]
 [ext_resource type="Material" uid="uid://cxnmhus55o8gb" path="res://materials/school2_material.tres" id="2_tmdtq"]
 [ext_resource type="Material" uid="uid://d3h003vo2gnon" path="res://materials/school2_2d_no_cull_material.tres" id="2_xw4jl"]
 [ext_resource type="Material" uid="uid://v14kv6hch4m7" path="res://materials/school2_backface_cull_material.tres" id="3_ladg8"]
@@ -10,7 +11,7 @@
 [node name="Classroom" instance=ExtResource("1_56hvo")]
 
 [node name="Door" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_xw4jl")
+surface_material_override/0 = ExtResource("2_0u4rc")
 
 [node name="Bookshelf" parent="." index="1"]
 surface_material_override/0 = ExtResource("2_tmdtq")
